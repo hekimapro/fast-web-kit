@@ -1,0 +1,26 @@
+{
+  "name": "fast-kit",
+  "version": "0.0.1",
+  "description": "Fast-Kit is a collection of utilities and functions that simplify common development tasks, allowing developers to write applications more quickly and efficiently. Lightweight, easy to use, and flexible, Fast-Kit helps save time and reduce development costs for beginners and experienced developers alike.",
+  "main": "index.js",
+  "scripts": {
+  
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hekima-dev/fast-kit.git"
+  },
+  "keywords": [
+    "fastkit",
+    "fast-kit",
+    "helpers",
+    "helper functions",
+    "utils"
+  ],
+  "author": "hekima-dev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hekima-dev/fast-kit/issues"
+  },
+  "homepage": "https://github.com/hekima-dev/fast-kit#readme"
+}
