@@ -1,4 +1,5 @@
-import * as array from "./helpers/array"
-const myArray: any = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1]
+import * as strings from "./helpers/string"
 
-console.log(array.removeElement(myArray, 1))
+const myString = "hekima peter"
+console.log(strings.camelCase(myString))
+console.log(strings.changeCase(myString, "snake"))
