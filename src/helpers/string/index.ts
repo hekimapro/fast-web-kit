@@ -290,5 +290,3 @@ export const isBase64 = (base64: string): boolean => {
         return false
     }
 }
-
-export * as string from "."

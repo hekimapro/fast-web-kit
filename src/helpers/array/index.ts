@@ -209,5 +209,3 @@ export const getElement = (array: any[], index: number): any => isValid(array) &
 
 // function that reverse a provided array
 export const reverse = (array: any[]): any[] => hasElements(array) ? array.reverse() : []
-
-export * as array from "."
