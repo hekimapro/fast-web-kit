@@ -166,14 +166,129 @@ export const hasAlphaNumericCharactersOnly = (alphaNumericString: string): boole
 
 /**
  * * Function that check if a given string contains only lowercase alphabetic characters (a-z)
- * * Return true is string contains only lowercase alphabetic characters and false if otherwise
+ * * Return true if a string contains only lowercase alphabetic characters and false if otherwise
  * * isLowerCase("fastkit")
  */
 export const isLowerCase = (lowerAlphabeticString: string): boolean => hasAlphabeticCharactersOnly(lowerAlphabeticString) ? /^[a-z\s]+$/.test(lowerAlphabeticString) : false
 
 /**
  * * Function that check if a given string contains only uppsercase alphabetic characters (a-z)
- * * Return true is string contains only uppsercase alphabetic characters and false if otherwise
+ * * Return true if a string contains only uppsercase alphabetic characters and false if otherwise
  * * isUpperCase("fastkit")
  */
 export const isUpperCase = (upperCaseAlphabeticString: string): boolean => hasAlphabeticCharactersOnly(upperCaseAlphabeticString) ? /^[A-Z\s]+$/.test(upperCaseAlphabeticString) : false
+
+/**
+ * * Function that check if a given string is an IP address
+ * * Returns true if a given string is an IP address and false if otherwise
+ * * isIPAddress("127.0.0.1")
+ */
+export const isIPAddress = (IPAddress: string): boolean => isNotEmpty(IPAddress) ? /^(\d{1,3}\.){3}\d{1,3}$/.test(IPAddress) || /^([\da-fA-F]{1,4}:){7}[\da-fA-F]{1,4}$/.test(IPAddress) : false
+
+/**
+ * Check if a given string is a valid hexadecimal color code
+ * @param color
+ */
+export const isHexColor = (color: string): boolean => {
+    try {
+
+        // Check if provided color is not empty
+        if (isNotEmpty(color)) {
+
+            // Check if the string starts with a hash symbol (#)
+            if (color[0] !== '#') {
+                return false;
+            }
+
+            // Check if the string has exactly 7 characters (including the hash symbol)
+            if (color.length !== 7) {
+                return false;
+            }
+
+            // Check if all the characters after the hash symbol are valid hexadecimal digits
+            for (let i = 1; i < color.length; i++) {
+                if (!/[0-9A-Fa-f]/.test(color[i])) {
+                    return false;
+                }
+            }
+
+            // If all the checks pass, the string is a valid hexadecimal color code
+            return true;
+        }
+
+        return false
+
+    } catch (error) {
+        return false
+    }
+}
+
+/**
+ *  Check wether a given string is a valid credit number by Luhn algorithm
+ *  @param cardNumber
+ */
+export const isCreditCard = (cardNumber: string): boolean => {
+    try {
+
+        // Check if value if not empty
+        if (isNotEmpty(cardNumber)) {
+
+            // Check if value is a string of digits with length between 13 and 19
+            if (!/^\d{13,19}$/.test(cardNumber))
+                return false;
+
+            // Apply Luhn algorithm
+            let sum = 0;
+            let shouldDouble = false;
+            for (let i = cardNumber.length - 1; i >= 0; i--) {
+                let digit = parseInt(cardNumber.charAt(i), 10);
+                if (shouldDouble) {
+                    digit *= 2;
+                    if (digit > 9) {
+                        digit -= 9;
+                    }
+                }
+                sum += digit;
+                shouldDouble = !shouldDouble;
+            }
+            return (sum % 10) === 0;
+        }
+
+        return false
+
+    } catch (error) {
+        return false
+    }
+}
+
+/**
+ * Check if a given string is a valid JSON
+ * @param JSONString
+ */
+export const isJSON = (JSONString: string): boolean => {
+    try {
+
+        if (isNotEmpty(JSONString)) {
+            JSON.parse(JSONString)
+            return true
+        }
+        return false
+
+    } catch (error) {
+        return false
+    }
+}
+
+/**
+ * Check if a given string is a valid base64 encoded string
+ * @param base64
+ */
+export const isBase64 = (base64: string): boolean => {
+    try {
+        return btoa(atob(base64)) === base64
+    } catch (error) {
+        return false
+    }
+}
+
+export * as string from "."
