@@ -10,7 +10,7 @@ const months: month[] = [
  * @param value The value to check
  * @returns True if the value is a valid date object, false otherwise
  */
-export function isValidDate(value: any): boolean {
+export function isValid(value: any): boolean {
     try {
         return value instanceof Date && !isNaN(value.getTime());
     } catch (error) {
@@ -70,7 +70,7 @@ export function getDaysInMonth(month: number | month, year: number): number {
  * Returns the name of the current month.
  * @returns {string} The name of the current month.
  */
-export function getCurrentMonthName(): month {
+export function getCurrentMonthName(): month | string {
     try {
 
         const currentDate: Date = new Date();
@@ -79,7 +79,7 @@ export function getCurrentMonthName(): month {
         return currentMonth;
     } catch (error) {
         console.error(error);
-        throw new Error("An error occurred while getting the current month name.");
+        return ""
     }
 }
 
@@ -87,13 +87,14 @@ export function getCurrentMonthName(): month {
  * Returns the current date as a string in the format "YYYY-MM-DD"
  * @returns {string} The current date in "YYYY-MM-DD" format
  */
-export function currentDate(): number {
+export function currentDate(date?: any): number {
     try {
-        const now = new Date();
+
+        const now = date ? convertToDate(date) : new Date();
         return now.getDate();
     } catch (error) {
         console.error(error);
-        throw new Error("Unable to get the current date.");
+        return NaN
     }
 }
 
@@ -101,13 +102,13 @@ export function currentDate(): number {
  * Returns the current hour as a number (0-23)
  * @returns {number} The current hour as a number
  */
-export function currentHour(): number {
+export function currentHour(date?: any): number {
     try {
-        const now = new Date();
+        const now = date ? convertToDate(date) : new Date();
         return now.getHours();
     } catch (error) {
         console.error(error);
-        throw new Error("Unable to get the current hour.");
+        return NaN
     }
 }
 
@@ -115,13 +116,13 @@ export function currentHour(): number {
  * Returns the current minute as a number (0-59)
  * @returns {number} The current minute as a number
  */
-export function currentMinute(): number {
+export function currentMinute(date?: any): number {
     try {
-        const now = new Date();
+        const now = date ? convertToDate(date) : new Date();
         return now.getMinutes();
     } catch (error) {
         console.error(error);
-        throw new Error("Unable to get the current minute.");
+        return NaN;
     }
 }
 
@@ -129,13 +130,13 @@ export function currentMinute(): number {
  * Returns the current second as a number (0-59)
  * @returns {number} The current second as a number
  */
-export function currentSecond(): number {
+export function currentSecond(date?: any): number {
     try {
-        const now = new Date();
+        const now = date ? convertToDate(date) : new Date();
         return now.getSeconds();
     } catch (error) {
         console.error(error);
-        throw new Error("Unable to get the current second.");
+        return NaN
     }
 }
 
@@ -143,9 +144,9 @@ export function currentSecond(): number {
  * Returns the current date in "YYYY-MM-DD" format.
  * @returns {string} The current date in "YYYY-MM-DD" format.
  */
-export function currentFullDate(): string {
+export function currentFullDate(date?: any): string {
     try {
-        const now: Date = new Date();
+        const now = date ? convertToDate(date) : new Date();
         const year: number = now.getFullYear();
         const month: number = now.getMonth() + 1;
         const day: number = now.getDate();
@@ -161,43 +162,42 @@ export function currentFullDate(): string {
 /**
  * Returns the current month as a number (1-12).
  *
- * @throws {Error} If unable to get the current month.
  */
-export function currentMonth(): number {
+export function currentMonth(date?: any): number {
     try {
-        return new Date().getMonth() + 1;
+        const now = date ? convertToDate(date) : new Date();
+        return now.getMonth() + 1;
     } catch (error) {
-        throw new Error(`Unable to get the current month: ${error}`);
+        return NaN
     }
 }
 
 /**
  * Returns the current time in the format `HH:MM:SS`.
  *
- * @throws {Error} If unable to get the current time.
  */
-export function currentTime(): string {
+export function currentTime(date?: any): string {
     try {
-        const now = new Date();
+        const now = date ? convertToDate(date) : new Date();
         const hours = now.getHours().toString().padStart(2, '0');
         const minutes = now.getMinutes().toString().padStart(2, '0');
         const seconds = now.getSeconds().toString().padStart(2, '0');
         return `${hours}:${minutes}:${seconds}`;
     } catch (error) {
-        throw new Error(`Unable to get the current time: ${error}`);
+        return ""
     }
 }
 
 /**
  * Returns the current time in milliseconds.
- * @returns {number} The current time in milliseconds.
  */
-export function currentTimeInMilliseconds(): number {
+export function currentTimeInMilliseconds(date?: any): number {
     try {
-        return new Date().getTime();
+        const now = date ? convertToDate(date) : new Date();
+        return now.getTime();
     } catch (error) {
         console.error(error);
-        return -1;
+        return NaN
     }
 }
 
@@ -367,14 +367,48 @@ export function isBusinessHours(date: any): boolean {
  * @param format The format string to use for parsing the date (defaults to 'YYYY-MM-DDTHH:mm:ssZ')
  * @returns A Date object representing the parsed date and time, or null if the parsing fails
  */
-export function convertToDate(dateString: string, format: string = 'YYYY-MM-DDTHH:mm:ssZ'): Date | null {
+export function convertToDate(dateString: any): Date | null {
     try {
-        const year = parseInt(dateString.substring(format.indexOf('Y'), format.indexOf('Y') + 4));
-        const month = parseInt(dateString.substring(format.indexOf('M'), format.indexOf('M') + 2)) - 1;
-        const day = parseInt(dateString.substring(format.indexOf('D'), format.indexOf('D') + 2));
-        return new Date(Date.UTC(year, month, day));
+        return new Date(dateString);
     } catch (error) {
         console.error(error);
         return null;
     }
 }
+
+/**
+ * Returns a relative time according to a provided date
+ *
+ * @param {Date} date - The date to calculate the relative time from
+ *
+ * @returns {string} A string representing the relative time
+ */
+export const relativeTime = (date: any): string => {
+    try {
+        date = convertToDate(date)
+        const currentDate = new Date();
+        const differenceInSeconds = Math.floor((currentDate.getTime() - date.getTime()) / 1000);
+
+        if (differenceInSeconds < 60) {
+            return "just now";
+        } else if (differenceInSeconds < 120) {
+            return "1 minute ago";
+        } else if (differenceInSeconds < 3600) {
+            const minutes = Math.floor(differenceInSeconds / 60);
+            return `${minutes} minutes ago`;
+        } else if (differenceInSeconds < 7200) {
+            return "1 hour ago";
+        } else if (differenceInSeconds < 86400) {
+            const hours = Math.floor(differenceInSeconds / 3600);
+            return `${hours} hours ago`;
+        } else if (differenceInSeconds < 172800) {
+            return "1 day ago";
+        } else {
+            const days = Math.floor(differenceInSeconds / 86400);
+            return `${days} days ago`;
+        }
+    } catch (error) {
+        console.error(`Error calculating relative time: ${error.message}`);
+        return "";
+    }
+};

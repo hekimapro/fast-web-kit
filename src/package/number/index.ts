@@ -92,12 +92,11 @@ export function toOrdinal(num: number): string {
  * Generates the nth number in the Fibonacci sequence.
  * @param n - The index of the number to generate (starting from 0).
  * @returns The nth number in the Fibonacci sequence.
- * @throws An error if n is negative.
  */
 export function fibonacci(n: number): number {
     try {
         if (n < 0) {
-            throw new Error("Cannot generate Fibonacci number for a negative index.");
+            return NaN
         }
         if (n === 0) {
             return 0;
@@ -126,7 +125,7 @@ export const randomFloat = (min: number, max: number): number => {
     try {
         return Math.random() * (max - min) + min;
     } catch (error) {
-        throw new Error(`An error occurred while generating random float: ${error.message}`);
+        return NaN
     }
 };
 
@@ -139,7 +138,7 @@ export const radianToDegree = (radians: number): number => {
     try {
         return radians * (180 / Math.PI);
     } catch (error) {
-        throw new Error(`An error occurred while converting radians to degree: ${error.message}`);
+        return NaN
     }
 };
 
@@ -152,7 +151,7 @@ export const degreeToRadian = (degrees: number): number => {
     try {
         return degrees * (Math.PI / 180);
     } catch (error) {
-        throw new Error(`An error occurred while converting degree to radians: ${error.message}`);
+        return NaN
     }
 };
 
@@ -187,7 +186,7 @@ export const randomInteger = (min: number, max: number): number => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     } catch (error) {
         console.error(error);
-        return min;
+        return 0;
     }
 };
 
@@ -382,30 +381,28 @@ export const random = (): number => {
  * Returns the smallest number in an array of numbers
  *
  * @param arr An array of numbers
- * @throws {TypeError} Thrown if the argument is not an array or contains non-number elements
- * @throws {Error} Thrown if the array is empty
  * @returns The smallest number in the array
  */
 export function min(arr: number[]): number {
     try {
         if (!Array.isArray(arr)) {
-            throw new TypeError('The argument must be an array');
+            return 0
         }
 
         if (arr.length === 0) {
-            throw new Error('The array cannot be empty');
+            return 0
         }
 
         for (let i = 0; i < arr.length; i++) {
             if (typeof arr[i] !== 'number' || isNaN(arr[i])) {
-                throw new TypeError('The array can only contain numbers');
+                return 0
             }
         }
 
         return Math.min(...arr);
     } catch (err) {
         console.error(err);
-        throw err;
+        return 0
     }
 }
 
@@ -413,30 +410,28 @@ export function min(arr: number[]): number {
 * Returns the largest number in an array of numbers
 *
 * @param arr An array of numbers
-* @throws {TypeError} Thrown if the argument is not an array or contains non-number elements
-* @throws {Error} Thrown if the array is empty
 * @returns The largest number in the array
 */
 export function max(arr: number[]): number {
     try {
         if (!Array.isArray(arr)) {
-            throw new TypeError('The argument must be an array');
+            return 0
         }
 
         if (arr.length === 0) {
-            throw new Error('The array cannot be empty');
+            return 0
         }
 
         for (let i = 0; i < arr.length; i++) {
             if (typeof arr[i] !== 'number' || isNaN(arr[i])) {
-                throw new TypeError('The array can only contain numbers');
+                return 0
             }
         }
 
         return Math.max(...arr);
     } catch (err) {
         console.error(err);
-        throw err;
+        return 0
     }
 }
 
@@ -444,20 +439,16 @@ export function max(arr: number[]): number {
 * Returns the sum of an array of numbers
 *
 * @param arr An array of numbers
-* @throws {TypeError} Thrown if the argument is not an array or contains non-number elements
 * @returns The sum of the numbers in the array
 */
 export function sum(arr: number[]): number {
     try {
-        if (!Array.isArray(arr)) {
-            throw new TypeError('The argument must be an array');
-        }
 
         let total = 0;
 
         for (let i = 0; i < arr.length; i++) {
             if (typeof arr[i] !== 'number' || isNaN(arr[i])) {
-                throw new TypeError('The array can only contain numbers');
+                return total
             }
 
             total += arr[i];
@@ -466,7 +457,7 @@ export function sum(arr: number[]): number {
         return total;
     } catch (err) {
         console.error(err);
-        throw err;
+        return 0
     }
 }
 
@@ -474,24 +465,16 @@ export function sum(arr: number[]): number {
 * Returns the average of an array of numbers
 *
 * @param arr An array of numbers
-* @throws {TypeError} Thrown if the argument is not an array or contains non-number elements
 * @returns The average of the numbers in the array
 */
 export function average(arr: number[]): number {
     try {
-        if (!Array.isArray(arr)) {
-            throw new TypeError('The argument must be an array');
-        }
-
-        if (arr.length === 0) {
-            throw new Error('The array cannot be empty');
-        }
 
         let total = 0;
 
         for (let i = 0; i < arr.length; i++) {
             if (typeof arr[i] !== 'number' || isNaN(arr[i])) {
-                throw new TypeError('The array can only contain numbers');
+                return 0
             }
 
             total += arr[i];
@@ -500,7 +483,7 @@ export function average(arr: number[]): number {
         return total / arr.length;
     } catch (err) {
         console.error(err);
-        throw err;
+        return 0
     }
 }
 
@@ -510,21 +493,12 @@ export function average(arr: number[]): number {
  * @returns The standard deviation of the array
  */
 export const standardDeviation = (arr: number[]): number => {
-    if (!Array.isArray(arr)) {
-        throw new Error("Argument must be an array.");
-    }
-
-    if (arr.length === 0) {
-        throw new Error("Array must not be empty.");
-    }
-
-    const mean = average(arr);
-
     try {
+        const mean = average(arr);
         const variance = arr.reduce((acc, curr) => acc + (curr - mean) ** 2, 0) / arr.length;
         return Math.sqrt(variance);
     } catch (error) {
-        throw new Error("Error occurred while finding standard deviation.");
+        return 0
     }
 };
 
@@ -654,10 +628,6 @@ export function greatestCommonDivisor(a: number, b: number): number {
 */
 export function leastCommonMultiple(num1: number, num2: number): number {
     try {
-        // Check if both inputs are integers
-        if (!Number.isInteger(num1) || !Number.isInteger(num2)) {
-            throw new Error("Inputs must be integers");
-        }
 
         // Find the greater and lesser numbers
         let greaterNum = Math.max(num1, num2);
@@ -681,20 +651,117 @@ export function leastCommonMultiple(num1: number, num2: number): number {
  */
 export function generateRandomNumber(min: number, max: number): number {
     try {
-        // Check if both inputs are numbers
-        if (typeof min !== "number" || typeof max !== "number") {
-            throw new Error("Inputs must be numbers");
-        }
-
-        // Check if min is less than or equal to max
-        if (min > max) {
-            throw new Error("Minimum value must be less than or equal to maximum value");
-        }
-
         // Generate a random number between min and max
         return Math.floor(Math.random() * (max - min + 1) + min);
     } catch (error) {
         console.error(error);
         return 0
+    }
+}
+
+/**
+ * Returns a number in short form with a suffix (k, m, b, t)
+ *
+ * @param {number} number - The number to convert to short form
+ *
+ * @returns {string} A string representing the number in short form with suffix
+ */
+export const toShortForm = (number: number, upperCaseLetter?: boolean): string => {
+    try {
+
+        let abbrevValue: any = number;
+        let suffix = "";
+
+        if (number >= 1e12) {
+            abbrevValue = number / 1e12;
+            suffix = upperCaseLetter ? "T" : "t";
+        } else if (number >= 1e9) {
+            abbrevValue = number / 1e9;
+            suffix = upperCaseLetter ? "B" : "b";
+        } else if (number >= 1e6) {
+            abbrevValue = number / 1e6;
+            suffix = upperCaseLetter ? "M" : "m";
+        } else if (number >= 1e3) {
+            abbrevValue = number / 1e3;
+            suffix = upperCaseLetter ? "K" : "k";
+        }
+
+        if (abbrevValue % 1 !== 0) {
+            abbrevValue = abbrevValue.toFixed(1);
+        }
+
+        return `${abbrevValue}${suffix}`;
+
+    } catch (error) {
+        console.error(`Error converting to short form: ${error.message}`);
+        return "";
+    }
+};
+
+/**
+ * Converts a number to its equivalent word representation.
+ *
+ * @param currency - The number to be converted to word representation. Must be a finite number within the range of (-10^33 to 10^33).
+ * @returns The word representation of the input number.
+ */
+export const toWord = (currency: number): string => {
+    try {
+
+        let words = "";
+        const ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+        const tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+        const teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+        const thousands = ["", "thousand", "million", "billion", "trillion"];
+
+        // if (currency === 0) {
+        //     return "zero dollars";
+        // }
+
+        if (currency < 0) {
+            words += "negative ";
+            currency = Math.abs(currency);
+        }
+
+        let i = 0;
+        while (currency > 0) {
+            const threeDigits = currency % 1000;
+            if (threeDigits !== 0) {
+                let str = "";
+                if (threeDigits < 10) {
+                    str = ones[threeDigits];
+                } else if (threeDigits < 20) {
+                    str = teens[threeDigits - 10];
+                } else if (threeDigits < 100) {
+                    str = tens[Math.floor(threeDigits / 10)];
+                    if (threeDigits % 10 !== 0) {
+                        str += " " + ones[threeDigits % 10];
+                    }
+                } else {
+                    str = ones[Math.floor(threeDigits / 100)] + " hundred";
+                    if (threeDigits % 100 !== 0) {
+                        str += " and ";
+                        if (threeDigits % 100 < 10) {
+                            str += ones[threeDigits % 100];
+                        } else if (threeDigits % 100 < 20) {
+                            str += teens[threeDigits % 100 - 10];
+                        } else {
+                            str += tens[Math.floor((threeDigits % 100) / 10)];
+                            if (threeDigits % 10 !== 0) {
+                                str += " " + ones[threeDigits % 10];
+                            }
+                        }
+                    }
+                }
+                words = str + " " + thousands[i] + " " + words;
+            }
+            i++;
+            currency = Math.floor(currency / 1000);
+        }
+
+        return words.trim()
+
+    } catch (error) {
+        console.error("Error converting number to word:", error.message);
+        return ""
     }
 }

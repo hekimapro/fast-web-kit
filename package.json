@@ -2,13 +2,19 @@
   "name": "fast-kit",
   "version": "0.0.1",
   "description": "Fast-Kit is a collection of utilities and functions that simplify common development tasks, allowing developers to write applications more quickly and efficiently. Lightweight, easy to use, and flexible, Fast-Kit helps save time and reduce development costs for beginners and experienced developers alike.",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
   "scripts": {
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "prod": "npm run build && npm publish",
+    "build": "tsc -p ."
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hekima-dev/fast-kit.git"
+    "url": "git+https://github.com/hekimapro/fast-kit.git"
   },
   "keywords": [
     "fastkit",
@@ -17,17 +23,17 @@
     "helper functions",
     "utils"
   ],
-  "author": "hekima-dev",
+  "author": {
+    "email": "hekima.dev@gmail.com",
+    "name": "Hekima Peter",
+    "url": "https://github.com/hekimapro"
+  },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hekima-dev/fast-kit/issues"
+    "url": "https://github.com/hekimapro/fast-kit/issues"
   },
-  "homepage": "https://github.com/hekima-dev/fast-kit#readme",
+  "homepage": "https://github.com/hekimapro/fast-kit#readme",
   "devDependencies": {
-    "@types/axios": "^0.14.0",
     "@types/node": "^18.14.6"
-  },
-  "dependencies": {
-    "axios": "^1.3.4"
   }
 }

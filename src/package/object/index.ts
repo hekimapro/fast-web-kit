@@ -299,7 +299,7 @@ export function sortByKey<T>(obj: Record<string, T>, order: "asc" | "desc" = "as
         return sortedObj;
     } catch (err) {
         console.error(err);
-        throw new Error("Failed to sort object keys.");
+        return {}
     }
 }
 
@@ -315,7 +315,7 @@ export function parseJSON<T>(jsonString: string): T {
         return JSON.parse(jsonString);
     } catch (err) {
         console.error(err);
-        throw new Error("Failed to parse JSON string.");
+        return null
     }
 }
 
@@ -331,7 +331,7 @@ export function stringifyJSON(obj: any): string {
         return JSON.stringify(obj);
     } catch (err) {
         console.error(err);
-        throw new Error("Failed to stringify object to JSON.");
+        return ''
     }
 }
 
@@ -351,7 +351,6 @@ export function mapObject<T, U>(obj: Record<string, T>, fn: (value: T, key: stri
         return mappedObj;
     } catch (err) {
         console.error(err);
-        throw new Error("Failed to map object.");
+        return {}
     }
 }
-

@@ -174,14 +174,9 @@ export function isUppercaseOnly(password: string): boolean {
  *
  * @param password - The password to be validated.
  * @returns True if password has repeated characters, false otherwise.
- * @throws TypeError if password is not a string.
  */
 export function isRepeatedChar(password: string): boolean {
     try {
-        if (typeof password !== "string") {
-            throw new TypeError("Password should be a string.");
-        }
-
         return /(.).*\1/.test(password);
     } catch (error) {
         console.error(error);
@@ -194,13 +189,9 @@ export function isRepeatedChar(password: string): boolean {
 *
 * @param password - The password to be validated.
 * @returns True if password has sequential characters, false otherwise.
-* @throws TypeError if password is not a string.
 */
 export function isSequencedChar(password: string): boolean {
     try {
-        if (typeof password !== "string") {
-            throw new TypeError("Password should be a string.");
-        }
 
         const sequenceRegex = /^(?:abc|bcd|cde|def|efg|fgh|ghi|hij|ijk|jkl|klm|lmn|mno|nop|opq|pqr|qrs|rst|stu|tuv|uvw|vwx|wxy|xyz)$/;
 
@@ -216,13 +207,9 @@ export function isSequencedChar(password: string): boolean {
 *
 * @param password - The password to be validated.
 * @returns True if password has leet speak characters, false otherwise.
-* @throws TypeError if password is not a string.
 */
 export function isLeetSpeak(password: string): boolean {
     try {
-        if (typeof password !== "string") {
-            throw new TypeError("Password should be a string.");
-        }
 
         const leetMap: { [key: string]: string } = {
             "a": "@",
