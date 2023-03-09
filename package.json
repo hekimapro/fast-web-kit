@@ -1,7 +1,7 @@
 {
-  "name": "fast-kit",
+  "name": "fast-web-kit",
   "version": "0.0.1",
-  "description": "Fast-Kit is a collection of utilities and functions that simplify common development tasks, allowing developers to write applications more quickly and efficiently. Lightweight, easy to use, and flexible, Fast-Kit helps save time and reduce development costs for beginners and experienced developers alike.",
+  "description": "Fast-web-Kit is a collection of utilities and functions that simplify common development tasks, allowing developers to write applications more quickly and efficiently. Lightweight, easy to use, and flexible, Fast-web-Kit helps save time and reduce development costs for beginners and experienced developers alike.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
@@ -9,16 +9,16 @@
   ],
   "scripts": {
     "dev": "nodemon src/index.ts",
-    "prod": "npm run build && npm publish",
+    "prod": "npm run build && npm publish --access=public",
     "build": "tsc -p ."
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hekimapro/fast-kit.git"
+    "url": "git+https://github.com/hekimapro/fast-web-kit.git"
   },
   "keywords": [
     "fastkit",
-    "fast-kit",
+    "fast-web-kit",
     "helpers",
     "helper functions",
     "utils"
@@ -30,9 +30,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hekimapro/fast-kit/issues"
+    "url": "https://github.com/hekimapro/fast-web-kit/issues"
   },
-  "homepage": "https://github.com/hekimapro/fast-kit#readme",
+  "homepage": "https://github.com/hekimapro/fast-web-kit#readme",
   "devDependencies": {
     "@types/node": "^18.14.6"
   }
