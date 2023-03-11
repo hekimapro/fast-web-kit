@@ -23,7 +23,7 @@ export declare function isLeapYear(year: number): boolean;
  * @param year - The year in the Gregorian calendar.
  * @returns The number of days in the given month and year.
  */
-export declare function getDaysInMonth(month: number | month, year: number): number;
+export declare function daysInMonth(month?: number | month, year?: number): number;
 /**
  * Returns the name of the current month.
  * @returns {string} The name of the current month.

@@ -55,9 +55,14 @@ export function isLeapYear(year: number): boolean {
  * @param year - The year in the Gregorian calendar.
  * @returns The number of days in the given month and year.
  */
-export function getDaysInMonth(month: number | month, year: number): number {
+export function daysInMonth(month?: number | month, year?: number): number {
     try {
-        const date = new Date(year, typeof month === 'string' ? months.indexOf(month) : month, 1);
+
+        let date = new Date()
+
+        if (month && year)
+            date = new Date(year, typeof month === 'string' ? months.indexOf(month) : month, 1);
+
         date.setMonth(date.getMonth() + 1);
         date.setDate(date.getDate() - 1);
         return date.getDate();

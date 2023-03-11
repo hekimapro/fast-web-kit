@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.relativeTime = exports.convertToDate = exports.isBusinessHours = exports.isWeekend = exports.getAge = exports.parseDate = exports.formatDate = exports.getWeekNumber = exports.addTimeToDate = exports.currentTimeInMilliseconds = exports.currentTime = exports.currentMonth = exports.currentFullDate = exports.currentSecond = exports.currentDate = exports.currentDay = exports.currentYear = exports.currentMinute = exports.currentHour = exports.currentMonthName = exports.getDaysInMonth = exports.isLeapYear = exports.isToday = exports.isValid = void 0;
+exports.relativeTime = exports.convertToDate = exports.isBusinessHours = exports.isWeekend = exports.getAge = exports.parseDate = exports.formatDate = exports.getWeekNumber = exports.addTimeToDate = exports.currentTimeInMilliseconds = exports.currentTime = exports.currentMonth = exports.currentFullDate = exports.currentSecond = exports.currentDate = exports.currentDay = exports.currentYear = exports.currentMinute = exports.currentHour = exports.currentMonthName = exports.daysInMonth = exports.isLeapYear = exports.isToday = exports.isValid = void 0;
 const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
@@ -57,9 +57,11 @@ exports.isLeapYear = isLeapYear;
  * @param year - The year in the Gregorian calendar.
  * @returns The number of days in the given month and year.
  */
-function getDaysInMonth(month, year) {
+function daysInMonth(month, year) {
     try {
-        const date = new Date(year, typeof month === 'string' ? months.indexOf(month) : month, 1);
+        let date = new Date();
+        if (month && year)
+            date = new Date(year, typeof month === 'string' ? months.indexOf(month) : month, 1);
         date.setMonth(date.getMonth() + 1);
         date.setDate(date.getDate() - 1);
         return date.getDate();
@@ -68,7 +70,7 @@ function getDaysInMonth(month, year) {
         return -1;
     }
 }
-exports.getDaysInMonth = getDaysInMonth;
+exports.daysInMonth = daysInMonth;
 /**
  * Returns the name of the current month.
  * @returns {string} The name of the current month.
