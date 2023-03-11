@@ -28,12 +28,7 @@ export declare function getDaysInMonth(month: number | month, year: number): num
  * Returns the name of the current month.
  * @returns {string} The name of the current month.
  */
-export declare function getCurrentMonthName(): month | string;
-/**
- * Returns the current date as a string in the format "YYYY-MM-DD"
- * @returns {string} The current date in "YYYY-MM-DD" format
- */
-export declare function currentDate(date?: any): number;
+export declare function currentMonthName(): month | string;
 /**
  * Returns the current hour as a number (0-23)
  * @returns {number} The current hour as a number
@@ -44,6 +39,21 @@ export declare function currentHour(date?: any): number;
  * @returns {number} The current minute as a number
  */
 export declare function currentMinute(date?: any): number;
+/**
+ * Returns the current year as a number
+ * @returns {number} The current minute as a number
+ */
+export declare function currentYear(date?: any): number;
+/**
+ * Returns the current day as a number
+ * @returns {number} The current minute as a number
+ */
+export declare function currentDay(date?: any): number;
+/**
+ * Returns the current date as a number (1-31)
+ * @returns {number} The current minute as a number
+ */
+export declare function currentDate(date?: any): number;
 /**
  * Returns the current second as a number (0-59)
  * @returns {number} The current second as a number

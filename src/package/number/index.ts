@@ -1,3 +1,4 @@
+import { timeUnit } from "../../types"
 
 /**
  * Checks if a given value is a valid number
@@ -765,3 +766,50 @@ export const toWord = (currency: number): string => {
         return ""
     }
 }
+
+/**
+ * Converts a number and time unit to milliseconds
+ * @param value The numerical value to convert
+ * @param unit The time unit to convert, one of: seconds, minutes, hours, days, weeks, months, years
+ * @returns The value converted to milliseconds
+ */
+export const toMilliseconds = (value: number, unit: timeUnit): number => {
+    try {
+
+        // Perform conversion
+        let milliseconds = 0;
+
+        // Validate parameters
+        const validUnits = ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years'];
+        if (!validUnits.includes(unit))
+            return milliseconds
+        switch (unit) {
+            case 'seconds':
+                milliseconds = value * 1000;
+                break;
+            case 'minutes':
+                milliseconds = value * 60 * 1000;
+                break;
+            case 'hours':
+                milliseconds = value * 60 * 60 * 1000;
+                break;
+            case 'days':
+                milliseconds = value * 24 * 60 * 60 * 1000;
+                break;
+            case 'weeks':
+                milliseconds = value * 7 * 24 * 60 * 60 * 1000;
+                break;
+            case 'months':
+                milliseconds = value * 30 * 24 * 60 * 60 * 1000;
+                break;
+            case 'years':
+                milliseconds = value * 365 * 24 * 60 * 60 * 1000;
+                break;
+        }
+        return milliseconds
+    } catch (error) {
+        console.error(`Error converting ${value} ${unit} to milliseconds: ${error}`);
+        return 0;
+    }
+};
+

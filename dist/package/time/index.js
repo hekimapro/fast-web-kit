@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.relativeTime = exports.convertToDate = exports.isBusinessHours = exports.isWeekend = exports.getAge = exports.parseDate = exports.formatDate = exports.getWeekNumber = exports.addTimeToDate = exports.currentTimeInMilliseconds = exports.currentTime = exports.currentMonth = exports.currentFullDate = exports.currentSecond = exports.currentMinute = exports.currentHour = exports.currentDate = exports.getCurrentMonthName = exports.getDaysInMonth = exports.isLeapYear = exports.isToday = exports.isValid = void 0;
+exports.relativeTime = exports.convertToDate = exports.isBusinessHours = exports.isWeekend = exports.getAge = exports.parseDate = exports.formatDate = exports.getWeekNumber = exports.addTimeToDate = exports.currentTimeInMilliseconds = exports.currentTime = exports.currentMonth = exports.currentFullDate = exports.currentSecond = exports.currentDate = exports.currentDay = exports.currentYear = exports.currentMinute = exports.currentHour = exports.currentMonthName = exports.getDaysInMonth = exports.isLeapYear = exports.isToday = exports.isValid = void 0;
 const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
@@ -73,7 +73,7 @@ exports.getDaysInMonth = getDaysInMonth;
  * Returns the name of the current month.
  * @returns {string} The name of the current month.
  */
-function getCurrentMonthName() {
+function currentMonthName() {
     try {
         const currentDate = new Date();
         const currentMonth = months[currentDate.getMonth()];
@@ -84,22 +84,7 @@ function getCurrentMonthName() {
         return "";
     }
 }
-exports.getCurrentMonthName = getCurrentMonthName;
-/**
- * Returns the current date as a string in the format "YYYY-MM-DD"
- * @returns {string} The current date in "YYYY-MM-DD" format
- */
-function currentDate(date) {
-    try {
-        const now = date ? convertToDate(date) : new Date();
-        return now.getDate();
-    }
-    catch (error) {
-        console.error(error);
-        return NaN;
-    }
-}
-exports.currentDate = currentDate;
+exports.currentMonthName = currentMonthName;
 /**
  * Returns the current hour as a number (0-23)
  * @returns {number} The current hour as a number
@@ -130,6 +115,51 @@ function currentMinute(date) {
     }
 }
 exports.currentMinute = currentMinute;
+/**
+ * Returns the current year as a number
+ * @returns {number} The current minute as a number
+ */
+function currentYear(date) {
+    try {
+        const now = date ? convertToDate(date) : new Date();
+        return now.getFullYear();
+    }
+    catch (error) {
+        console.error(error);
+        return NaN;
+    }
+}
+exports.currentYear = currentYear;
+/**
+ * Returns the current day as a number
+ * @returns {number} The current minute as a number
+ */
+function currentDay(date) {
+    try {
+        const now = date ? convertToDate(date) : new Date();
+        return now.getDay();
+    }
+    catch (error) {
+        console.error(error);
+        return NaN;
+    }
+}
+exports.currentDay = currentDay;
+/**
+ * Returns the current date as a number (1-31)
+ * @returns {number} The current minute as a number
+ */
+function currentDate(date) {
+    try {
+        const now = date ? convertToDate(date) : new Date();
+        return now.getDate();
+    }
+    catch (error) {
+        console.error(error);
+        return NaN;
+    }
+}
+exports.currentDate = currentDate;
 /**
  * Returns the current second as a number (0-59)
  * @returns {number} The current second as a number
@@ -221,6 +251,7 @@ exports.currentTimeInMilliseconds = currentTimeInMilliseconds;
 function addTimeToDate(date, time, unit) {
     try {
         date = convertToDate(date);
+        console.log(new Date().setUTCFullYear);
         switch (unit) {
             case 'seconds':
                 date.setSeconds(date.getSeconds() + time);
@@ -234,14 +265,21 @@ function addTimeToDate(date, time, unit) {
             case 'days':
                 date.setDate(date.getDate() + time);
                 break;
+            case 'years':
+                date.setUTCFullYear(date.getFullYear() + time);
+                break;
+            case 'months':
+                date.setMonth(date.getMonth() + time);
+                break;
             default:
-                throw new Error(`Invalid time unit: ${unit}`);
+                console.log("invalid unit");
         }
+        return date;
     }
     catch (error) {
         console.error(error);
+        return date;
     }
-    return date;
 }
 exports.addTimeToDate = addTimeToDate;
 /**

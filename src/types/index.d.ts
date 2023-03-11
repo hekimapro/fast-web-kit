@@ -13,4 +13,4 @@ export type month = "January" | "February" | "March" | "April" | "May" | "June" 
 
 
 // time unit
-export type timeUnit = 'seconds' | 'minutes' | 'hours' | 'days'
+export type timeUnit = 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks' | 'months' | 'years'

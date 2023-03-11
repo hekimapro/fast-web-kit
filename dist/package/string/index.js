@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isValidBase64 = exports.isValidJSON = exports.isValidCreditCard = exports.isValidHexColor = exports.isIPAddress = exports.isUpperCase = exports.isLowerCase = exports.isAlphanumeric = exports.hasNumericCharsOnly = exports.hasAlphabeticCharsOnly = exports.toTitleCase = exports.toSnakeCase = exports.toKebabCase = exports.toCamelCase = exports.split = exports.removeWhitespace = exports.truncate = exports.getLength = exports.removeSpecialCharacters = exports.reverse = exports.capitalize = exports.convert = exports.isNotEmpty = exports.isValid = void 0;
+exports.removeCase = exports.isValidBase64 = exports.isValidJSON = exports.isValidCreditCard = exports.isValidHexColor = exports.isIPAddress = exports.isUpperCase = exports.isLowerCase = exports.isAlphanumeric = exports.hasNumericCharsOnly = exports.hasAlphabeticCharsOnly = exports.toTitleCase = exports.toSnakeCase = exports.toKebabCase = exports.toCamelCase = exports.split = exports.removeWhitespace = exports.truncate = exports.getLength = exports.removeSpecialCharacters = exports.reverse = exports.capitalize = exports.convert = exports.isNotEmpty = exports.isValid = void 0;
 /**
  * Determines whether a given value is a string.
  *
@@ -486,4 +486,35 @@ const isValidBase64 = (base64String) => {
     }
 };
 exports.isValidBase64 = isValidBase64;
+/**
+ * Convert a specified case to string
+ *
+ * @param {string} str - The input string to convert
+ * @param {string} caseType - The case type to convert to. Possible values: kebab-case, snake_case, camelCase, Title Case
+ * @returns {string} The converted string
+ */
+function removeCase(str, caseType) {
+    try {
+        let convertedStr = '';
+        if ((0, exports.isNotEmpty)(str) && (0, exports.isNotEmpty)(caseType)) {
+            // Convert the string based on the case type
+            switch (caseType) {
+                case 'kebab-case':
+                    convertedStr = str.replace(/-/g, ' ').toLowerCase();
+                    break;
+                case 'snake_case':
+                    convertedStr = str.replace(/_/g, ' ').toLowerCase();
+                    break;
+                default:
+                    convertedStr = "";
+            }
+        }
+        return convertedStr;
+    }
+    catch (err) {
+        console.error(err.message);
+        return "";
+    }
+}
+exports.removeCase = removeCase;
 //# sourceMappingURL=index.js.map

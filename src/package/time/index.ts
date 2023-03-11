@@ -70,7 +70,7 @@ export function getDaysInMonth(month: number | month, year: number): number {
  * Returns the name of the current month.
  * @returns {string} The name of the current month.
  */
-export function getCurrentMonthName(): month | string {
+export function currentMonthName(): month | string {
     try {
 
         const currentDate: Date = new Date();
@@ -80,21 +80,6 @@ export function getCurrentMonthName(): month | string {
     } catch (error) {
         console.error(error);
         return ""
-    }
-}
-
-/**
- * Returns the current date as a string in the format "YYYY-MM-DD"
- * @returns {string} The current date in "YYYY-MM-DD" format
- */
-export function currentDate(date?: any): number {
-    try {
-
-        const now = date ? convertToDate(date) : new Date();
-        return now.getDate();
-    } catch (error) {
-        console.error(error);
-        return NaN
     }
 }
 
@@ -120,6 +105,48 @@ export function currentMinute(date?: any): number {
     try {
         const now = date ? convertToDate(date) : new Date();
         return now.getMinutes();
+    } catch (error) {
+        console.error(error);
+        return NaN;
+    }
+}
+
+/**
+ * Returns the current year as a number
+ * @returns {number} The current minute as a number
+ */
+export function currentYear(date?: any): number {
+    try {
+        const now = date ? convertToDate(date) : new Date();
+        return now.getFullYear();
+    } catch (error) {
+        console.error(error);
+        return NaN;
+    }
+}
+
+/**
+ * Returns the current day as a number
+ * @returns {number} The current minute as a number
+ */
+export function currentDay(date?: any): number {
+    try {
+        const now = date ? convertToDate(date) : new Date();
+        return now.getDay();
+    } catch (error) {
+        console.error(error);
+        return NaN;
+    }
+}
+
+/**
+ * Returns the current date as a number (1-31)
+ * @returns {number} The current minute as a number
+ */
+export function currentDate(date?: any): number {
+    try {
+        const now = date ? convertToDate(date) : new Date();
+        return now.getDate();
     } catch (error) {
         console.error(error);
         return NaN;
@@ -213,7 +240,9 @@ export function currentTimeInMilliseconds(date?: any): number {
 export function addTimeToDate(date: any, time: number, unit: timeUnit): Date {
     try {
         date = convertToDate(date)
+        console.log(new Date().setUTCFullYear)
         switch (unit) {
+
             case 'seconds':
                 date.setSeconds(date.getSeconds() + time);
                 break;
@@ -226,13 +255,21 @@ export function addTimeToDate(date: any, time: number, unit: timeUnit): Date {
             case 'days':
                 date.setDate(date.getDate() + time);
                 break;
+            case 'years':
+                date.setUTCFullYear(date.getFullYear() + time);
+                break;
+            case 'months':
+                date.setMonth(date.getMonth() + time);
+                break;
             default:
-                throw new Error(`Invalid time unit: ${unit}`);
+                console.log("invalid unit")
         }
+        return date;
+
     } catch (error) {
         console.error(error);
+        return date;
     }
-    return date;
 }
 
 /**

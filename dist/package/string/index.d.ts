@@ -162,3 +162,11 @@ export declare const isValidJSON: (jsonString: string) => boolean;
  * @returns A boolean indicating whether the string is a valid Base64 or not.
  */
 export declare const isValidBase64: (base64String: string) => boolean;
+/**
+ * Convert a specified case to string
+ *
+ * @param {string} str - The input string to convert
+ * @param {string} caseType - The case type to convert to. Possible values: kebab-case, snake_case, camelCase, Title Case
+ * @returns {string} The converted string
+ */
+export declare function removeCase(str: string, caseType: 'kebab-case' | 'snake_case'): string;

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.toWord = exports.toShortForm = exports.generateRandomNumber = exports.leastCommonMultiple = exports.greatestCommonDivisor = exports.isPerfectSquare = exports.isPowerOfTwo = exports.factorial = exports.isPrime = exports.standardDeviation = exports.average = exports.sum = exports.max = exports.min = exports.random = exports.floor = exports.ceil = exports.round = exports.power = exports.divide = exports.multiply = exports.subtract = exports.add = exports.isDivisibleBy = exports.isMultipleOf = exports.isOdd = exports.isEven = exports.randomInteger = exports.clamp = exports.degreeToRadian = exports.radianToDegree = exports.randomFloat = exports.fibonacci = exports.toOrdinal = exports.percent = exports.formatNumber = exports.isNegativeInteger = exports.isPositiveInteger = exports.isZero = exports.isNegative = exports.isPositive = exports.isInteger = exports.isValid = void 0;
+exports.toMilliseconds = exports.toWord = exports.toShortForm = exports.generateRandomNumber = exports.leastCommonMultiple = exports.greatestCommonDivisor = exports.isPerfectSquare = exports.isPowerOfTwo = exports.factorial = exports.isPrime = exports.standardDeviation = exports.average = exports.sum = exports.max = exports.min = exports.random = exports.floor = exports.ceil = exports.round = exports.power = exports.divide = exports.multiply = exports.subtract = exports.add = exports.isDivisibleBy = exports.isMultipleOf = exports.isOdd = exports.isEven = exports.randomInteger = exports.clamp = exports.degreeToRadian = exports.radianToDegree = exports.randomFloat = exports.fibonacci = exports.toOrdinal = exports.percent = exports.formatNumber = exports.isNegativeInteger = exports.isPositiveInteger = exports.isZero = exports.isNegative = exports.isPositive = exports.isInteger = exports.isValid = void 0;
 /**
  * Checks if a given value is a valid number
  * @param number
@@ -772,4 +772,49 @@ const toWord = (currency) => {
     }
 };
 exports.toWord = toWord;
+/**
+ * Converts a number and time unit to milliseconds
+ * @param value The numerical value to convert
+ * @param unit The time unit to convert, one of: seconds, minutes, hours, days, weeks, months, years
+ * @returns The value converted to milliseconds
+ */
+const toMilliseconds = (value, unit) => {
+    try {
+        // Perform conversion
+        let milliseconds = 0;
+        // Validate parameters
+        const validUnits = ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years'];
+        if (!validUnits.includes(unit))
+            return milliseconds;
+        switch (unit) {
+            case 'seconds':
+                milliseconds = value * 1000;
+                break;
+            case 'minutes':
+                milliseconds = value * 60 * 1000;
+                break;
+            case 'hours':
+                milliseconds = value * 60 * 60 * 1000;
+                break;
+            case 'days':
+                milliseconds = value * 24 * 60 * 60 * 1000;
+                break;
+            case 'weeks':
+                milliseconds = value * 7 * 24 * 60 * 60 * 1000;
+                break;
+            case 'months':
+                milliseconds = value * 30 * 24 * 60 * 60 * 1000;
+                break;
+            case 'years':
+                milliseconds = value * 365 * 24 * 60 * 60 * 1000;
+                break;
+        }
+        return milliseconds;
+    }
+    catch (error) {
+        console.error(`Error converting ${value} ${unit} to milliseconds: ${error}`);
+        return 0;
+    }
+};
+exports.toMilliseconds = toMilliseconds;
 //# sourceMappingURL=index.js.map
