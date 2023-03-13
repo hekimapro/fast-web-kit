@@ -22,12 +22,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.hasValidDomain = exports.validateMXRecord = exports.normalize = exports.getUsername = exports.getDomain = exports.isValid = void 0;
-const dns_1 = __importDefault(require("dns"));
 const string = __importStar(require("../string"));
 /**
  * Check if the provided string is a valid email
@@ -133,9 +129,10 @@ exports.normalize = normalize;
 const validateMXRecord = async (email) => {
     try {
         if ((0, exports.isValid)(email)) {
+            const dns = require("dns");
             // Use the built-in `dns` module to get the MX records for the domain
             await new Promise((resolve, reject) => {
-                dns_1.default.resolveMx((0, exports.getDomain)(email), (error) => {
+                dns.resolveMx((0, exports.getDomain)(email), (error) => {
                     if (error)
                         reject(error);
                     else
@@ -160,7 +157,8 @@ exports.validateMXRecord = validateMXRecord;
 async function hasValidDomain(email) {
     try {
         await new Promise((resolve, reject) => {
-            dns_1.default.resolve((0, exports.getDomain)(email), (error) => {
+            const dns = require("dns");
+            dns.resolve((0, exports.getDomain)(email), (error) => {
                 if (error) {
                     reject(error);
                 }

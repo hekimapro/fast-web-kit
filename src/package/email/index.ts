@@ -1,4 +1,3 @@
-import dns from "dns"
 import * as string from "../string"
 
 /**
@@ -103,6 +102,7 @@ export const validateMXRecord = async (email: string): Promise<boolean> => {
     try {
 
         if (isValid(email)) {
+            const dns = require("dns")
             // Use the built-in `dns` module to get the MX records for the domain
             await new Promise((resolve, reject) => {
                 dns.resolveMx(getDomain(email), (error: any) => {
@@ -129,6 +129,7 @@ export const validateMXRecord = async (email: string): Promise<boolean> => {
 export async function hasValidDomain(email: string): Promise<boolean> {
     try {
         await new Promise((resolve, reject) => {
+            const dns = require("dns")
             dns.resolve(getDomain(email), (error: any) => {
                 if (error) {
                     reject(error);
