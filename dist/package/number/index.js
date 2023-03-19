@@ -1,47 +1,47 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.toMilliseconds = exports.toWord = exports.toShortForm = exports.generateRandomNumber = exports.leastCommonMultiple = exports.greatestCommonDivisor = exports.isPerfectSquare = exports.isPowerOfTwo = exports.factorial = exports.isPrime = exports.standardDeviation = exports.average = exports.sum = exports.max = exports.min = exports.random = exports.floor = exports.ceil = exports.round = exports.power = exports.divide = exports.multiply = exports.subtract = exports.add = exports.isDivisibleBy = exports.isMultipleOf = exports.isOdd = exports.isEven = exports.randomInteger = exports.clamp = exports.degreeToRadian = exports.radianToDegree = exports.randomFloat = exports.fibonacci = exports.toOrdinal = exports.percent = exports.formatNumber = exports.isNegativeInteger = exports.isPositiveInteger = exports.isZero = exports.isNegative = exports.isPositive = exports.isInteger = exports.isValid = void 0;
 /**
  * Checks if a given value is a valid number
  * @param number
  */
-const isValid = (number) => typeof number === "number" && !isNaN(number);
+var isValid = function (number) { return typeof number === "number" && !isNaN(number); };
 exports.isValid = isValid;
 /**
  * Checks if a given value is a valid integer
  * @param integer
  */
-const isInteger = (integer) => (0, exports.isValid)(integer) ? Number.isInteger(integer) : false;
+var isInteger = function (integer) { return (0, exports.isValid)(integer) ? Number.isInteger(integer) : false; };
 exports.isInteger = isInteger;
 /**
  * Checks if a given number is positive
  * @param number
  */
-const isPositive = (number) => (0, exports.isValid)(number) ? number > 0 : false;
+var isPositive = function (number) { return (0, exports.isValid)(number) ? number > 0 : false; };
 exports.isPositive = isPositive;
 /**
  * Checks if a given number is negative
  * @param number
  */
-const isNegative = (number) => (0, exports.isValid)(number) ? number < 0 : false;
+var isNegative = function (number) { return (0, exports.isValid)(number) ? number < 0 : false; };
 exports.isNegative = isNegative;
 /**
  * Check if a given number is zero
  * @param number
  */
-const isZero = (number) => (0, exports.isValid)(number) ? number === 0 : false;
+var isZero = function (number) { return (0, exports.isValid)(number) ? number === 0 : false; };
 exports.isZero = isZero;
 /**
  * Checks if a given  value is a positive integer
  * @param number
  */
-const isPositiveInteger = (number) => (0, exports.isInteger)(number) ? number > 0 : false;
+var isPositiveInteger = function (number) { return (0, exports.isInteger)(number) ? number > 0 : false; };
 exports.isPositiveInteger = isPositiveInteger;
 /**
  * Checks if a given value is a negative integer
  * @param number
  */
-const isNegativeInteger = (number) => (0, exports.isInteger)(number) ? number < 0 : false;
+var isNegativeInteger = function (number) { return (0, exports.isInteger)(number) ? number < 0 : false; };
 exports.isNegativeInteger = isNegativeInteger;
 /**
  * Formats a number with specified decimal points and separator.
@@ -50,7 +50,9 @@ exports.isNegativeInteger = isNegativeInteger;
  * @param separator The separator to use between thousands. Defaults to ",".
  * @returns The formatted number as a string.
  */
-function formatNumber(num, decimalPoints = 2, separator = ',') {
+function formatNumber(num, decimalPoints, separator) {
+    if (decimalPoints === void 0) { decimalPoints = 2; }
+    if (separator === void 0) { separator = ','; }
     try {
         return num.toFixed(decimalPoints).replace(/\B(?=(\d{3})+(?!\d))/g, separator);
     }
@@ -66,7 +68,8 @@ exports.formatNumber = formatNumber;
  * @param decimalPoints The number of decimal points to include. Defaults to 2.
  * @returns The percentage value as a string with percent sign.
  */
-function percent(num, decimalPoints = 2) {
+function percent(num, decimalPoints) {
+    if (decimalPoints === void 0) { decimalPoints = 2; }
     try {
         return (num * 100).toFixed(decimalPoints) + '%';
     }
@@ -83,8 +86,8 @@ exports.percent = percent;
  */
 function toOrdinal(num) {
     try {
-        const suffixes = ['th', 'st', 'nd', 'rd'];
-        const suffix = num % 100 > 10 && num % 100 < 14 ? suffixes[0] : suffixes[num % 10] || suffixes[0];
+        var suffixes = ['th', 'st', 'nd', 'rd'];
+        var suffix = num % 100 > 10 && num % 100 < 14 ? suffixes[0] : suffixes[num % 10] || suffixes[0];
         return num + suffix;
     }
     catch (error) {
@@ -106,10 +109,10 @@ function fibonacci(n) {
         if (n === 0) {
             return 0;
         }
-        let prev = 0;
-        let current = 1;
-        for (let i = 1; i < n; i++) {
-            let next = prev + current;
+        var prev = 0;
+        var current = 1;
+        for (var i = 1; i < n; i++) {
+            var next = prev + current;
             prev = current;
             current = next;
         }
@@ -127,7 +130,7 @@ exports.fibonacci = fibonacci;
  * @param max The maximum value.
  * @returns A random float number between the given minimum and maximum values.
  */
-const randomFloat = (min, max) => {
+var randomFloat = function (min, max) {
     try {
         return Math.random() * (max - min) + min;
     }
@@ -141,7 +144,7 @@ exports.randomFloat = randomFloat;
  * @param radians The angle in radians.
  * @returns The angle in degrees.
  */
-const radianToDegree = (radians) => {
+var radianToDegree = function (radians) {
     try {
         return radians * (180 / Math.PI);
     }
@@ -155,7 +158,7 @@ exports.radianToDegree = radianToDegree;
  * @param degrees The angle in degrees.
  * @returns The angle in radians.
  */
-const degreeToRadian = (degrees) => {
+var degreeToRadian = function (degrees) {
     try {
         return degrees * (Math.PI / 180);
     }
@@ -173,7 +176,7 @@ exports.degreeToRadian = degreeToRadian;
  *
  * @returns The clamped number.
  */
-const clamp = (num, min, max) => {
+var clamp = function (num, min, max) {
     try {
         return Math.min(Math.max(num, min), max);
     }
@@ -191,7 +194,7 @@ exports.clamp = clamp;
  *
  * @returns The randomly generated integer.
  */
-const randomInteger = (min, max) => {
+var randomInteger = function (min, max) {
     try {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -268,9 +271,13 @@ exports.isDivisibleBy = isDivisibleBy;
  * @param numbers The numbers to be added.
  * @returns The sum of the numbers.
  */
-const add = (...numbers) => {
+var add = function () {
+    var numbers = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        numbers[_i] = arguments[_i];
+    }
     try {
-        return numbers.reduce((acc, val) => acc + val);
+        return numbers.reduce(function (acc, val) { return acc + val; });
     }
     catch (error) {
         console.error(error);
@@ -284,7 +291,7 @@ exports.add = add;
  * @param b The number to subtract.
  * @returns The difference between the two numbers.
  */
-const subtract = (a, b) => {
+var subtract = function (a, b) {
     try {
         return a - b;
     }
@@ -299,9 +306,13 @@ exports.subtract = subtract;
  * @param numbers The numbers to be multiplied.
  * @returns The product of the numbers.
  */
-const multiply = (...numbers) => {
+var multiply = function () {
+    var numbers = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        numbers[_i] = arguments[_i];
+    }
     try {
-        return numbers.reduce((acc, val) => acc * val);
+        return numbers.reduce(function (acc, val) { return acc * val; });
     }
     catch (error) {
         console.error(error);
@@ -315,7 +326,7 @@ exports.multiply = multiply;
  * @param b The number to divide by.
  * @returns The quotient of the two numbers.
  */
-const divide = (a, b) => {
+var divide = function (a, b) {
     try {
         return a / b;
     }
@@ -331,7 +342,7 @@ exports.divide = divide;
  * @param exponent The exponent.
  * @returns The base number raised to the power of the exponent.
  */
-const power = (base, exponent) => {
+var power = function (base, exponent) {
     try {
         return Math.pow(base, exponent);
     }
@@ -346,7 +357,7 @@ exports.power = power;
  * @param number The number to round.
  * @returns The nearest integer to the input number.
  */
-const round = (number) => {
+var round = function (number) {
     try {
         return Math.round(number);
     }
@@ -361,7 +372,7 @@ exports.round = round;
  * @param number The number to round up.
  * @returns The smallest integer greater than or equal to the input number.
  */
-const ceil = (number) => {
+var ceil = function (number) {
     try {
         return Math.ceil(number);
     }
@@ -376,7 +387,7 @@ exports.ceil = ceil;
  * @param number The number to round down.
  * @returns The largest integer less than or equal to the input number.
  */
-const floor = (number) => {
+var floor = function (number) {
     try {
         return Math.floor(number);
     }
@@ -390,7 +401,7 @@ exports.floor = floor;
  * Generates a random number between 0 and 1.
  * @returns A random number between 0 and 1.
  */
-const random = () => {
+var random = function () {
     try {
         return Math.random();
     }
@@ -414,12 +425,12 @@ function min(arr) {
         if (arr.length === 0) {
             return 0;
         }
-        for (let i = 0; i < arr.length; i++) {
+        for (var i = 0; i < arr.length; i++) {
             if (typeof arr[i] !== 'number' || isNaN(arr[i])) {
                 return 0;
             }
         }
-        return Math.min(...arr);
+        return Math.min.apply(Math, arr);
     }
     catch (err) {
         console.error(err);
@@ -441,12 +452,12 @@ function max(arr) {
         if (arr.length === 0) {
             return 0;
         }
-        for (let i = 0; i < arr.length; i++) {
+        for (var i = 0; i < arr.length; i++) {
             if (typeof arr[i] !== 'number' || isNaN(arr[i])) {
                 return 0;
             }
         }
-        return Math.max(...arr);
+        return Math.max.apply(Math, arr);
     }
     catch (err) {
         console.error(err);
@@ -462,8 +473,8 @@ exports.max = max;
 */
 function sum(arr) {
     try {
-        let total = 0;
-        for (let i = 0; i < arr.length; i++) {
+        var total = 0;
+        for (var i = 0; i < arr.length; i++) {
             if (typeof arr[i] !== 'number' || isNaN(arr[i])) {
                 return total;
             }
@@ -485,8 +496,8 @@ exports.sum = sum;
 */
 function average(arr) {
     try {
-        let total = 0;
-        for (let i = 0; i < arr.length; i++) {
+        var total = 0;
+        for (var i = 0; i < arr.length; i++) {
             if (typeof arr[i] !== 'number' || isNaN(arr[i])) {
                 return 0;
             }
@@ -505,10 +516,10 @@ exports.average = average;
  * @param arr Array of numbers
  * @returns The standard deviation of the array
  */
-const standardDeviation = (arr) => {
+var standardDeviation = function (arr) {
     try {
-        const mean = average(arr);
-        const variance = arr.reduce((acc, curr) => acc + (curr - mean) ** 2, 0) / arr.length;
+        var mean_1 = average(arr);
+        var variance = arr.reduce(function (acc, curr) { return acc + Math.pow((curr - mean_1), 2); }, 0) / arr.length;
         return Math.sqrt(variance);
     }
     catch (error) {
@@ -527,8 +538,8 @@ function isPrime(n) {
             return false;
         }
         // Check for divisibility by numbers up to the square root of n.
-        const limit = Math.sqrt(n);
-        for (let i = 2; i <= limit; i++) {
+        var limit = Math.sqrt(n);
+        for (var i = 2; i <= limit; i++) {
             if (n % i === 0) {
                 return false;
             }
@@ -548,9 +559,9 @@ exports.isPrime = isPrime;
 */
 function factorial(n) {
     try {
-        let result = 1;
+        var result = 1;
         // Multiply all numbers from 1 to n.
-        for (let i = 2; i <= n; i++) {
+        for (var i = 2; i <= n; i++) {
             result *= i;
         }
         return result;
@@ -595,7 +606,7 @@ function isPerfectSquare(n) {
             return false;
         }
         // Check if the square root is an integer.
-        const root = Math.sqrt(n);
+        var root = Math.sqrt(n);
         return Number.isInteger(root);
     }
     catch (error) {
@@ -614,7 +625,7 @@ function greatestCommonDivisor(a, b) {
     try {
         // Use Euclid's algorithm to find the GCD.
         while (b !== 0) {
-            const temp = b;
+            var temp = b;
             b = a % b;
             a = temp;
         }
@@ -636,10 +647,10 @@ exports.greatestCommonDivisor = greatestCommonDivisor;
 function leastCommonMultiple(num1, num2) {
     try {
         // Find the greater and lesser numbers
-        let greaterNum = Math.max(num1, num2);
-        let lesserNum = Math.min(num1, num2);
+        var greaterNum = Math.max(num1, num2);
+        var lesserNum = Math.min(num1, num2);
         // Find the LCM using the formula: LCM(a,b) = a * b / GCD(a,b)
-        let gcd = greatestCommonDivisor(greaterNum, lesserNum);
+        var gcd = greatestCommonDivisor(greaterNum, lesserNum);
         return (greaterNum * lesserNum) / gcd;
     }
     catch (error) {
@@ -673,10 +684,10 @@ exports.generateRandomNumber = generateRandomNumber;
  *
  * @returns {string} A string representing the number in short form with suffix
  */
-const toShortForm = (number, upperCaseLetter) => {
+var toShortForm = function (number, upperCaseLetter) {
     try {
-        let abbrevValue = number;
-        let suffix = "";
+        var abbrevValue = number;
+        var suffix = "";
         if (number >= 1e12) {
             abbrevValue = number / 1e12;
             suffix = upperCaseLetter ? "T" : "t";
@@ -696,10 +707,10 @@ const toShortForm = (number, upperCaseLetter) => {
         if (abbrevValue % 1 !== 0) {
             abbrevValue = abbrevValue.toFixed(1);
         }
-        return `${abbrevValue}${suffix}`;
+        return "".concat(abbrevValue).concat(suffix);
     }
     catch (error) {
-        console.error(`Error converting to short form: ${error.message}`);
+        console.error("Error converting to short form: ".concat(error.message));
         return "";
     }
 };
@@ -710,13 +721,13 @@ exports.toShortForm = toShortForm;
  * @param currency - The number to be converted to word representation. Must be a finite number within the range of (-10^33 to 10^33).
  * @returns The word representation of the input number.
  */
-const toWord = (currency) => {
+var toWord = function (currency) {
     try {
-        let words = "";
-        const ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
-        const tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
-        const teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
-        const thousands = ["", "thousand", "million", "billion", "trillion"];
+        var words = "";
+        var ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+        var tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+        var teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+        var thousands = ["", "thousand", "million", "billion", "trillion"];
         // if (currency === 0) {
         //     return "zero dollars";
         // }
@@ -724,11 +735,11 @@ const toWord = (currency) => {
             words += "negative ";
             currency = Math.abs(currency);
         }
-        let i = 0;
+        var i = 0;
         while (currency > 0) {
-            const threeDigits = currency % 1000;
+            var threeDigits = currency % 1000;
             if (threeDigits !== 0) {
-                let str = "";
+                var str = "";
                 if (threeDigits < 10) {
                     str = ones[threeDigits];
                 }
@@ -778,12 +789,12 @@ exports.toWord = toWord;
  * @param unit The time unit to convert, one of: seconds, minutes, hours, days, weeks, months, years
  * @returns The value converted to milliseconds
  */
-const toMilliseconds = (value, unit) => {
+var toMilliseconds = function (value, unit) {
     try {
         // Perform conversion
-        let milliseconds = 0;
+        var milliseconds = 0;
         // Validate parameters
-        const validUnits = ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years'];
+        var validUnits = ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years'];
         if (!validUnits.includes(unit))
             return milliseconds;
         switch (unit) {
@@ -812,7 +823,7 @@ const toMilliseconds = (value, unit) => {
         return milliseconds;
     }
     catch (error) {
-        console.error(`Error converting ${value} ${unit} to milliseconds: ${error}`);
+        console.error("Error converting ".concat(value, " ").concat(unit, " to milliseconds: ").concat(error));
         return 0;
     }
 };

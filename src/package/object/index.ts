@@ -1,31 +1,67 @@
 /**
- * Function to check if an object is empty
- * @param obj - The object to check
- * @returns Whether the object is empty or not
+ * This function checks if an object is empty.
+ * @param obj The object to check.
+ * @returns A boolean indicating whether the object is empty.
  */
-export function isEmpty(obj: object): boolean {
+export function isEmpty(obj: Record<string, any>): boolean {
     try {
+        // Validate function parameters
+        if (typeof obj !== 'object' || Array.isArray(obj) || obj === null) {
+            throw new Error('Invalid object parameter. Must be a non-null object.');
+        }
+
+        // Function logic and other codes inside try block
         return Object.keys(obj).length === 0;
-    } catch (err) {
-        console.error(err);
+    } catch (error) {
+        console.error(error);
         return false;
     }
 }
 
 /**
- * Function to check if two objects are equal
- * @param obj1 - The first object to compare
- * @param obj2 - The second object to compare
- * @returns Whether the two objects are equal or not
- */
-export function isEqual(obj1: object, obj2: object): boolean {
+* This function checks if an object is not empty.
+* @param obj The object to check.
+* @returns A boolean indicating whether the object is not empty.
+*/
+export function isNotEmpty(obj: Record<string, any>): boolean {
     try {
-        return JSON.stringify(obj1) === JSON.stringify(obj2);
-    } catch (err) {
-        console.error(err);
+        // Validate function parameters
+        if (typeof obj !== 'object' || Array.isArray(obj) || obj === null) {
+            throw new Error('Invalid object parameter. Must be a non-null object.');
+        }
+
+        // Function logic and other codes inside try block
+        return Object.keys(obj).length !== 0;
+    } catch (error) {
+        console.error(error);
         return false;
     }
 }
+
+/**
+ * This function checks if two objects are equal.
+ * @param obj1 The first object to compare.
+ * @param obj2 The second object to compare.
+ * @returns A boolean indicating whether the two objects are equal.
+ */
+export function areEqual(obj1: Record<string, any>, obj2: Record<string, any>): boolean {
+    try {
+        // Validate function parameters
+        if (typeof obj1 !== 'object' || Array.isArray(obj1) || obj1 === null) {
+            throw new Error('Invalid first object parameter. Must be a non-null object.');
+        }
+        if (typeof obj2 !== 'object' || Array.isArray(obj2) || obj2 === null) {
+            throw new Error('Invalid second object parameter. Must be a non-null object.');
+        }
+
+        // Function logic and other codes inside try block
+        return JSON.stringify(obj1) === JSON.stringify(obj2);
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+}
+
 
 /**
  * Function to create a deep clone of an object
@@ -136,7 +172,7 @@ export function filterObject<T extends object>(obj: T, predicate: (value: T[keyo
  * @param value - The value to check
  * @returns Whether the value is an object or not
  */
-export function isObject(value: any): boolean {
+export function isValid(value: any): boolean {
     try {
         return typeof value === 'object' && value !== null && !Array.isArray(value);
     } catch (err) {
@@ -156,49 +192,6 @@ export function getObjectValues(obj: any): any[] {
     } catch (err) {
         console.error(err);
         return [];
-    }
-}
-
-
-/**
- * Function to check if an object has a specified key
- * @param obj - The object to check
- * @param key - The key to check for
- * @returns True if the object has the specified key, false otherwise
- */
-export function hasKey(obj: any, key: string): boolean {
-    try {
-        return key in obj;
-    } catch (err) {
-        console.error(err);
-        return false;
-    }
-}
-
-/**
- * Function to flatten an object with nested properties into a single-level object with dot-separated keys
- * @param obj - The object to flatten
- * @returns A new object with dot-separated keys representing the original object's nested properties
- */
-export function flattenObject(obj: any): any {
-    try {
-        const result: any = {};
-        function recurse(obj: any, currentKey: string) {
-            for (const key in obj) {
-                const value = obj[key];
-                const newKey = currentKey ? `${currentKey}.${key}` : key;
-                if (typeof value === "object" && value !== null) {
-                    recurse(value, newKey);
-                } else {
-                    result[newKey] = value;
-                }
-            }
-        }
-        recurse(obj, "");
-        return result;
-    } catch (err) {
-        console.error(err);
-        return {};
     }
 }
 
@@ -305,35 +298,48 @@ export function sortByKey<T>(obj: Record<string, T>, order: "asc" | "desc" = "as
 
 
 /**
-* Parses a JSON string into a JavaScript object.
-*
-* @param jsonString The JSON string to parse.
-* @returns The resulting JavaScript object.
-*/
-export function parseJSON<T>(jsonString: string): T {
+ * This function converts a provided JSON string to an object.
+ * @param jsonString The JSON string to convert to an object.
+ * @returns An object representing the JSON string, or null if the string is not valid JSON.
+ */
+export function toObject(jsonString: string): Record<string, any> | null {
     try {
-        return JSON.parse(jsonString);
-    } catch (err) {
-        console.error(err);
-        return null
+        // Validate function parameters
+        if (typeof jsonString !== 'string') {
+            throw new Error('Input must be a JSON string.');
+        }
+
+        // Function logic and other codes inside try block
+        const obj = JSON.parse(jsonString);
+        return obj;
+    } catch (error) {
+        console.error(error);
+        return null;
     }
 }
 
 
 /**
-* Converts a JavaScript object into a JSON string.
-*
-* @param obj The object to convert.
-* @returns The resulting JSON string.
-*/
-export function stringifyJSON(obj: any): string {
+ * This function converts a provided object to a JSON string.
+ * @param obj The object to convert to a JSON string.
+ * @returns A string representing the object in JSON format, or null if the object is undefined.
+ */
+export function stringify(obj: Record<string, any>): string | null {
     try {
-        return JSON.stringify(obj);
-    } catch (err) {
-        console.error(err);
-        return ''
+        // Validate function parameters
+        if (obj === undefined) {
+            throw new Error('Cannot stringify undefined object.');
+        }
+
+        // Function logic and other codes inside try block
+        const jsonString = JSON.stringify(obj);
+        return jsonString;
+    } catch (error) {
+        console.error(error);
+        return null;
     }
 }
+
 
 /**
 * Applies a mapping function to each value in an object and returns a new object with the same keys.
@@ -352,5 +358,64 @@ export function mapObject<T, U>(obj: Record<string, T>, fn: (value: T, key: stri
     } catch (err) {
         console.error(err);
         return {}
+    }
+}
+
+/**
+ * This function checks if an object has all the specified keys.
+ * @param obj The object to check.
+ * @param keys An array of strings representing the keys to check for.
+ * @returns A boolean indicating whether the object has all the specified keys.
+ */
+export function hasAllKeys(obj: Record<string, any>, keys: string[]): boolean {
+    try {
+        // Validate function parameters
+        if (typeof obj !== 'object' || Array.isArray(obj) || obj === null) {
+            throw new Error('Invalid object parameter. Must be a non-null object.');
+        }
+
+        if (!Array.isArray(keys)) {
+            throw new Error('Invalid keys parameter. Must be an array of strings.');
+        }
+
+        if (keys.length === 0) {
+            throw new Error('Invalid keys parameter. Must specify at least one key.');
+        }
+
+        // Function logic and other codes inside try block
+        for (const key of keys) {
+            if (!obj.hasOwnProperty(key)) {
+                return false;
+            }
+        }
+
+        return true;
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+}
+
+/**
+ * This function checks if a provided object has a given key.
+ * @param obj The object to check.
+ * @param key The key to check for.
+ * @returns A boolean indicating whether the key exists in the object.
+ */
+export function keyExist(obj: Record<string, any>, key: string): boolean {
+    try {
+        // Validate function parameters
+        if (typeof obj !== 'object' || Array.isArray(obj) || obj === null) {
+            throw new Error('Invalid object parameter. Must be a non-null object.');
+        }
+        if (typeof key !== 'string' || key.trim().length === 0) {
+            throw new Error('Invalid key parameter. Must be a non-empty string.');
+        }
+
+        // Function logic and other codes inside try block
+        return obj.hasOwnProperty(key);
+    } catch (error) {
+        console.error(error);
+        return false;
     }
 }

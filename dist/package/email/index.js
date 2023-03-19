@@ -22,21 +22,21 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.hasValidDomain = exports.validateMXRecord = exports.normalize = exports.getUsername = exports.getDomain = exports.isValid = void 0;
-const string = __importStar(require("../string"));
+exports.__esModule = true;
+exports.normalize = exports.getUsername = exports.getDomain = exports.isValid = void 0;
+var string = __importStar(require("../string"));
 /**
  * Check if the provided string is a valid email
  * @param email - string to be validated as email
  * @returns boolean - true if email is valid, false otherwise
  */
-const isValid = (email) => {
+var isValid = function (email) {
     try {
         if (string.isNotEmpty(email)) {
             // Regular expression to match email format
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             // Validate email using regex
-            const isEmailValid = emailRegex.test(email);
+            var isEmailValid = emailRegex.test(email);
             // Return true if email is valid
             return isEmailValid;
         }
@@ -44,7 +44,7 @@ const isValid = (email) => {
     }
     catch (error) {
         // Handle error without throw
-        console.error(`Error in isValidEmail function: ${error.message}`);
+        console.error("Error in isValidEmail function: ".concat(error.message));
         // Return false if there was an error
         return false;
     }
@@ -55,12 +55,12 @@ exports.isValid = isValid;
  * @param email - string of the email address to get the domain from
  * @returns string - the domain of the provided email address, or an empty string if the email is invalid
  */
-const getDomain = (email) => {
+var getDomain = function (email) {
     try {
         if ((0, exports.isValid)(email)) {
             // Split email by '@' symbol to get domain
-            const emailParts = email.split('@');
-            const domain = emailParts[1];
+            var emailParts = email.split('@');
+            var domain = emailParts[1];
             // Return domain
             return domain;
         }
@@ -68,7 +68,7 @@ const getDomain = (email) => {
     }
     catch (error) {
         // Handle error without throw
-        console.error(`Error in getEmailDomain function: ${error.message}`);
+        console.error("Error in getEmailDomain function: ".concat(error.message));
         // Return empty string if there was an error
         return '';
     }
@@ -79,12 +79,12 @@ exports.getDomain = getDomain;
  * @param email - string of the email address to get the username from
  * @returns string - the username of the provided email address, or an empty string if the email is invalid
  */
-const getUsername = (email) => {
+var getUsername = function (email) {
     try {
         if ((0, exports.isValid)(email)) {
             // Split email by '@' symbol to get username
-            const emailParts = email.split('@');
-            const username = emailParts[0];
+            var emailParts = email.split('@');
+            var username = emailParts[0];
             // Return username
             return username;
         }
@@ -92,7 +92,7 @@ const getUsername = (email) => {
     }
     catch (error) {
         // Handle error without throw
-        console.error(`Error in getEmailUsername function: ${error.message}`);
+        console.error("Error in getEmailUsername function: ".concat(error.message));
         // Return empty string if there was an error
         return '';
     }
@@ -103,11 +103,11 @@ exports.getUsername = getUsername;
  * @param email - string of the email address to normalize
  * @returns string - the normalized email address, or an empty string if the email is invalid
  */
-const normalize = (email) => {
+var normalize = function (email) {
     try {
         if ((0, exports.isValid)(email)) {
             // Convert email to lowercase and remove spaces
-            const normalizedEmail = email.toLowerCase().replace(/\s/g, '');
+            var normalizedEmail = email.toLowerCase().replace(/\s/g, '');
             // Return normalized email
             return normalizedEmail;
         }
@@ -115,63 +115,10 @@ const normalize = (email) => {
     }
     catch (error) {
         // Handle error without throw
-        console.error(`Error in normalizeEmail function: ${error.message}`);
+        console.error("Error in normalizeEmail function: ".concat(error.message));
         // Return empty string if there was an error
         return '';
     }
 };
 exports.normalize = normalize;
-/**
- * Validates the given email address and checks if its MX record is valid.
- * @param email - The email address to validate.
- * @returns A boolean value indicating whether the email is valid and its MX record is valid.
- */
-const validateMXRecord = async (email) => {
-    try {
-        if ((0, exports.isValid)(email)) {
-            const dns = require("dns");
-            // Use the built-in `dns` module to get the MX records for the domain
-            await new Promise((resolve, reject) => {
-                dns.resolveMx((0, exports.getDomain)(email), (error) => {
-                    if (error)
-                        reject(error);
-                    else
-                        resolve(true);
-                });
-            });
-            return true;
-        }
-        return false;
-    }
-    catch (error) {
-        console.log(error.message);
-        // If there is any error in the try block, the email is invalid or its MX record is invalid
-        return false;
-    }
-};
-exports.validateMXRecord = validateMXRecord;
-/**
- * @returns true if the domain of the given email exists and is valid, false otherwise.
- * @param email The email to check.
- */
-async function hasValidDomain(email) {
-    try {
-        await new Promise((resolve, reject) => {
-            const dns = require("dns");
-            dns.resolve((0, exports.getDomain)(email), (error) => {
-                if (error) {
-                    reject(error);
-                }
-                else {
-                    resolve(true);
-                }
-            });
-        });
-        return true;
-    }
-    catch (error) {
-        return false;
-    }
-}
-exports.hasValidDomain = hasValidDomain;
 //# sourceMappingURL=index.js.map

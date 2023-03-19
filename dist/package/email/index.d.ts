@@ -22,14 +22,3 @@ export declare const getUsername: (email: string) => string;
  * @returns string - the normalized email address, or an empty string if the email is invalid
  */
 export declare const normalize: (email: string) => string;
-/**
- * Validates the given email address and checks if its MX record is valid.
- * @param email - The email address to validate.
- * @returns A boolean value indicating whether the email is valid and its MX record is valid.
- */
-export declare const validateMXRecord: (email: string) => Promise<boolean>;
-/**
- * @returns true if the domain of the given email exists and is valid, false otherwise.
- * @param email The email to check.
- */
-export declare function hasValidDomain(email: string): Promise<boolean>;

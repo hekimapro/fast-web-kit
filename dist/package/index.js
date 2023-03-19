@@ -22,7 +22,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.password = exports.object = exports.number = exports.string = exports.email = exports.array = exports.time = void 0;
 exports.time = __importStar(require("./time"));
 exports.array = __importStar(require("./array"));

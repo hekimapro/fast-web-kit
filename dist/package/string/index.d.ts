@@ -170,3 +170,9 @@ export declare const isValidBase64: (base64String: string) => boolean;
  * @returns {string} The converted string
  */
 export declare function removeCase(str: string, caseType: 'kebab-case' | 'snake_case'): string;
+/**
+ * This function checks if a provided string is empty.
+ * @param str The string to check.
+ * @returns True if the string is empty, false otherwise.
+ */
+export declare function isEmpty(str: string): boolean;

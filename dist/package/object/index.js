@@ -1,37 +1,81 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.mapObject = exports.stringifyJSON = exports.parseJSON = exports.sortByKey = exports.setNestedProperty = exports.getNestedProperty = exports.unflattenObject = exports.flattenObject = exports.hasKey = exports.getObjectValues = exports.isObject = exports.filterObject = exports.mapValues = exports.mapKeys = exports.pick = exports.omit = exports.deepMerge = exports.deepClone = exports.isEqual = exports.isEmpty = void 0;
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+exports.__esModule = true;
+exports.keyExist = exports.hasAllKeys = exports.mapObject = exports.stringify = exports.toObject = exports.sortByKey = exports.setNestedProperty = exports.getNestedProperty = exports.unflattenObject = exports.getObjectValues = exports.isValid = exports.filterObject = exports.mapValues = exports.mapKeys = exports.pick = exports.omit = exports.deepMerge = exports.deepClone = exports.areEqual = exports.isNotEmpty = exports.isEmpty = void 0;
 /**
- * Function to check if an object is empty
- * @param obj - The object to check
- * @returns Whether the object is empty or not
+ * This function checks if an object is empty.
+ * @param obj The object to check.
+ * @returns A boolean indicating whether the object is empty.
  */
 function isEmpty(obj) {
     try {
+        // Validate function parameters
+        if (typeof obj !== 'object' || Array.isArray(obj) || obj === null) {
+            throw new Error('Invalid object parameter. Must be a non-null object.');
+        }
+        // Function logic and other codes inside try block
         return Object.keys(obj).length === 0;
     }
-    catch (err) {
-        console.error(err);
+    catch (error) {
+        console.error(error);
         return false;
     }
 }
 exports.isEmpty = isEmpty;
 /**
- * Function to check if two objects are equal
- * @param obj1 - The first object to compare
- * @param obj2 - The second object to compare
- * @returns Whether the two objects are equal or not
- */
-function isEqual(obj1, obj2) {
+* This function checks if an object is not empty.
+* @param obj The object to check.
+* @returns A boolean indicating whether the object is not empty.
+*/
+function isNotEmpty(obj) {
     try {
-        return JSON.stringify(obj1) === JSON.stringify(obj2);
+        // Validate function parameters
+        if (typeof obj !== 'object' || Array.isArray(obj) || obj === null) {
+            throw new Error('Invalid object parameter. Must be a non-null object.');
+        }
+        // Function logic and other codes inside try block
+        return Object.keys(obj).length !== 0;
     }
-    catch (err) {
-        console.error(err);
+    catch (error) {
+        console.error(error);
         return false;
     }
 }
-exports.isEqual = isEqual;
+exports.isNotEmpty = isNotEmpty;
+/**
+ * This function checks if two objects are equal.
+ * @param obj1 The first object to compare.
+ * @param obj2 The second object to compare.
+ * @returns A boolean indicating whether the two objects are equal.
+ */
+function areEqual(obj1, obj2) {
+    try {
+        // Validate function parameters
+        if (typeof obj1 !== 'object' || Array.isArray(obj1) || obj1 === null) {
+            throw new Error('Invalid first object parameter. Must be a non-null object.');
+        }
+        if (typeof obj2 !== 'object' || Array.isArray(obj2) || obj2 === null) {
+            throw new Error('Invalid second object parameter. Must be a non-null object.');
+        }
+        // Function logic and other codes inside try block
+        return JSON.stringify(obj1) === JSON.stringify(obj2);
+    }
+    catch (error) {
+        console.error(error);
+        return false;
+    }
+}
+exports.areEqual = areEqual;
 /**
  * Function to create a deep clone of an object
  * @param obj - The object to clone
@@ -55,11 +99,11 @@ exports.deepClone = deepClone;
  */
 function deepMerge(obj1, obj2) {
     try {
-        return { ...obj1, ...obj2 };
+        return __assign(__assign({}, obj1), obj2);
     }
     catch (err) {
         console.error(err);
-        return { ...obj1 };
+        return __assign({}, obj1);
     }
 }
 exports.deepMerge = deepMerge;
@@ -71,11 +115,14 @@ exports.deepMerge = deepMerge;
  */
 function omit(obj, keys) {
     try {
-        return Object.fromEntries(Object.entries(obj).filter(([key]) => !keys.includes(key)));
+        return Object.fromEntries(Object.entries(obj).filter(function (_a) {
+            var key = _a[0];
+            return !keys.includes(key);
+        }));
     }
     catch (err) {
         console.error(err);
-        return { ...obj };
+        return __assign({}, obj);
     }
 }
 exports.omit = omit;
@@ -87,7 +134,10 @@ exports.omit = omit;
  */
 function pick(obj, keys) {
     try {
-        return Object.fromEntries(Object.entries(obj).filter(([key]) => keys.includes(key)));
+        return Object.fromEntries(Object.entries(obj).filter(function (_a) {
+            var key = _a[0];
+            return keys.includes(key);
+        }));
     }
     catch (err) {
         console.error(err);
@@ -103,7 +153,10 @@ exports.pick = pick;
  */
 function mapKeys(obj, keyMap) {
     try {
-        return Object.fromEntries(Object.entries(obj).map(([key, val]) => [keyMap[key] || key, val]));
+        return Object.fromEntries(Object.entries(obj).map(function (_a) {
+            var key = _a[0], val = _a[1];
+            return [keyMap[key] || key, val];
+        }));
     }
     catch (err) {
         console.error(err);
@@ -119,7 +172,10 @@ exports.mapKeys = mapKeys;
  */
 function mapValues(obj, callback) {
     try {
-        return Object.fromEntries(Object.entries(obj).map(([key, val]) => [key, callback(val, key)]));
+        return Object.fromEntries(Object.entries(obj).map(function (_a) {
+            var key = _a[0], val = _a[1];
+            return [key, callback(val, key)];
+        }));
     }
     catch (err) {
         console.error(err);
@@ -135,7 +191,10 @@ exports.mapValues = mapValues;
  */
 function filterObject(obj, predicate) {
     try {
-        return Object.fromEntries(Object.entries(obj).filter(([key, val]) => predicate(val, key)));
+        return Object.fromEntries(Object.entries(obj).filter(function (_a) {
+            var key = _a[0], val = _a[1];
+            return predicate(val, key);
+        }));
     }
     catch (err) {
         console.error(err);
@@ -148,7 +207,7 @@ exports.filterObject = filterObject;
  * @param value - The value to check
  * @returns Whether the value is an object or not
  */
-function isObject(value) {
+function isValid(value) {
     try {
         return typeof value === 'object' && value !== null && !Array.isArray(value);
     }
@@ -157,7 +216,7 @@ function isObject(value) {
         return false;
     }
 }
-exports.isObject = isObject;
+exports.isValid = isValid;
 /**
  * Function to get an array of all the own property values of an object
  * @param obj - The object to get values from
@@ -165,7 +224,7 @@ exports.isObject = isObject;
  */
 function getObjectValues(obj) {
     try {
-        return Object.keys(obj).map(key => obj[key]);
+        return Object.keys(obj).map(function (key) { return obj[key]; });
     }
     catch (err) {
         console.error(err);
@@ -174,61 +233,16 @@ function getObjectValues(obj) {
 }
 exports.getObjectValues = getObjectValues;
 /**
- * Function to check if an object has a specified key
- * @param obj - The object to check
- * @param key - The key to check for
- * @returns True if the object has the specified key, false otherwise
- */
-function hasKey(obj, key) {
-    try {
-        return key in obj;
-    }
-    catch (err) {
-        console.error(err);
-        return false;
-    }
-}
-exports.hasKey = hasKey;
-/**
- * Function to flatten an object with nested properties into a single-level object with dot-separated keys
- * @param obj - The object to flatten
- * @returns A new object with dot-separated keys representing the original object's nested properties
- */
-function flattenObject(obj) {
-    try {
-        const result = {};
-        function recurse(obj, currentKey) {
-            for (const key in obj) {
-                const value = obj[key];
-                const newKey = currentKey ? `${currentKey}.${key}` : key;
-                if (typeof value === "object" && value !== null) {
-                    recurse(value, newKey);
-                }
-                else {
-                    result[newKey] = value;
-                }
-            }
-        }
-        recurse(obj, "");
-        return result;
-    }
-    catch (err) {
-        console.error(err);
-        return {};
-    }
-}
-exports.flattenObject = flattenObject;
-/**
  * Function to unflatten an object with dot-separated keys into a nested object with nested properties
  * @param obj - The object to unflatten
  * @returns A new object with nested properties representing the original object's dot-separated keys
  */
 function unflattenObject(obj) {
     try {
-        const result = {};
-        for (const key in obj) {
-            const keys = key.split(".");
-            keys.reduce((acc, curKey, idx) => {
+        var result = {};
+        var _loop_1 = function (key) {
+            var keys = key.split(".");
+            keys.reduce(function (acc, curKey, idx) {
                 if (!acc[curKey]) {
                     acc[curKey] = isNaN(Number(keys[idx + 1])) ? {} : [];
                 }
@@ -237,6 +251,9 @@ function unflattenObject(obj) {
                 }
                 return acc[curKey];
             }, result);
+        };
+        for (var key in obj) {
+            _loop_1(key);
         }
         return result;
     }
@@ -259,10 +276,10 @@ function getNestedProperty(obj, path) {
         // Use reduce to iterate over the keys in the path, updating the accumulator (the current object) with each iteration.
         // If the current key doesn't exist in the current object, return undefined.
         // Otherwise, return the value of the current key in the current object.
-        return path.reduce((acc, key) => (acc && acc[key] !== undefined ? acc[key] : undefined), obj);
+        return path.reduce(function (acc, key) { return (acc && acc[key] !== undefined ? acc[key] : undefined); }, obj);
     }
     catch (error) {
-        console.error(`Error getting nested property: ${error}`);
+        console.error("Error getting nested property: ".concat(error));
         return undefined;
     }
 }
@@ -282,7 +299,7 @@ function setNestedProperty(obj, path, value) {
         // If the current key doesn't exist in the current object, create it.
         // If the current key is the last one in the path, set its value to the given value.
         // Otherwise, return the value of the current key in the current object.
-        path.reduce((acc, key, index) => {
+        path.reduce(function (acc, key, index) {
             if (index === path.length - 1) {
                 acc[key] = value;
             }
@@ -294,7 +311,7 @@ function setNestedProperty(obj, path, value) {
         return obj;
     }
     catch (error) {
-        console.error(`Error setting nested property: ${error}`);
+        console.error("Error setting nested property: ".concat(error));
         return obj;
     }
 }
@@ -306,14 +323,16 @@ exports.setNestedProperty = setNestedProperty;
  * @param order The sort order ("asc" or "desc"). Defaults to "asc".
  * @returns A new object with the same properties as `obj`, but with the keys sorted.
  */
-function sortByKey(obj, order = "asc") {
+function sortByKey(obj, order) {
+    if (order === void 0) { order = "asc"; }
     try {
-        const sortedKeys = Object.keys(obj).sort();
+        var sortedKeys = Object.keys(obj).sort();
         if (order === "desc") {
             sortedKeys.reverse();
         }
-        const sortedObj = {};
-        for (const key of sortedKeys) {
+        var sortedObj = {};
+        for (var _i = 0, sortedKeys_1 = sortedKeys; _i < sortedKeys_1.length; _i++) {
+            var key = sortedKeys_1[_i];
             sortedObj[key] = obj[key];
         }
         return sortedObj;
@@ -325,37 +344,47 @@ function sortByKey(obj, order = "asc") {
 }
 exports.sortByKey = sortByKey;
 /**
-* Parses a JSON string into a JavaScript object.
-*
-* @param jsonString The JSON string to parse.
-* @returns The resulting JavaScript object.
-*/
-function parseJSON(jsonString) {
+ * This function converts a provided JSON string to an object.
+ * @param jsonString The JSON string to convert to an object.
+ * @returns An object representing the JSON string, or null if the string is not valid JSON.
+ */
+function toObject(jsonString) {
     try {
-        return JSON.parse(jsonString);
+        // Validate function parameters
+        if (typeof jsonString !== 'string') {
+            throw new Error('Input must be a JSON string.');
+        }
+        // Function logic and other codes inside try block
+        var obj = JSON.parse(jsonString);
+        return obj;
     }
-    catch (err) {
-        console.error(err);
+    catch (error) {
+        console.error(error);
         return null;
     }
 }
-exports.parseJSON = parseJSON;
+exports.toObject = toObject;
 /**
-* Converts a JavaScript object into a JSON string.
-*
-* @param obj The object to convert.
-* @returns The resulting JSON string.
-*/
-function stringifyJSON(obj) {
+ * This function converts a provided object to a JSON string.
+ * @param obj The object to convert to a JSON string.
+ * @returns A string representing the object in JSON format, or null if the object is undefined.
+ */
+function stringify(obj) {
     try {
-        return JSON.stringify(obj);
+        // Validate function parameters
+        if (obj === undefined) {
+            throw new Error('Cannot stringify undefined object.');
+        }
+        // Function logic and other codes inside try block
+        var jsonString = JSON.stringify(obj);
+        return jsonString;
     }
-    catch (err) {
-        console.error(err);
-        return '';
+    catch (error) {
+        console.error(error);
+        return null;
     }
 }
-exports.stringifyJSON = stringifyJSON;
+exports.stringify = stringify;
 /**
 * Applies a mapping function to each value in an object and returns a new object with the same keys.
 *
@@ -365,8 +394,9 @@ exports.stringifyJSON = stringifyJSON;
 */
 function mapObject(obj, fn) {
     try {
-        const mappedObj = {};
-        for (const [key, value] of Object.entries(obj)) {
+        var mappedObj = {};
+        for (var _i = 0, _a = Object.entries(obj); _i < _a.length; _i++) {
+            var _b = _a[_i], key = _b[0], value = _b[1];
             mappedObj[key] = fn(value, key);
         }
         return mappedObj;
@@ -377,4 +407,61 @@ function mapObject(obj, fn) {
     }
 }
 exports.mapObject = mapObject;
+/**
+ * This function checks if an object has all the specified keys.
+ * @param obj The object to check.
+ * @param keys An array of strings representing the keys to check for.
+ * @returns A boolean indicating whether the object has all the specified keys.
+ */
+function hasAllKeys(obj, keys) {
+    try {
+        // Validate function parameters
+        if (typeof obj !== 'object' || Array.isArray(obj) || obj === null) {
+            throw new Error('Invalid object parameter. Must be a non-null object.');
+        }
+        if (!Array.isArray(keys)) {
+            throw new Error('Invalid keys parameter. Must be an array of strings.');
+        }
+        if (keys.length === 0) {
+            throw new Error('Invalid keys parameter. Must specify at least one key.');
+        }
+        // Function logic and other codes inside try block
+        for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
+            var key = keys_1[_i];
+            if (!obj.hasOwnProperty(key)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    catch (error) {
+        console.error(error);
+        return false;
+    }
+}
+exports.hasAllKeys = hasAllKeys;
+/**
+ * This function checks if a provided object has a given key.
+ * @param obj The object to check.
+ * @param key The key to check for.
+ * @returns A boolean indicating whether the key exists in the object.
+ */
+function keyExist(obj, key) {
+    try {
+        // Validate function parameters
+        if (typeof obj !== 'object' || Array.isArray(obj) || obj === null) {
+            throw new Error('Invalid object parameter. Must be a non-null object.');
+        }
+        if (typeof key !== 'string' || key.trim().length === 0) {
+            throw new Error('Invalid key parameter. Must be a non-empty string.');
+        }
+        // Function logic and other codes inside try block
+        return obj.hasOwnProperty(key);
+    }
+    catch (error) {
+        console.error(error);
+        return false;
+    }
+}
+exports.keyExist = keyExist;
 //# sourceMappingURL=index.js.map

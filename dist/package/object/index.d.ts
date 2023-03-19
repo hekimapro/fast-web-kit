@@ -1,16 +1,22 @@
 /**
- * Function to check if an object is empty
- * @param obj - The object to check
- * @returns Whether the object is empty or not
+ * This function checks if an object is empty.
+ * @param obj The object to check.
+ * @returns A boolean indicating whether the object is empty.
  */
-export declare function isEmpty(obj: object): boolean;
+export declare function isEmpty(obj: Record<string, any>): boolean;
 /**
- * Function to check if two objects are equal
- * @param obj1 - The first object to compare
- * @param obj2 - The second object to compare
- * @returns Whether the two objects are equal or not
+* This function checks if an object is not empty.
+* @param obj The object to check.
+* @returns A boolean indicating whether the object is not empty.
+*/
+export declare function isNotEmpty(obj: Record<string, any>): boolean;
+/**
+ * This function checks if two objects are equal.
+ * @param obj1 The first object to compare.
+ * @param obj2 The second object to compare.
+ * @returns A boolean indicating whether the two objects are equal.
  */
-export declare function isEqual(obj1: object, obj2: object): boolean;
+export declare function areEqual(obj1: Record<string, any>, obj2: Record<string, any>): boolean;
 /**
  * Function to create a deep clone of an object
  * @param obj - The object to clone
@@ -68,26 +74,13 @@ export declare function filterObject<T extends object>(obj: T, predicate: (value
  * @param value - The value to check
  * @returns Whether the value is an object or not
  */
-export declare function isObject(value: any): boolean;
+export declare function isValid(value: any): boolean;
 /**
  * Function to get an array of all the own property values of an object
  * @param obj - The object to get values from
  * @returns An array of all the own property values of the object
  */
 export declare function getObjectValues(obj: any): any[];
-/**
- * Function to check if an object has a specified key
- * @param obj - The object to check
- * @param key - The key to check for
- * @returns True if the object has the specified key, false otherwise
- */
-export declare function hasKey(obj: any, key: string): boolean;
-/**
- * Function to flatten an object with nested properties into a single-level object with dot-separated keys
- * @param obj - The object to flatten
- * @returns A new object with dot-separated keys representing the original object's nested properties
- */
-export declare function flattenObject(obj: any): any;
 /**
  * Function to unflatten an object with dot-separated keys into a nested object with nested properties
  * @param obj - The object to unflatten
@@ -122,19 +115,17 @@ export declare function setNestedProperty(obj: any, path: string[], value: any):
  */
 export declare function sortByKey<T>(obj: Record<string, T>, order?: "asc" | "desc"): Record<string, T>;
 /**
-* Parses a JSON string into a JavaScript object.
-*
-* @param jsonString The JSON string to parse.
-* @returns The resulting JavaScript object.
-*/
-export declare function parseJSON<T>(jsonString: string): T;
+ * This function converts a provided JSON string to an object.
+ * @param jsonString The JSON string to convert to an object.
+ * @returns An object representing the JSON string, or null if the string is not valid JSON.
+ */
+export declare function toObject(jsonString: string): Record<string, any> | null;
 /**
-* Converts a JavaScript object into a JSON string.
-*
-* @param obj The object to convert.
-* @returns The resulting JSON string.
-*/
-export declare function stringifyJSON(obj: any): string;
+ * This function converts a provided object to a JSON string.
+ * @param obj The object to convert to a JSON string.
+ * @returns A string representing the object in JSON format, or null if the object is undefined.
+ */
+export declare function stringify(obj: Record<string, any>): string | null;
 /**
 * Applies a mapping function to each value in an object and returns a new object with the same keys.
 *
@@ -143,3 +134,17 @@ export declare function stringifyJSON(obj: any): string;
 * @returns A new object with the same properties as `obj`, but with the values transformed by `fn`.
 */
 export declare function mapObject<T, U>(obj: Record<string, T>, fn: (value: T, key: string) => U): Record<string, U>;
+/**
+ * This function checks if an object has all the specified keys.
+ * @param obj The object to check.
+ * @param keys An array of strings representing the keys to check for.
+ * @returns A boolean indicating whether the object has all the specified keys.
+ */
+export declare function hasAllKeys(obj: Record<string, any>, keys: string[]): boolean;
+/**
+ * This function checks if a provided object has a given key.
+ * @param obj The object to check.
+ * @param key The key to check for.
+ * @returns A boolean indicating whether the key exists in the object.
+ */
+export declare function keyExist(obj: Record<string, any>, key: string): boolean;

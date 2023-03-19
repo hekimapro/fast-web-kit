@@ -1,33 +1,42 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
+exports.__esModule = true;
 exports.getElementByIndex = exports.getMiddleElement = exports.getFirstElement = exports.getLastElement = exports.getLength = exports.addElement = exports.copy = exports.sort = exports.computeMathOperation = exports.countOccurrences = exports.countElements = exports.elementsWithSameType = exports.removeFalsyElements = exports.removeElement = exports.getElementIndex = exports.elementExist = exports.hasFalsyValues = exports.hasSameDataType = exports.hasDuplicates = exports.isUnique = exports.hasElements = exports.isValid = void 0;
 /**
  * Check if a given value is an array
  * @param value The value to check
  * @returns true if the value is an array, false otherwise
  */
-const isValid = (value) => Array.isArray(value);
+var isValid = function (value) { return Array.isArray(value); };
 exports.isValid = isValid;
 /**
  * Check if a given array has elements
  * @param arr The array to check
  * @returns true if the array has elements, false otherwise
  */
-const hasElements = (arr) => (0, exports.isValid)(arr) ? arr.length > 0 : false;
+var hasElements = function (arr) { return (0, exports.isValid)(arr) ? arr.length > 0 : false; };
 exports.hasElements = hasElements;
 /**
  * Check if a given array is unique
  * @param arr The array to check
  * @returns true if the array is unique, false otherwise
  */
-const isUnique = (arr) => (0, exports.hasElements)(arr) ? new Set(arr).size === arr.length : false;
+var isUnique = function (arr) { return (0, exports.hasElements)(arr) ? new Set(arr).size === arr.length : false; };
 exports.isUnique = isUnique;
 /**
  * Check if a given array has duplicates
  * @param arr The array to check
  * @returns true if the array has duplicates, false otherwise
  */
-const hasDuplicates = (arr) => (0, exports.hasElements)(arr) ? arr.length !== new Set(arr).size : false;
+var hasDuplicates = function (arr) { return (0, exports.hasElements)(arr) ? arr.length !== new Set(arr).size : false; };
 exports.hasDuplicates = hasDuplicates;
 /**
  * Check if a given array has elements with the same provided data type
@@ -35,14 +44,14 @@ exports.hasDuplicates = hasDuplicates;
  * @param type The data type to compare against
  * @returns true if the array has elements with the same data type, false otherwise
  */
-const hasSameDataType = (arr, type) => (0, exports.hasElements)(arr) && type ? arr.every(item => type === "array" ? (0, exports.isValid)(item) : typeof item === type) : false;
+var hasSameDataType = function (arr, type) { return (0, exports.hasElements)(arr) && type ? arr.every(function (item) { return type === "array" ? (0, exports.isValid)(item) : typeof item === type; }) : false; };
 exports.hasSameDataType = hasSameDataType;
 /**
  * Check if a given array has falsy values
  * @param arr The array to check
  * @returns true if the array has falsy values, false otherwise
  */
-const hasFalsyValues = (arr) => (0, exports.hasElements)(arr) ? arr.some(item => !item) : false;
+var hasFalsyValues = function (arr) { return (0, exports.hasElements)(arr) ? arr.some(function (item) { return !item; }) : false; };
 exports.hasFalsyValues = hasFalsyValues;
 /**
  * Check if a given element exists in an array
@@ -50,7 +59,7 @@ exports.hasFalsyValues = hasFalsyValues;
  * @param elem The element to search for
  * @returns true if the element exists in the array, false otherwise
  */
-const elementExist = (arr, elem) => (0, exports.hasElements)(arr) ? arr.includes(elem) : false;
+var elementExist = function (arr, elem) { return (0, exports.hasElements)(arr) ? arr.includes(elem) : false; };
 exports.elementExist = elementExist;
 /**
  * Get the index of a given element in an array
@@ -58,7 +67,7 @@ exports.elementExist = elementExist;
  * @param elem The element to search for
  * @returns The index of the element if it exists in the array, or -1 if it does not
  */
-const getElementIndex = (arr, elem) => (0, exports.elementExist)(arr, elem) ? arr.indexOf(elem) : -1;
+var getElementIndex = function (arr, elem) { return (0, exports.elementExist)(arr, elem) ? arr.indexOf(elem) : -1; };
 exports.getElementIndex = getElementIndex;
 /**
  * Removes an element from the given array
@@ -67,10 +76,10 @@ exports.getElementIndex = getElementIndex;
  * @param elem The element to remove from the array
  * @returns The array with the element removed
  */
-const removeElement = (arr, elem) => {
+var removeElement = function (arr, elem) {
     try {
         if ((0, exports.elementExist)(arr, elem)) {
-            const index = (0, exports.getElementIndex)(arr, elem);
+            var index = (0, exports.getElementIndex)(arr, elem);
             if (index !== -1) {
                 arr.splice(index, 1);
             }
@@ -88,7 +97,7 @@ exports.removeElement = removeElement;
  * @param arr The array to remove falsy elements from
  * @returns A new array with the falsy elements removed
  */
-const removeFalsyElements = (arr) => (0, exports.hasElements)(arr) ? arr.filter(Boolean) : [];
+var removeFalsyElements = function (arr) { return (0, exports.hasElements)(arr) ? arr.filter(Boolean) : []; };
 exports.removeFalsyElements = removeFalsyElements;
 /**
  * This function returns all elements in an array that have the same provided data type.
@@ -96,7 +105,7 @@ exports.removeFalsyElements = removeFalsyElements;
  * @param dataType The data type to search for.
  * @returns An array containing all elements in arr that have the same data type as dataType.
  */
-const elementsWithSameType = (arr, dataType) => (0, exports.hasElements)(arr) && dataType ? arr.filter((element) => dataType === "array" ? (0, exports.isValid)(element) : dataType === "null" ? element === null : ((typeof element === dataType) && (element !== null))) : [];
+var elementsWithSameType = function (arr, dataType) { return (0, exports.hasElements)(arr) && dataType ? arr.filter(function (element) { return dataType === "array" ? (0, exports.isValid)(element) : dataType === "null" ? element === null : ((typeof element === dataType) && (element !== null)); }) : []; };
 exports.elementsWithSameType = elementsWithSameType;
 /**
  * Returns an object with the count of all elements in the given array
@@ -105,10 +114,10 @@ exports.elementsWithSameType = elementsWithSameType;
  * @returns An object with keys for each element in the array and their respective count
  */
 function countElements(arr) {
-    const counts = {};
+    var counts = {};
     try {
         if ((0, exports.hasElements)(arr)) {
-            arr.forEach((elem) => {
+            arr.forEach(function (elem) {
                 if (counts[elem]) {
                     counts[elem]++;
                 }
@@ -130,10 +139,10 @@ exports.countElements = countElements;
  * @param elem The element to count occurrences of.
  * @returns The number of occurrences of the element in the array.
  */
-const countOccurrences = (arr, elem) => {
+var countOccurrences = function (arr, elem) {
     try {
         if ((0, exports.elementExist)(arr, elem)) {
-            return arr.reduce((acc, curr) => {
+            return arr.reduce(function (acc, curr) {
                 if (curr === elem) {
                     return acc + 1;
                 }
@@ -156,10 +165,10 @@ exports.countOccurrences = countOccurrences;
  * @param operator The math operator to use (+, -, /, or *)
  * @returns The result of the math operation
  */
-const computeMathOperation = (nums, operator) => {
+var computeMathOperation = function (nums, operator) {
     try {
         if ((0, exports.hasSameDataType)(nums, "number") && (typeof operator === 'string' && ['+', '-', '/', '*'].includes(operator)))
-            return nums.reduce((acc, num) => {
+            return nums.reduce(function (acc, num) {
                 switch (operator) {
                     case '+':
                         return acc + num;
@@ -186,13 +195,13 @@ exports.computeMathOperation = computeMathOperation;
  * @param order The order to sort in. Must be either "asc" or "desc".
  * @returns The sorted array.
  */
-const sort = (array, order, key) => {
+var sort = function (array, order, key) {
     try {
         if ((0, exports.hasElements)(array) && (typeof order === "string" && ["asc", "desc"].includes(order))) {
             if (order === "asc")
-                return array.sort((a, b) => {
-                    const conditionOne = key ? a[key] < b[key] : a < b;
-                    const conditionTwo = key ? a[key] > b[key] : a > b;
+                return array.sort(function (a, b) {
+                    var conditionOne = key ? a[key] < b[key] : a < b;
+                    var conditionTwo = key ? a[key] > b[key] : a > b;
                     if (conditionOne) {
                         return -1;
                     }
@@ -203,9 +212,9 @@ const sort = (array, order, key) => {
                         return 0;
                     }
                 });
-            return array.sort((a, b) => {
-                const conditionOne = key ? a[key] > b[key] : a > b;
-                const conditionTwo = key ? a[key] < b[key] : a < b;
+            return array.sort(function (a, b) {
+                var conditionOne = key ? a[key] > b[key] : a > b;
+                var conditionTwo = key ? a[key] < b[key] : a < b;
                 if (conditionOne) {
                     return -1;
                 }
@@ -230,12 +239,12 @@ exports.sort = sort;
  * @param {T[]} arr2 - the second array to be copied.
  * @returns {T[]} - a new array that contains all the elements of the two arrays.
  */
-const copy = (arr1, arr2) => {
+var copy = function (arr1, arr2) {
     try {
         // Check if the provided arrays are not undefined, null, or empty.
         if ((0, exports.hasElements)(arr1) && (0, exports.hasElements)(arr2)) {
             // Copy the two arrays into a new array.
-            const copiedArray = [...arr2, ...arr1];
+            var copiedArray = __spreadArray(__spreadArray([], arr2, true), arr1, true);
             return copiedArray;
         }
         return [];
@@ -253,7 +262,7 @@ exports.copy = copy;
  * @param elem The element to add to the array.
  * @returns The updated array.
  */
-const addElement = (arr, elem) => {
+var addElement = function (arr, elem) {
     try {
         if ((0, exports.isValid)(arr))
             arr.push(elem);
@@ -271,7 +280,7 @@ exports.addElement = addElement;
  * @param arr The array whose length is to be calculated.
  * @returns The length of the array.
  */
-const getLength = (arr) => {
+var getLength = function (arr) {
     try {
         if ((0, exports.isValid)(arr))
             return arr.length;
@@ -289,7 +298,7 @@ exports.getLength = getLength;
 * @param arr: The array to retrieve the last element from.
 * @return The last element of the array, or undefined if the array is empty.
 */
-const getLastElement = (arr) => {
+var getLastElement = function (arr) {
     try {
         if ((0, exports.hasElements)(arr))
             return arr[arr.length - 1];
@@ -307,7 +316,7 @@ exports.getLastElement = getLastElement;
 * @param arr: The array to retrieve the first element from.
 * @return The first element of the array, or undefined if the array is empty.
 */
-const getFirstElement = (arr) => {
+var getFirstElement = function (arr) {
     try {
         if ((0, exports.hasElements)(arr))
             return arr[0];
@@ -326,13 +335,13 @@ exports.getFirstElement = getFirstElement;
 * @param arr: The array to retrieve the middle element from.
 * @return A middle element of the array, or undefined if the array is empty or has less than 3 elements.
 */
-const getMiddleElement = (arr) => {
+var getMiddleElement = function (arr) {
     try {
         if ((0, exports.hasElements)(arr)) {
-            const length = (0, exports.getLength)(arr);
-            if (length > 3) {
-                const middleIndex = Math.floor(length / 2) - 1;
-                return length % 2 === 0 ? arr[middleIndex] : arr[middleIndex + 1];
+            var length_1 = (0, exports.getLength)(arr);
+            if (length_1 > 3) {
+                var middleIndex = Math.floor(length_1 / 2) - 1;
+                return length_1 % 2 === 0 ? arr[middleIndex] : arr[middleIndex + 1];
             }
         }
         return undefined;
@@ -350,7 +359,7 @@ exports.getMiddleElement = getMiddleElement;
  * @param index The index of the element to retrieve.
  * @returns The element at the given index, or undefined if the index is out of bounds.
  */
-const getElementByIndex = (arr, index) => {
+var getElementByIndex = function (arr, index) {
     try {
         if ((0, exports.hasElements)(arr) && (typeof index === "number" && index >= 0))
             return arr[index];

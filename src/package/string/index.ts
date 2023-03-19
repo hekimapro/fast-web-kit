@@ -505,3 +505,23 @@ export function removeCase(str: string, caseType: 'kebab-case' | 'snake_case'): 
         return "";
     }
 }
+
+/**
+ * This function checks if a provided string is empty.
+ * @param str The string to check.
+ * @returns True if the string is empty, false otherwise.
+ */
+export function isEmpty(str: string): boolean {
+    try {
+        // Validate function parameters
+        if (typeof str !== 'string') {
+            throw new Error('Input must be a string.');
+        }
+
+        // Function logic and other codes inside try block
+        return str.trim().length === 0;
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+}
