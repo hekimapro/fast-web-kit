@@ -694,7 +694,7 @@ export const toShortForm = (number: number, upperCaseLetter?: boolean): string =
         return `${abbrevValue}${suffix}`;
 
     } catch (error) {
-        console.error(`Error converting to short form: ${error.message}`);
+        console.error(`Error converting to short form: ${(error as Error).message}`);
         return "";
     }
 };
@@ -762,7 +762,7 @@ export const toWord = (currency: number): string => {
         return words.trim()
 
     } catch (error) {
-        console.error("Error converting number to word:", error.message);
+        console.error("Error converting number to word:", (error as Error).message);
         return ""
     }
 }

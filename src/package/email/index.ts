@@ -19,7 +19,7 @@ export const isValid = (email: string): boolean => {
         return false
     } catch (error) {
         // Handle error without throw
-        console.error(`Error in isValidEmail function: ${error.message}`);
+        console.error(`Error in isValidEmail function: ${(error as Error).message}`);
         // Return false if there was an error
         return false;
     }
@@ -42,7 +42,7 @@ export const getDomain = (email: string): string => {
         return ""
     } catch (error) {
         // Handle error without throw
-        console.error(`Error in getEmailDomain function: ${error.message}`);
+        console.error(`Error in getEmailDomain function: ${(error as Error).message}`);
         // Return empty string if there was an error
         return '';
     }
@@ -65,7 +65,7 @@ export const getUsername = (email: string): string => {
         return ''
     } catch (error) {
         // Handle error without throw
-        console.error(`Error in getEmailUsername function: ${error.message}`);
+        console.error(`Error in getEmailUsername function: ${(error as Error).message}`);
         // Return empty string if there was an error
         return '';
     }
@@ -87,7 +87,7 @@ export const normalize = (email: string): string => {
         return ''
     } catch (error) {
         // Handle error without throw
-        console.error(`Error in normalizeEmail function: ${error.message}`);
+        console.error(`Error in normalizeEmail function: ${(error as Error).message}`);
         // Return empty string if there was an error
         return '';
     }

@@ -22,7 +22,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.password = exports.object = exports.number = exports.string = exports.email = exports.array = exports.time = void 0;
 exports.time = __importStar(require("./time"));
 exports.array = __importStar(require("./array"));
@@ -31,4 +31,3 @@ exports.string = __importStar(require("./string"));
 exports.number = __importStar(require("./number"));
 exports.object = __importStar(require("./object"));
 exports.password = __importStar(require("./password"));
-//# sourceMappingURL=index.js.map

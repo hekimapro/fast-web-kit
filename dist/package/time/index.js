@@ -1,7 +1,7 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.relativeTime = exports.convertToDate = exports.isBusinessHours = exports.isWeekend = exports.getAge = exports.parseDate = exports.formatDate = exports.getWeekNumber = exports.addTimeToDate = exports.currentTimeInMilliseconds = exports.currentTime = exports.currentMonth = exports.currentFullDate = exports.currentSecond = exports.currentDate = exports.currentDay = exports.currentYear = exports.currentMinute = exports.currentHour = exports.currentMonthName = exports.daysInMonth = exports.isLeapYear = exports.isToday = exports.isValid = void 0;
-var months = [
+const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
 ];
@@ -27,7 +27,7 @@ exports.isValid = isValid;
  */
 function isToday(date) {
     try {
-        var today = new Date();
+        const today = new Date();
         return date.getDate() === today.getDate()
             && date.getMonth() === today.getMonth()
             && date.getFullYear() === today.getFullYear();
@@ -59,7 +59,7 @@ exports.isLeapYear = isLeapYear;
  */
 function daysInMonth(month, year) {
     try {
-        var date = new Date();
+        let date = new Date();
         if (month && year)
             date = new Date(year, typeof month === 'string' ? months.indexOf(month) : month, 1);
         date.setMonth(date.getMonth() + 1);
@@ -77,9 +77,9 @@ exports.daysInMonth = daysInMonth;
  */
 function currentMonthName() {
     try {
-        var currentDate_1 = new Date();
-        var currentMonth_1 = months[currentDate_1.getMonth()];
-        return currentMonth_1;
+        const currentDate = new Date();
+        const currentMonth = months[currentDate.getMonth()];
+        return currentMonth;
     }
     catch (error) {
         console.error(error);
@@ -93,7 +93,7 @@ exports.currentMonthName = currentMonthName;
  */
 function currentHour(date) {
     try {
-        var now = date ? convertToDate(date) : new Date();
+        const now = date ? convertToDate(date) : new Date();
         return now.getHours();
     }
     catch (error) {
@@ -108,7 +108,7 @@ exports.currentHour = currentHour;
  */
 function currentMinute(date) {
     try {
-        var now = date ? convertToDate(date) : new Date();
+        const now = date ? convertToDate(date) : new Date();
         return now.getMinutes();
     }
     catch (error) {
@@ -123,7 +123,7 @@ exports.currentMinute = currentMinute;
  */
 function currentYear(date) {
     try {
-        var now = date ? convertToDate(date) : new Date();
+        const now = date ? convertToDate(date) : new Date();
         return now.getFullYear();
     }
     catch (error) {
@@ -138,7 +138,7 @@ exports.currentYear = currentYear;
  */
 function currentDay(date) {
     try {
-        var now = date ? convertToDate(date) : new Date();
+        const now = date ? convertToDate(date) : new Date();
         return now.getDay();
     }
     catch (error) {
@@ -153,7 +153,7 @@ exports.currentDay = currentDay;
  */
 function currentDate(date) {
     try {
-        var now = date ? convertToDate(date) : new Date();
+        const now = date ? convertToDate(date) : new Date();
         return now.getDate();
     }
     catch (error) {
@@ -168,7 +168,7 @@ exports.currentDate = currentDate;
  */
 function currentSecond(date) {
     try {
-        var now = date ? convertToDate(date) : new Date();
+        const now = date ? convertToDate(date) : new Date();
         return now.getSeconds();
     }
     catch (error) {
@@ -183,13 +183,13 @@ exports.currentSecond = currentSecond;
  */
 function currentFullDate(date) {
     try {
-        var now = date ? convertToDate(date) : new Date();
-        var year = now.getFullYear();
-        var month = now.getMonth() + 1;
-        var day = now.getDate();
-        var paddedMonth = month < 10 ? "0".concat(month) : "".concat(month);
-        var paddedDay = day < 10 ? "0".concat(day) : "".concat(day);
-        return "".concat(year, "-").concat(paddedMonth, "-").concat(paddedDay);
+        const now = date ? convertToDate(date) : new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+        const day = now.getDate();
+        const paddedMonth = month < 10 ? `0${month}` : `${month}`;
+        const paddedDay = day < 10 ? `0${day}` : `${day}`;
+        return `${year}-${paddedMonth}-${paddedDay}`;
     }
     catch (error) {
         console.error(error);
@@ -203,7 +203,7 @@ exports.currentFullDate = currentFullDate;
  */
 function currentMonth(date) {
     try {
-        var now = date ? convertToDate(date) : new Date();
+        const now = date ? convertToDate(date) : new Date();
         return now.getMonth() + 1;
     }
     catch (error) {
@@ -217,11 +217,11 @@ exports.currentMonth = currentMonth;
  */
 function currentTime(date) {
     try {
-        var now = date ? convertToDate(date) : new Date();
-        var hours = now.getHours().toString().padStart(2, '0');
-        var minutes = now.getMinutes().toString().padStart(2, '0');
-        var seconds = now.getSeconds().toString().padStart(2, '0');
-        return "".concat(hours, ":").concat(minutes, ":").concat(seconds);
+        const now = date ? convertToDate(date) : new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        return `${hours}:${minutes}:${seconds}`;
     }
     catch (error) {
         return "";
@@ -233,7 +233,7 @@ exports.currentTime = currentTime;
  */
 function currentTimeInMilliseconds(date) {
     try {
-        var now = date ? convertToDate(date) : new Date();
+        const now = date ? convertToDate(date) : new Date();
         return now.getTime();
     }
     catch (error) {
@@ -292,8 +292,8 @@ exports.addTimeToDate = addTimeToDate;
 function getWeekNumber(date) {
     try {
         date = convertToDate(date);
-        var firstDayOfYear = new Date(date.getFullYear(), 0, 1);
-        var daysSinceFirstDayOfYear = (date.getTime() - firstDayOfYear.getTime()) / 86400000; // Number of milliseconds in a day
+        const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+        const daysSinceFirstDayOfYear = (date.getTime() - firstDayOfYear.getTime()) / 86400000; // Number of milliseconds in a day
         return Math.ceil((daysSinceFirstDayOfYear + firstDayOfYear.getDay() + 1) / 7);
     }
     catch (error) {
@@ -308,17 +308,16 @@ exports.getWeekNumber = getWeekNumber;
  * @param format The format string (default is 'YYYY-MM-DD')
  * @returns The formatted date string
  */
-function formatDate(date, format) {
-    if (format === void 0) { format = 'YYYY-MM-DD'; }
+function formatDate(date, format = 'YYYY-MM-DD') {
     try {
         date = convertToDate(date);
-        var year = date.getFullYear();
-        var month = date.getMonth() + 1;
-        var day = date.getDate();
-        var hours = date.getHours();
-        var minutes = date.getMinutes();
-        var seconds = date.getSeconds();
-        var milliseconds = date.getMilliseconds();
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        const seconds = date.getSeconds();
+        const milliseconds = date.getMilliseconds();
         return format
             .replace('YYYY', year.toString())
             .replace('MM', month.toString().padStart(2, '0'))
@@ -342,17 +341,17 @@ exports.formatDate = formatDate;
  */
 function parseDate(dateString, format) {
     try {
-        var parts = dateString.match(/(\d+)/g);
+        const parts = dateString.match(/(\d+)/g);
         if (!parts || parts.length < 3) {
             return null;
         }
-        var formatParts = format.match(/([Ymd]+)/g);
+        const formatParts = format.match(/([Ymd]+)/g);
         if (!formatParts || formatParts.length < 3) {
             return null;
         }
-        var year = parseInt(parts[formatParts.indexOf('Y')]);
-        var month = parseInt(parts[formatParts.indexOf('m')]) - 1;
-        var day = parseInt(parts[formatParts.indexOf('d')]);
+        const year = parseInt(parts[formatParts.indexOf('Y')]);
+        const month = parseInt(parts[formatParts.indexOf('m')]) - 1;
+        const day = parseInt(parts[formatParts.indexOf('d')]);
         return new Date(year, month, day);
     }
     catch (error) {
@@ -367,13 +366,12 @@ exports.parseDate = parseDate;
  * @param referenceDate The reference date to calculate the age from (defaults to the current date)
  * @returns The age of the person in years, or -1 if the calculation fails
  */
-function getAge(birthdate, referenceDate) {
-    if (referenceDate === void 0) { referenceDate = new Date(); }
+function getAge(birthdate, referenceDate = new Date()) {
     try {
         birthdate = convertToDate(birthdate);
         referenceDate = convertToDate(referenceDate);
-        var ageInMillis = referenceDate.getTime() - birthdate.getTime();
-        var ageInYears = ageInMillis / 31536000000; // 365 days + leap years
+        const ageInMillis = referenceDate.getTime() - birthdate.getTime();
+        const ageInYears = ageInMillis / 31536000000; // 365 days + leap years
         return Math.floor(ageInYears);
     }
     catch (error) {
@@ -390,7 +388,7 @@ exports.getAge = getAge;
 function isWeekend(date) {
     try {
         date = convertToDate(date);
-        var dayOfWeek = date.getDay();
+        const dayOfWeek = date.getDay();
         return dayOfWeek === 0 || dayOfWeek === 6;
     }
     catch (error) {
@@ -407,8 +405,8 @@ exports.isWeekend = isWeekend;
 function isBusinessHours(date) {
     try {
         date = convertToDate(date);
-        var dayOfWeek = date.getDay();
-        var hours = date.getHours();
+        const dayOfWeek = date.getDay();
+        const hours = date.getHours();
         return dayOfWeek >= 1 && dayOfWeek <= 5 && hours >= 9 && hours <= 17;
     }
     catch (error) {
@@ -429,7 +427,8 @@ function convertToDate(dateString) {
     }
     catch (error) {
         console.error(error);
-        return null;
+        return new Date(dateString);
+        ;
     }
 }
 exports.convertToDate = convertToDate;
@@ -440,11 +439,11 @@ exports.convertToDate = convertToDate;
  *
  * @returns {string} A string representing the relative time
  */
-var relativeTime = function (date) {
+const relativeTime = (date) => {
     try {
         date = convertToDate(date);
-        var currentDate_2 = new Date();
-        var differenceInSeconds = Math.floor((currentDate_2.getTime() - date.getTime()) / 1000);
+        const currentDate = new Date();
+        const differenceInSeconds = Math.floor((currentDate.getTime() - date.getTime()) / 1000);
         if (differenceInSeconds < 60) {
             return "just now";
         }
@@ -452,28 +451,27 @@ var relativeTime = function (date) {
             return "1 minute ago";
         }
         else if (differenceInSeconds < 3600) {
-            var minutes = Math.floor(differenceInSeconds / 60);
-            return "".concat(minutes, " minutes ago");
+            const minutes = Math.floor(differenceInSeconds / 60);
+            return `${minutes} minutes ago`;
         }
         else if (differenceInSeconds < 7200) {
             return "1 hour ago";
         }
         else if (differenceInSeconds < 86400) {
-            var hours = Math.floor(differenceInSeconds / 3600);
-            return "".concat(hours, " hours ago");
+            const hours = Math.floor(differenceInSeconds / 3600);
+            return `${hours} hours ago`;
         }
         else if (differenceInSeconds < 172800) {
             return "1 day ago";
         }
         else {
-            var days = Math.floor(differenceInSeconds / 86400);
-            return "".concat(days, " days ago");
+            const days = Math.floor(differenceInSeconds / 86400);
+            return `${days} days ago`;
         }
     }
     catch (error) {
-        console.error("Error calculating relative time: ".concat(error.message));
+        console.error(`Error calculating relative time: ${error.message}`);
         return "";
     }
 };
 exports.relativeTime = relativeTime;
-//# sourceMappingURL=index.js.map

@@ -409,12 +409,12 @@ export function isBusinessHours(date: any): boolean {
  * @param format The format string to use for parsing the date (defaults to 'YYYY-MM-DDTHH:mm:ssZ')
  * @returns A Date object representing the parsed date and time, or null if the parsing fails
  */
-export function convertToDate(dateString: any): Date | null {
+export function convertToDate(dateString: any): Date {
     try {
         return new Date(dateString);
     } catch (error) {
         console.error(error);
-        return null;
+        return new Date(dateString);;
     }
 }
 
@@ -450,7 +450,7 @@ export const relativeTime = (date: any): string => {
             return `${days} days ago`;
         }
     } catch (error) {
-        console.error(`Error calculating relative time: ${error.message}`);
+        console.error(`Error calculating relative time: ${(error as Error).message}`);
         return "";
     }
 };

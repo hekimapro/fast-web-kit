@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.isEmpty = exports.removeCase = exports.isValidBase64 = exports.isValidJSON = exports.isValidCreditCard = exports.isValidHexColor = exports.isIPAddress = exports.isUpperCase = exports.isLowerCase = exports.isAlphanumeric = exports.hasNumericCharsOnly = exports.hasAlphabeticCharsOnly = exports.toTitleCase = exports.toSnakeCase = exports.toKebabCase = exports.toCamelCase = exports.split = exports.removeWhitespace = exports.truncate = exports.getLength = exports.removeSpecialCharacters = exports.reverse = exports.capitalize = exports.convert = exports.isNotEmpty = exports.isValid = void 0;
 /**
  * Determines whether a given value is a string.
@@ -7,14 +7,14 @@ exports.isEmpty = exports.removeCase = exports.isValidBase64 = exports.isValidJS
  * @param value - The value to check.
  * @returns Whether the value is a string.
  */
-var isValid = function (value) { return typeof value === 'string'; };
+const isValid = (value) => typeof value === 'string';
 exports.isValid = isValid;
 /**
  * Checks if a provided string is not empty.
  * @param str The string to check.
  * @throws TypeError if `str` is not a string.
  */
-var isNotEmpty = function (str) { return (0, exports.isValid)(str) ? str.trim() !== "" : false; };
+const isNotEmpty = (str) => (0, exports.isValid)(str) ? str.trim() !== "" : false;
 exports.isNotEmpty = isNotEmpty;
 /**
  * Converts the provided value to a string.
@@ -22,19 +22,19 @@ exports.isNotEmpty = isNotEmpty;
  * @param value The value to be converted to a string.
  * @returns The string representation of the provided value.
  */
-var convert = function (value) { return String(value); };
+const convert = (value) => String(value);
 exports.convert = convert;
 /**
  * This function takes a string and capitalizes it.
  * @param str - The string to capitalize.
  * @returns The capitalized string.
  */
-var capitalize = function (str) {
+const capitalize = (str) => {
     try {
         if ((0, exports.isNotEmpty)(str)) {
-            var firstLetter = str.charAt(0).toUpperCase();
-            var restOfString = str.slice(1);
-            return "".concat(firstLetter).concat(restOfString);
+            const firstLetter = str.charAt(0).toUpperCase();
+            const restOfString = str.slice(1);
+            return `${firstLetter}${restOfString}`;
         }
         return str;
     }
@@ -50,11 +50,11 @@ exports.capitalize = capitalize;
  * @param str - The string to reverse.
  * @returns The reversed string.
  */
-var reverse = function (str) {
+const reverse = (str) => {
     try {
         if ((0, exports.isNotEmpty)(str)) {
-            var reversed = '';
-            for (var i = str.length - 1; i >= 0; i--) {
+            let reversed = '';
+            for (let i = str.length - 1; i >= 0; i--) {
                 reversed += str[i];
             }
             return reversed;
@@ -76,9 +76,9 @@ exports.reverse = reverse;
 function removeSpecialCharacters(inputString) {
     try {
         // Validate function parameters
-        if (exports.isNotEmpty) {
+        if ((0, exports.isNotEmpty)(inputString)) {
             // Remove special characters from string
-            var regex = /[^A-Za-z0-9\s]/g;
+            const regex = /[^A-Za-z0-9\s]/g;
             return inputString.replace(regex, '');
         }
         return inputString;
@@ -95,7 +95,7 @@ exports.removeSpecialCharacters = removeSpecialCharacters;
  * @param {string} str - The string to get the length of.
  * @returns {number} The length of the provided string.
  */
-var getLength = function (str) {
+const getLength = (str) => {
     try {
         if ((0, exports.isNotEmpty)(str))
             return str.length;
@@ -113,10 +113,10 @@ exports.getLength = getLength;
  * @param maxLength The maximum length of the truncated string.
  * @returns The truncated string.
  */
-var truncate = function (str, maxLength) {
+const truncate = (str, maxLength) => {
     try {
         if ((0, exports.isNotEmpty)(str) && (typeof maxLength === "number" && maxLength > 0))
-            return str.length > maxLength ? "".concat(str.slice(0, maxLength), "...") : str;
+            return str.length > maxLength ? `${str.slice(0, maxLength)}...` : str;
         return str;
     }
     catch (error) {
@@ -131,7 +131,7 @@ exports.truncate = truncate;
  * @param str The string to remove whitespace from.
  * @returns The string with all whitespace removed.
  */
-var removeWhitespace = function (str) {
+const removeWhitespace = (str) => {
     try {
         if ((0, exports.isNotEmpty)(str))
             // Remove all whitespace characters from the string
@@ -151,10 +151,10 @@ exports.removeWhitespace = removeWhitespace;
  * @param separator The separator string to use.
  * @returns An array of substrs.
  */
-var split = function (str, separator) {
+const split = (str, separator) => {
     try {
         if ((0, exports.isNotEmpty)(str) && (0, exports.isValid)(separator)) {
-            var result = str.split(separator);
+            const result = str.split(separator);
             return result;
         }
         return [];
@@ -170,7 +170,7 @@ exports.split = split;
  * @param str The string to convert.
  * @returns The camel case version of the string.
  */
-var toCamelCase = function (str) {
+const toCamelCase = (str) => {
     try {
         if ((0, exports.isNotEmpty)(str))
             // Main logic for converting string to camel case goes here
@@ -190,10 +190,10 @@ exports.toCamelCase = toCamelCase;
  * @param str The input string to convert
  * @returns The kebab case version of the input string
  */
-var toKebabCase = function (str) {
+const toKebabCase = (str) => {
     try {
         if ((0, exports.isNotEmpty)(str)) {
-            var kebabCase = str.replace(/[^\w\s]/g, '').trim().replace(/\s+/g, '-').toLowerCase();
+            const kebabCase = str.replace(/[^\w\s]/g, '').trim().replace(/\s+/g, '-').toLowerCase();
             return kebabCase;
         }
         return '';
@@ -209,10 +209,10 @@ exports.toKebabCase = toKebabCase;
  * @param str The input string to convert.
  * @returns The converted snake case string.
  */
-var toSnakeCase = function (str) {
+const toSnakeCase = (str) => {
     try {
         if ((0, exports.isNotEmpty)(str)) {
-            var snakeCase = str.replace(/[^\w\s]/gi, '')
+            const snakeCase = str.replace(/[^\w\s]/gi, '')
                 .replace(/\s+/g, '_')
                 .toLowerCase();
             return snakeCase;
@@ -230,11 +230,11 @@ exports.toSnakeCase = toSnakeCase;
  * @param {string} str - The input string to be converted to title case.
  * @returns {string} - The title case version of the input string.
  */
-var toTitleCase = function (str) {
+const toTitleCase = (str) => {
     try {
         if ((0, exports.isNotEmpty)(str)) {
-            var words = str.toLowerCase().split(' ');
-            for (var i = 0; i < words.length; i++) {
+            const words = str.toLowerCase().split(' ');
+            for (let i = 0; i < words.length; i++) {
                 words[i] = words[i][0].toUpperCase() + words[i].substr(1);
             }
             return words.join(' ');
@@ -253,10 +253,10 @@ exports.toTitleCase = toTitleCase;
  * @returns true if the string contains only alphabetic characters, false otherwise.
  * @throws TypeError if the input is not a string.
  */
-var hasAlphabeticCharsOnly = function (str) {
+const hasAlphabeticCharsOnly = (str) => {
     try {
         if ((0, exports.isNotEmpty)(str)) {
-            var regex = /^[a-zA-Z\s]+$/;
+            const regex = /^[a-zA-Z\s]+$/;
             return regex.test(str);
         }
         return false;
@@ -274,18 +274,18 @@ exports.hasAlphabeticCharsOnly = hasAlphabeticCharsOnly;
  * @param str - The string to check.
  * @returns Whether the string contains only numeric characters.
  */
-var hasNumericCharsOnly = function (str) {
+const hasNumericCharsOnly = (str) => {
     try {
         // Validate function parameters
         if ((0, exports.isNotEmpty)(str)) {
             // Check if the string contains only numeric characters using a regular expression
-            var numericRegex = /^[0-9]+$/;
+            const numericRegex = /^[0-9]+$/;
             return numericRegex.test(str);
         }
         return false;
     }
     catch (error) {
-        console.error("Error in isNumeric: ".concat(error.message));
+        console.error(`Error in isNumeric: ${error.message}`);
         return false;
     }
 };
@@ -295,7 +295,7 @@ exports.hasNumericCharsOnly = hasNumericCharsOnly;
  * @param str The string to be checked
  * @returns A boolean indicating whether the string contains only alphanumeric characters or not
  */
-var isAlphanumeric = function (str) {
+const isAlphanumeric = (str) => {
     try {
         if ((0, exports.isNotEmpty)(str))
             return /^[a-zA-Z0-9]+$/.test(str);
@@ -314,7 +314,7 @@ exports.isAlphanumeric = isAlphanumeric;
  * @returns True if the string is all lowercase, false otherwise.
  * @throws TypeError if the parameter is not a string.
  */
-var isLowerCase = function (str) {
+const isLowerCase = (str) => {
     try {
         if ((0, exports.isNotEmpty)(str))
             return str === str.toLowerCase();
@@ -333,7 +333,7 @@ exports.isLowerCase = isLowerCase;
 * @returns True if the string is all uppercase, false otherwise.
 * @throws TypeError if the parameter is not a string.
 */
-var isUpperCase = function (str) {
+const isUpperCase = (str) => {
     try {
         if ((0, exports.isNotEmpty)(str))
             return str === str.toUpperCase();
@@ -351,19 +351,19 @@ exports.isUpperCase = isUpperCase;
  * @param ipAddress - The IP address to be validated.
  * @returns A boolean indicating whether the IP address is valid or not.
  */
-var isIPAddress = function (ipAddress) {
+const isIPAddress = (ipAddress) => {
     try {
         if ((0, exports.isNotEmpty)(ipAddress)) {
-            var ipPattern = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+            const ipPattern = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
             if (!ipPattern.test(ipAddress)) {
                 return false;
             }
-            var octets = ipAddress.split('.');
+            const octets = ipAddress.split('.');
             if (octets.length !== 4) {
                 return false;
             }
-            for (var i = 0; i < octets.length; i++) {
-                var octet = parseInt(octets[i]);
+            for (let i = 0; i < octets.length; i++) {
+                const octet = parseInt(octets[i]);
                 if (isNaN(octet) || octet < 0 || octet > 255) {
                     return false;
                 }
@@ -385,15 +385,15 @@ exports.isIPAddress = isIPAddress;
 * @param { value}
 * @returns { boolean}
 */
-var isValidHexColor = function (value) {
+const isValidHexColor = (value) => {
     try {
         if ((0, exports.isNotEmpty)(value)) {
             // Remove the '#' character from the start of the string, if present
-            var hex = value.startsWith('#') ? value.slice(1) : value;
+            const hex = value.startsWith('#') ? value.slice(1) : value;
             // Check if the remaining string has 3 or 6 characters and only contains hexadecimal digits
-            var hexRegex = /^[0-9a-fA-F]{3}([0-9a-fA-F]{3})?$/;
-            var isValid_1 = hexRegex.test(hex);
-            return isValid_1;
+            const hexRegex = /^[0-9a-fA-F]{3}([0-9a-fA-F]{3})?$/;
+            const isValid = hexRegex.test(hex);
+            return isValid;
         }
         return false;
     }
@@ -409,18 +409,18 @@ exports.isValidHexColor = isValidHexColor;
  * @param value
  * @returns true if the value is a valid credit card number, otherwise false.
 */
-var isValidCreditCard = function (value) {
+const isValidCreditCard = (value) => {
     try {
         if ((0, exports.isNotEmpty)(value)) {
             // Remove all non-digit characters from the string
-            var digits = value.replace(/\D/g, '');
+            const digits = value.replace(/\D/g, '');
             // Check if the string has a length of 16 and only contains digits
-            var creditCardRegex = /^\d{16}$/;
-            var isValid_2 = creditCardRegex.test(digits);
+            const creditCardRegex = /^\d{16}$/;
+            let isValid = creditCardRegex.test(digits);
             // Luhn algorithm for credit card validation
-            var sum = 0;
-            for (var i = 0; i < digits.length; i++) {
-                var digit = Number(digits[i]);
+            let sum = 0;
+            for (let i = 0; i < digits.length; i++) {
+                let digit = Number(digits[i]);
                 if ((i + 1) % 2 === 0) {
                     digit *= 2;
                     if (digit > 9) {
@@ -429,8 +429,8 @@ var isValidCreditCard = function (value) {
                 }
                 sum += digit;
             }
-            isValid_2 && (isValid_2 = sum % 10 === 0);
-            return isValid_2;
+            isValid && (isValid = sum % 10 === 0);
+            return isValid;
         }
         return false;
     }
@@ -445,10 +445,10 @@ exports.isValidCreditCard = isValidCreditCard;
  * @param jsonString The string to be validated as a JSON.
  * @returns A boolean indicating whether the string is a valid JSON or not.
  */
-var isValidJSON = function (jsonString) {
+const isValidJSON = (jsonString) => {
     try {
         if ((0, exports.isNotEmpty)(jsonString)) {
-            var json = JSON.parse(jsonString);
+            const json = JSON.parse(jsonString);
             if (typeof json !== 'object' || Array.isArray(json)) {
                 return false;
             }
@@ -457,7 +457,7 @@ var isValidJSON = function (jsonString) {
         return false;
     }
     catch (error) {
-        console.log("Error occurred while validating JSON: ".concat(error.message));
+        console.log(`Error occurred while validating JSON: ${error.message}`);
         return false;
     }
 };
@@ -467,21 +467,21 @@ exports.isValidJSON = isValidJSON;
  * @param base64String The string to be validated as a Base64.
  * @returns A boolean indicating whether the string is a valid Base64 or not.
  */
-var isValidBase64 = function (base64String) {
+const isValidBase64 = (base64String) => {
     try {
         if ((0, exports.isNotEmpty)(base64String)) {
-            var regex = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/;
+            const regex = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/;
             if (!(0, exports.isValid)(base64String) || !regex.test(base64String)) {
                 return false;
             }
-            var decodedString = atob(base64String);
-            var encodedString = btoa(decodedString);
+            const decodedString = atob(base64String);
+            const encodedString = btoa(decodedString);
             return encodedString === base64String;
         }
         return false;
     }
     catch (error) {
-        console.log("Error occurred while validating Base64: ".concat(error.message));
+        console.log(`Error occurred while validating Base64: ${error.message}`);
         return false;
     }
 };
@@ -495,7 +495,7 @@ exports.isValidBase64 = isValidBase64;
  */
 function removeCase(str, caseType) {
     try {
-        var convertedStr = '';
+        let convertedStr = '';
         if ((0, exports.isNotEmpty)(str) && (0, exports.isNotEmpty)(caseType)) {
             // Convert the string based on the case type
             switch (caseType) {
@@ -511,8 +511,8 @@ function removeCase(str, caseType) {
         }
         return convertedStr;
     }
-    catch (err) {
-        console.error(err.message);
+    catch (error) {
+        console.error(error.message);
         return "";
     }
 }
@@ -537,4 +537,3 @@ function isEmpty(str) {
     }
 }
 exports.isEmpty = isEmpty;
-//# sourceMappingURL=index.js.map

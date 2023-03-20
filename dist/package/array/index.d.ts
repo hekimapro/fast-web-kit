@@ -152,3 +152,11 @@ export declare const getMiddleElement: (arr: any[]) => any;
  * @returns The element at the given index, or undefined if the index is out of bounds.
  */
 export declare const getElementByIndex: (arr: any[], index: number) => any | undefined;
+/**
+ * Removes duplicate elements from an array.
+ *
+ * @param arr The array to remove duplicates from.
+ * @returns A new array with the duplicates removed.
+ * @throws TypeError if arr is not an array.
+ */
+export declare const removeDuplicates: (arr: any[]) => any[];

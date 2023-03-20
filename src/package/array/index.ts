@@ -76,7 +76,7 @@ export const removeElement = (arr: any[], elem: any): any[] => {
         }
         return arr
     } catch (error) {
-        console.error(error.message)
+        console.error((error as Error).message)
         return arr
     }
 }
@@ -142,7 +142,7 @@ export const countOccurrences = (arr: any[], elem: any): number => {
         }
         return 0
     } catch (error) {
-        console.error(error.message)
+        console.error((error as Error).message)
         return 0
     }
 }
@@ -170,7 +170,7 @@ export const computeMathOperation = (nums: number[], operator: '+' | '-' | '/' |
             })
         return 0
     } catch (error) {
-        console.log('An error occurred:', error.message)
+        console.log('An error occurred:', (error as Error).message)
         return 0
     }
 }
@@ -238,7 +238,7 @@ export const copy = <T>(arr1: T[], arr2: T[]): T[] => {
         }
         return []
     } catch (error) {
-        console.error(error.message)
+        console.error((error as Error).message)
         return []
     }
 }
@@ -351,7 +351,28 @@ export const getElementByIndex = (arr: any[], index: number): any | undefined =>
             return arr[index]
         return undefined
     } catch (error) {
-        console.error(error.message)
+        console.error((error as Error).message)
         return undefined
     }
 }
+
+/**
+ * Removes duplicate elements from an array.
+ *
+ * @param arr The array to remove duplicates from.
+ * @returns A new array with the duplicates removed.
+ * @throws TypeError if arr is not an array.
+ */
+export const removeDuplicates = (arr: any[]): any[] => {
+    if (!Array.isArray(arr)) {
+        throw new TypeError('Expected an array.');
+    }
+
+    try {
+        const uniqueArr = [...new Set(arr)];
+        return uniqueArr;
+    } catch (err) {
+        console.error('An error occurred while removing duplicates:', err);
+        return arr;
+    }
+};

@@ -132,7 +132,7 @@ export declare function isBusinessHours(date: any): boolean;
  * @param format The format string to use for parsing the date (defaults to 'YYYY-MM-DDTHH:mm:ssZ')
  * @returns A Date object representing the parsed date and time, or null if the parsing fails
  */
-export declare function convertToDate(dateString: any): Date | null;
+export declare function convertToDate(dateString: any): Date;
 /**
  * Returns a relative time according to a provided date
  *

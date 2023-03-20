@@ -1,16 +1,5 @@
 "use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.keyExist = exports.hasAllKeys = exports.mapObject = exports.stringify = exports.toObject = exports.sortByKey = exports.setNestedProperty = exports.getNestedProperty = exports.unflattenObject = exports.getObjectValues = exports.isValid = exports.filterObject = exports.mapValues = exports.mapKeys = exports.pick = exports.omit = exports.deepMerge = exports.deepClone = exports.areEqual = exports.isNotEmpty = exports.isEmpty = void 0;
 /**
  * This function checks if an object is empty.
@@ -99,11 +88,11 @@ exports.deepClone = deepClone;
  */
 function deepMerge(obj1, obj2) {
     try {
-        return __assign(__assign({}, obj1), obj2);
+        return Object.assign(Object.assign({}, obj1), obj2);
     }
     catch (err) {
         console.error(err);
-        return __assign({}, obj1);
+        return Object.assign({}, obj1);
     }
 }
 exports.deepMerge = deepMerge;
@@ -115,14 +104,11 @@ exports.deepMerge = deepMerge;
  */
 function omit(obj, keys) {
     try {
-        return Object.fromEntries(Object.entries(obj).filter(function (_a) {
-            var key = _a[0];
-            return !keys.includes(key);
-        }));
+        return Object.fromEntries(Object.entries(obj).filter(([key]) => !keys.includes(key)));
     }
     catch (err) {
         console.error(err);
-        return __assign({}, obj);
+        return Object.assign({}, obj);
     }
 }
 exports.omit = omit;
@@ -134,10 +120,7 @@ exports.omit = omit;
  */
 function pick(obj, keys) {
     try {
-        return Object.fromEntries(Object.entries(obj).filter(function (_a) {
-            var key = _a[0];
-            return keys.includes(key);
-        }));
+        return Object.fromEntries(Object.entries(obj).filter(([key]) => keys.includes(key)));
     }
     catch (err) {
         console.error(err);
@@ -153,10 +136,7 @@ exports.pick = pick;
  */
 function mapKeys(obj, keyMap) {
     try {
-        return Object.fromEntries(Object.entries(obj).map(function (_a) {
-            var key = _a[0], val = _a[1];
-            return [keyMap[key] || key, val];
-        }));
+        return Object.fromEntries(Object.entries(obj).map(([key, val]) => [keyMap[key] || key, val]));
     }
     catch (err) {
         console.error(err);
@@ -172,10 +152,7 @@ exports.mapKeys = mapKeys;
  */
 function mapValues(obj, callback) {
     try {
-        return Object.fromEntries(Object.entries(obj).map(function (_a) {
-            var key = _a[0], val = _a[1];
-            return [key, callback(val, key)];
-        }));
+        return Object.fromEntries(Object.entries(obj).map(([key, val]) => [key, callback(val, key)]));
     }
     catch (err) {
         console.error(err);
@@ -191,10 +168,7 @@ exports.mapValues = mapValues;
  */
 function filterObject(obj, predicate) {
     try {
-        return Object.fromEntries(Object.entries(obj).filter(function (_a) {
-            var key = _a[0], val = _a[1];
-            return predicate(val, key);
-        }));
+        return Object.fromEntries(Object.entries(obj).filter(([key, val]) => predicate(val, key)));
     }
     catch (err) {
         console.error(err);
@@ -224,7 +198,7 @@ exports.isValid = isValid;
  */
 function getObjectValues(obj) {
     try {
-        return Object.keys(obj).map(function (key) { return obj[key]; });
+        return Object.keys(obj).map(key => obj[key]);
     }
     catch (err) {
         console.error(err);
@@ -239,10 +213,10 @@ exports.getObjectValues = getObjectValues;
  */
 function unflattenObject(obj) {
     try {
-        var result = {};
-        var _loop_1 = function (key) {
-            var keys = key.split(".");
-            keys.reduce(function (acc, curKey, idx) {
+        const result = {};
+        for (const key in obj) {
+            const keys = key.split(".");
+            keys.reduce((acc, curKey, idx) => {
                 if (!acc[curKey]) {
                     acc[curKey] = isNaN(Number(keys[idx + 1])) ? {} : [];
                 }
@@ -251,9 +225,6 @@ function unflattenObject(obj) {
                 }
                 return acc[curKey];
             }, result);
-        };
-        for (var key in obj) {
-            _loop_1(key);
         }
         return result;
     }
@@ -276,10 +247,10 @@ function getNestedProperty(obj, path) {
         // Use reduce to iterate over the keys in the path, updating the accumulator (the current object) with each iteration.
         // If the current key doesn't exist in the current object, return undefined.
         // Otherwise, return the value of the current key in the current object.
-        return path.reduce(function (acc, key) { return (acc && acc[key] !== undefined ? acc[key] : undefined); }, obj);
+        return path.reduce((acc, key) => (acc && acc[key] !== undefined ? acc[key] : undefined), obj);
     }
     catch (error) {
-        console.error("Error getting nested property: ".concat(error));
+        console.error(`Error getting nested property: ${error}`);
         return undefined;
     }
 }
@@ -299,7 +270,7 @@ function setNestedProperty(obj, path, value) {
         // If the current key doesn't exist in the current object, create it.
         // If the current key is the last one in the path, set its value to the given value.
         // Otherwise, return the value of the current key in the current object.
-        path.reduce(function (acc, key, index) {
+        path.reduce((acc, key, index) => {
             if (index === path.length - 1) {
                 acc[key] = value;
             }
@@ -311,7 +282,7 @@ function setNestedProperty(obj, path, value) {
         return obj;
     }
     catch (error) {
-        console.error("Error setting nested property: ".concat(error));
+        console.error(`Error setting nested property: ${error}`);
         return obj;
     }
 }
@@ -323,16 +294,14 @@ exports.setNestedProperty = setNestedProperty;
  * @param order The sort order ("asc" or "desc"). Defaults to "asc".
  * @returns A new object with the same properties as `obj`, but with the keys sorted.
  */
-function sortByKey(obj, order) {
-    if (order === void 0) { order = "asc"; }
+function sortByKey(obj, order = "asc") {
     try {
-        var sortedKeys = Object.keys(obj).sort();
+        const sortedKeys = Object.keys(obj).sort();
         if (order === "desc") {
             sortedKeys.reverse();
         }
-        var sortedObj = {};
-        for (var _i = 0, sortedKeys_1 = sortedKeys; _i < sortedKeys_1.length; _i++) {
-            var key = sortedKeys_1[_i];
+        const sortedObj = {};
+        for (const key of sortedKeys) {
             sortedObj[key] = obj[key];
         }
         return sortedObj;
@@ -355,7 +324,7 @@ function toObject(jsonString) {
             throw new Error('Input must be a JSON string.');
         }
         // Function logic and other codes inside try block
-        var obj = JSON.parse(jsonString);
+        const obj = JSON.parse(jsonString);
         return obj;
     }
     catch (error) {
@@ -376,7 +345,7 @@ function stringify(obj) {
             throw new Error('Cannot stringify undefined object.');
         }
         // Function logic and other codes inside try block
-        var jsonString = JSON.stringify(obj);
+        const jsonString = JSON.stringify(obj);
         return jsonString;
     }
     catch (error) {
@@ -394,9 +363,8 @@ exports.stringify = stringify;
 */
 function mapObject(obj, fn) {
     try {
-        var mappedObj = {};
-        for (var _i = 0, _a = Object.entries(obj); _i < _a.length; _i++) {
-            var _b = _a[_i], key = _b[0], value = _b[1];
+        const mappedObj = {};
+        for (const [key, value] of Object.entries(obj)) {
             mappedObj[key] = fn(value, key);
         }
         return mappedObj;
@@ -426,8 +394,7 @@ function hasAllKeys(obj, keys) {
             throw new Error('Invalid keys parameter. Must specify at least one key.');
         }
         // Function logic and other codes inside try block
-        for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
-            var key = keys_1[_i];
+        for (const key of keys) {
             if (!obj.hasOwnProperty(key)) {
                 return false;
             }
@@ -464,4 +431,3 @@ function keyExist(obj, key) {
     }
 }
 exports.keyExist = keyExist;
-//# sourceMappingURL=index.js.map

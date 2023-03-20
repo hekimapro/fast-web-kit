@@ -35,7 +35,7 @@ export const capitalize = (str: string): string => {
         }
         return str
     } catch (error) {
-        console.error(error.message)
+        console.error((error as Error).message)
         return str // Return original string if there was an error.
     }
 }
@@ -71,7 +71,7 @@ export const reverse = (str: string): string => {
 export function removeSpecialCharacters(inputString: string): string {
     try {
         // Validate function parameters
-        if (isNotEmpty) {
+        if (isNotEmpty(inputString)) {
             // Remove special characters from string
             const regex = /[^A-Za-z0-9\s]/g
             return inputString.replace(regex, '')
@@ -208,7 +208,7 @@ export const toSnakeCase = (str: string): string => {
         }
         return ''
     } catch (error) {
-        console.error(error.message);
+        console.error((error as Error).message);
         return '';
     }
 }
@@ -229,7 +229,7 @@ export const toTitleCase = (str: string): string => {
         }
         return ''
     } catch (error) {
-        console.error(error.message);
+        console.error((error as Error).message);
         return '';
     }
 };
@@ -248,7 +248,7 @@ export const hasAlphabeticCharsOnly = (str: string): boolean => {
         }
         return false
     } catch (error) {
-        console.error(error.message);
+        console.error((error as Error).message);
         return false;
     }
 }
@@ -270,7 +270,7 @@ export const hasNumericCharsOnly = (str: string): boolean => {
         }
         return false
     } catch (error) {
-        console.error(`Error in isNumeric: ${error.message}`);
+        console.error(`Error in isNumeric: ${(error as Error).message}`);
         return false;
     }
 }
@@ -446,7 +446,7 @@ export const isValidJSON = (jsonString: string): boolean => {
         }
         return false
     } catch (error) {
-        console.log(`Error occurred while validating JSON: ${error.message}`);
+        console.log(`Error occurred while validating JSON: ${(error as Error).message}`);
         return false;
     }
 }
@@ -469,7 +469,7 @@ export const isValidBase64 = (base64String: string): boolean => {
         }
         return false
     } catch (error) {
-        console.log(`Error occurred while validating Base64: ${error.message}`);
+        console.log(`Error occurred while validating Base64: ${(error as Error).message}`);
         return false;
     }
 };
@@ -500,8 +500,8 @@ export function removeCase(str: string, caseType: 'kebab-case' | 'snake_case'): 
             }
         }
         return convertedStr
-    } catch (err) {
-        console.error(err.message);
+    } catch (error) {
+        console.error((error as Error).message);
         return "";
     }
 }

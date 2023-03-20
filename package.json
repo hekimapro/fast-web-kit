@@ -1,11 +1,12 @@
 {
   "name": "fast-web-kit",
-  "version": "0.0.8",
+  "version": "0.1.1",
   "description": "Fast-web-Kit is a collection of utilities and functions that simplify common development tasks, allowing developers to write applications more quickly and efficiently. Lightweight, easy to use, and flexible, Fast-web-Kit helps save time and reduce development costs for beginners and experienced developers alike.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
-    "/dist"
+    "./dist",
+    "./dist/**/*.js"
   ],
   "scripts": {
     "dev": "nodemon src/index.ts",
