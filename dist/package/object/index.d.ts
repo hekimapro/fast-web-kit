@@ -3,20 +3,20 @@
  * @param obj The object to check.
  * @returns A boolean indicating whether the object is empty.
  */
-export declare function isEmpty(obj: Record<string, any>): boolean;
+export declare function isEmpty(obj: any): boolean;
 /**
 * This function checks if an object is not empty.
 * @param obj The object to check.
 * @returns A boolean indicating whether the object is not empty.
 */
-export declare function isNotEmpty(obj: Record<string, any>): boolean;
+export declare function isNotEmpty(obj: any): boolean;
 /**
  * This function checks if two objects are equal.
  * @param obj1 The first object to compare.
  * @param obj2 The second object to compare.
  * @returns A boolean indicating whether the two objects are equal.
  */
-export declare function areEqual(obj1: Record<string, any>, obj2: Record<string, any>): boolean;
+export declare function areEqual(obj1: Record<string, any>, obj2: any): boolean;
 /**
  * Function to create a deep clone of an object
  * @param obj - The object to clone
@@ -119,13 +119,13 @@ export declare function sortByKey<T>(obj: Record<string, T>, order?: "asc" | "de
  * @param jsonString The JSON string to convert to an object.
  * @returns An object representing the JSON string, or null if the string is not valid JSON.
  */
-export declare function toObject(jsonString: string): Record<string, any> | null;
+export declare function toObject(jsonString: string): object | any[] | null;
 /**
  * This function converts a provided object to a JSON string.
  * @param obj The object to convert to a JSON string.
  * @returns A string representing the object in JSON format, or null if the object is undefined.
  */
-export declare function stringify(obj: Record<string, any>): string | null;
+export declare function stringify(obj: any): string | null;
 /**
 * Applies a mapping function to each value in an object and returns a new object with the same keys.
 *

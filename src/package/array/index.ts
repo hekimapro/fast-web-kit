@@ -76,7 +76,6 @@ export const removeElement = (arr: any[], elem: any): any[] => {
         }
         return arr
     } catch (error) {
-        console.error((error as Error).message)
         return arr
     }
 }
@@ -117,7 +116,6 @@ export function countElements(arr: any[]): Record<string, number> {
         }
 
     } catch (error) {
-        console.error(error)
     }
 
     return counts
@@ -142,7 +140,6 @@ export const countOccurrences = (arr: any[], elem: any): number => {
         }
         return 0
     } catch (error) {
-        console.error((error as Error).message)
         return 0
     }
 }
@@ -170,7 +167,6 @@ export const computeMathOperation = (nums: number[], operator: '+' | '-' | '/' |
             })
         return 0
     } catch (error) {
-        console.log('An error occurred:', (error as Error).message)
         return 0
     }
 }
@@ -238,7 +234,6 @@ export const copy = <T>(arr1: T[], arr2: T[]): T[] => {
         }
         return []
     } catch (error) {
-        console.error((error as Error).message)
         return []
     }
 }
@@ -256,7 +251,6 @@ export const addElement = (arr: any[], elem: any): any[] => {
             arr.push(elem)
         return arr
     } catch (error) {
-        console.error(error)
         return arr
     }
 }
@@ -274,7 +268,6 @@ export const getLength = (arr: any[]): number => {
             return arr.length
         return 0
     } catch (error) {
-        console.error(error)
         return 0
     }
 }
@@ -291,7 +284,6 @@ export const getLastElement = (arr: any[]): any[] | undefined => {
             return arr[arr.length - 1]
         return undefined
     } catch (error) {
-        console.error(error)
         return undefined
     }
 }
@@ -308,7 +300,6 @@ export const getFirstElement = (arr: any[]): any[] | undefined => {
             return arr[0]
         return undefined
     } catch (error) {
-        console.error(error)
         return undefined
     }
 }
@@ -333,7 +324,6 @@ export const getMiddleElement = (arr: any[]): any => {
         return undefined
 
     } catch (error) {
-        console.error(error)
         return undefined
     }
 }
@@ -351,7 +341,6 @@ export const getElementByIndex = (arr: any[], index: number): any | undefined =>
             return arr[index]
         return undefined
     } catch (error) {
-        console.error((error as Error).message)
         return undefined
     }
 }
@@ -361,18 +350,38 @@ export const getElementByIndex = (arr: any[], index: number): any | undefined =>
  *
  * @param arr The array to remove duplicates from.
  * @returns A new array with the duplicates removed.
- * @throws TypeError if arr is not an array.
  */
 export const removeDuplicates = (arr: any[]): any[] => {
-    if (!Array.isArray(arr)) {
-        throw new TypeError('Expected an array.');
-    }
-
     try {
+
+        if (!Array.isArray(arr))
+            return arr
+
         const uniqueArr = [...new Set(arr)];
         return uniqueArr;
     } catch (err) {
-        console.error('An error occurred while removing duplicates:', err);
         return arr;
     }
 };
+
+/**
+ * Check if an array is empty.
+ * @param arr The array to check.
+ * @returns True if the array is empty, false otherwise.
+ */
+export const isEmpty = (arr: any[]): boolean => {
+    try {
+
+        // Validate function parameters
+        if (!Array.isArray(arr))
+            return true
+
+        // Code logic should be written inside the try block
+        return arr.length === 0;
+
+    } catch (error) {
+        // Handle errors in the catch block
+        return true;
+    }
+}
+

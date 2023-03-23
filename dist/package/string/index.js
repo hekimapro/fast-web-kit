@@ -12,7 +12,6 @@ exports.isValid = isValid;
 /**
  * Checks if a provided string is not empty.
  * @param str The string to check.
- * @throws TypeError if `str` is not a string.
  */
 const isNotEmpty = (str) => (0, exports.isValid)(str) ? str.trim() !== "" : false;
 exports.isNotEmpty = isNotEmpty;
@@ -39,7 +38,6 @@ const capitalize = (str) => {
         return str;
     }
     catch (error) {
-        console.error(error.message);
         return str; // Return original string if there was an error.
     }
 };
@@ -62,7 +60,6 @@ const reverse = (str) => {
         return str;
     }
     catch (error) {
-        console.error(error);
         return str;
     }
 };
@@ -84,7 +81,6 @@ function removeSpecialCharacters(inputString) {
         return inputString;
     }
     catch (error) {
-        console.error(error);
         return inputString;
     }
 }
@@ -102,7 +98,6 @@ const getLength = (str) => {
         return 0;
     }
     catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -120,7 +115,6 @@ const truncate = (str, maxLength) => {
         return str;
     }
     catch (error) {
-        console.error(error);
         return str;
     }
 };
@@ -139,7 +133,6 @@ const removeWhitespace = (str) => {
         return "";
     }
     catch (error) {
-        console.error(error);
         return '';
     }
 };
@@ -160,7 +153,6 @@ const split = (str, separator) => {
         return [];
     }
     catch (error) {
-        console.error("An error occurred while splitting the string:", error);
         return [];
     }
 };
@@ -180,8 +172,7 @@ const toCamelCase = (str) => {
         return '';
     }
     catch (error) {
-        console.error(error);
-        return ''; // Return empty string instead of throwing error
+        return '';
     }
 };
 exports.toCamelCase = toCamelCase;
@@ -199,7 +190,6 @@ const toKebabCase = (str) => {
         return '';
     }
     catch (error) {
-        console.error(error);
         return '';
     }
 };
@@ -220,7 +210,6 @@ const toSnakeCase = (str) => {
         return '';
     }
     catch (error) {
-        console.error(error.message);
         return '';
     }
 };
@@ -242,7 +231,6 @@ const toTitleCase = (str) => {
         return '';
     }
     catch (error) {
-        console.error(error.message);
         return '';
     }
 };
@@ -251,7 +239,6 @@ exports.toTitleCase = toTitleCase;
  * Checks if the given string contains only alphabetic characters.
  * @param str The string to be checked.
  * @returns true if the string contains only alphabetic characters, false otherwise.
- * @throws TypeError if the input is not a string.
  */
 const hasAlphabeticCharsOnly = (str) => {
     try {
@@ -262,7 +249,6 @@ const hasAlphabeticCharsOnly = (str) => {
         return false;
     }
     catch (error) {
-        console.error(error.message);
         return false;
     }
 };
@@ -285,7 +271,6 @@ const hasNumericCharsOnly = (str) => {
         return false;
     }
     catch (error) {
-        console.error(`Error in isNumeric: ${error.message}`);
         return false;
     }
 };
@@ -302,7 +287,6 @@ const isAlphanumeric = (str) => {
         return false;
     }
     catch (err) {
-        console.error(err);
         return false;
     }
 };
@@ -312,7 +296,6 @@ exports.isAlphanumeric = isAlphanumeric;
  *
  * @param str The string to check.
  * @returns True if the string is all lowercase, false otherwise.
- * @throws TypeError if the parameter is not a string.
  */
 const isLowerCase = (str) => {
     try {
@@ -321,7 +304,6 @@ const isLowerCase = (str) => {
         return false;
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 };
@@ -331,7 +313,6 @@ exports.isLowerCase = isLowerCase;
 *
 * @param str The string to check.
 * @returns True if the string is all uppercase, false otherwise.
-* @throws TypeError if the parameter is not a string.
 */
 const isUpperCase = (str) => {
     try {
@@ -340,7 +321,6 @@ const isUpperCase = (str) => {
         return false;
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 };
@@ -373,7 +353,6 @@ const isIPAddress = (ipAddress) => {
         return false;
     }
     catch (error) {
-        console.log('An error occurred while validating IP address:', error);
         return false;
     }
 };
@@ -398,7 +377,6 @@ const isValidHexColor = (value) => {
         return false;
     }
     catch (error) {
-        console.error('An error occurred while validating the hexadecimal color:', error);
         return false;
     }
 };
@@ -435,7 +413,6 @@ const isValidCreditCard = (value) => {
         return false;
     }
     catch (error) {
-        console.error('An error occurred while validating the credit card number:', error);
         return false;
     }
 };
@@ -449,7 +426,7 @@ const isValidJSON = (jsonString) => {
     try {
         if ((0, exports.isNotEmpty)(jsonString)) {
             const json = JSON.parse(jsonString);
-            if (typeof json !== 'object' || Array.isArray(json)) {
+            if (typeof json !== 'object') {
                 return false;
             }
             return true;
@@ -457,7 +434,6 @@ const isValidJSON = (jsonString) => {
         return false;
     }
     catch (error) {
-        console.log(`Error occurred while validating JSON: ${error.message}`);
         return false;
     }
 };
@@ -481,7 +457,6 @@ const isValidBase64 = (base64String) => {
         return false;
     }
     catch (error) {
-        console.log(`Error occurred while validating Base64: ${error.message}`);
         return false;
     }
 };
@@ -512,7 +487,6 @@ function removeCase(str, caseType) {
         return convertedStr;
     }
     catch (error) {
-        console.error(error.message);
         return "";
     }
 }
@@ -525,14 +499,12 @@ exports.removeCase = removeCase;
 function isEmpty(str) {
     try {
         // Validate function parameters
-        if (typeof str !== 'string') {
-            throw new Error('Input must be a string.');
-        }
+        if (typeof str !== 'string')
+            return false;
         // Function logic and other codes inside try block
         return str.trim().length === 0;
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }

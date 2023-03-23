@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removeDuplicates = exports.getElementByIndex = exports.getMiddleElement = exports.getFirstElement = exports.getLastElement = exports.getLength = exports.addElement = exports.copy = exports.sort = exports.computeMathOperation = exports.countOccurrences = exports.countElements = exports.elementsWithSameType = exports.removeFalsyElements = exports.removeElement = exports.getElementIndex = exports.elementExist = exports.hasFalsyValues = exports.hasSameDataType = exports.hasDuplicates = exports.isUnique = exports.hasElements = exports.isValid = void 0;
+exports.isEmpty = exports.removeDuplicates = exports.getElementByIndex = exports.getMiddleElement = exports.getFirstElement = exports.getLastElement = exports.getLength = exports.addElement = exports.copy = exports.sort = exports.computeMathOperation = exports.countOccurrences = exports.countElements = exports.elementsWithSameType = exports.removeFalsyElements = exports.removeElement = exports.getElementIndex = exports.elementExist = exports.hasFalsyValues = exports.hasSameDataType = exports.hasDuplicates = exports.isUnique = exports.hasElements = exports.isValid = void 0;
 /**
  * Check if a given value is an array
  * @param value The value to check
@@ -78,7 +78,6 @@ const removeElement = (arr, elem) => {
         return arr;
     }
     catch (error) {
-        console.error(error.message);
         return arr;
     }
 };
@@ -119,7 +118,6 @@ function countElements(arr) {
         }
     }
     catch (error) {
-        console.error(error);
     }
     return counts;
 }
@@ -145,7 +143,6 @@ const countOccurrences = (arr, elem) => {
         return 0;
     }
     catch (error) {
-        console.error(error.message);
         return 0;
     }
 };
@@ -174,7 +171,6 @@ const computeMathOperation = (nums, operator) => {
         return 0;
     }
     catch (error) {
-        console.log('An error occurred:', error.message);
         return 0;
     }
 };
@@ -241,7 +237,6 @@ const copy = (arr1, arr2) => {
         return [];
     }
     catch (error) {
-        console.error(error.message);
         return [];
     }
 };
@@ -260,7 +255,6 @@ const addElement = (arr, elem) => {
         return arr;
     }
     catch (error) {
-        console.error(error);
         return arr;
     }
 };
@@ -278,7 +272,6 @@ const getLength = (arr) => {
         return 0;
     }
     catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -296,7 +289,6 @@ const getLastElement = (arr) => {
         return undefined;
     }
     catch (error) {
-        console.error(error);
         return undefined;
     }
 };
@@ -314,7 +306,6 @@ const getFirstElement = (arr) => {
         return undefined;
     }
     catch (error) {
-        console.error(error);
         return undefined;
     }
 };
@@ -338,7 +329,6 @@ const getMiddleElement = (arr) => {
         return undefined;
     }
     catch (error) {
-        console.error(error);
         return undefined;
     }
 };
@@ -357,7 +347,6 @@ const getElementByIndex = (arr, index) => {
         return undefined;
     }
     catch (error) {
-        console.error(error.message);
         return undefined;
     }
 };
@@ -367,19 +356,35 @@ exports.getElementByIndex = getElementByIndex;
  *
  * @param arr The array to remove duplicates from.
  * @returns A new array with the duplicates removed.
- * @throws TypeError if arr is not an array.
  */
 const removeDuplicates = (arr) => {
-    if (!Array.isArray(arr)) {
-        throw new TypeError('Expected an array.');
-    }
     try {
+        if (!Array.isArray(arr))
+            return arr;
         const uniqueArr = [...new Set(arr)];
         return uniqueArr;
     }
     catch (err) {
-        console.error('An error occurred while removing duplicates:', err);
         return arr;
     }
 };
 exports.removeDuplicates = removeDuplicates;
+/**
+ * Check if an array is empty.
+ * @param arr The array to check.
+ * @returns True if the array is empty, false otherwise.
+ */
+const isEmpty = (arr) => {
+    try {
+        // Validate function parameters
+        if (!Array.isArray(arr))
+            return true;
+        // Code logic should be written inside the try block
+        return arr.length === 0;
+    }
+    catch (error) {
+        // Handle errors in the catch block
+        return true;
+    }
+};
+exports.isEmpty = isEmpty;

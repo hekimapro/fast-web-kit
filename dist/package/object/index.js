@@ -8,16 +8,13 @@ exports.keyExist = exports.hasAllKeys = exports.mapObject = exports.stringify = 
  */
 function isEmpty(obj) {
     try {
-        // Validate function parameters
-        if (typeof obj !== 'object' || Array.isArray(obj) || obj === null) {
-            throw new Error('Invalid object parameter. Must be a non-null object.');
-        }
+        if (isValid(obj))
+            return Object.keys(obj).length === 0;
         // Function logic and other codes inside try block
-        return Object.keys(obj).length === 0;
+        return true;
     }
     catch (error) {
-        console.error(error);
-        return false;
+        return true;
     }
 }
 exports.isEmpty = isEmpty;
@@ -29,14 +26,12 @@ exports.isEmpty = isEmpty;
 function isNotEmpty(obj) {
     try {
         // Validate function parameters
-        if (typeof obj !== 'object' || Array.isArray(obj) || obj === null) {
-            throw new Error('Invalid object parameter. Must be a non-null object.');
-        }
+        if (!isValid(obj))
+            return false;
         // Function logic and other codes inside try block
         return Object.keys(obj).length !== 0;
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -50,17 +45,14 @@ exports.isNotEmpty = isNotEmpty;
 function areEqual(obj1, obj2) {
     try {
         // Validate function parameters
-        if (typeof obj1 !== 'object' || Array.isArray(obj1) || obj1 === null) {
-            throw new Error('Invalid first object parameter. Must be a non-null object.');
-        }
-        if (typeof obj2 !== 'object' || Array.isArray(obj2) || obj2 === null) {
-            throw new Error('Invalid second object parameter. Must be a non-null object.');
-        }
+        if (typeof obj1 !== 'object' || Array.isArray(obj1) || obj1 === null)
+            return false;
+        if (typeof obj2 !== 'object' || Array.isArray(obj2) || obj2 === null)
+            return false;
         // Function logic and other codes inside try block
         return JSON.stringify(obj1) === JSON.stringify(obj2);
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -75,7 +67,6 @@ function deepClone(obj) {
         return JSON.parse(JSON.stringify(obj));
     }
     catch (err) {
-        console.error(err);
         return obj;
     }
 }
@@ -91,7 +82,6 @@ function deepMerge(obj1, obj2) {
         return Object.assign(Object.assign({}, obj1), obj2);
     }
     catch (err) {
-        console.error(err);
         return Object.assign({}, obj1);
     }
 }
@@ -107,7 +97,6 @@ function omit(obj, keys) {
         return Object.fromEntries(Object.entries(obj).filter(([key]) => !keys.includes(key)));
     }
     catch (err) {
-        console.error(err);
         return Object.assign({}, obj);
     }
 }
@@ -123,7 +112,6 @@ function pick(obj, keys) {
         return Object.fromEntries(Object.entries(obj).filter(([key]) => keys.includes(key)));
     }
     catch (err) {
-        console.error(err);
         return {};
     }
 }
@@ -139,7 +127,6 @@ function mapKeys(obj, keyMap) {
         return Object.fromEntries(Object.entries(obj).map(([key, val]) => [keyMap[key] || key, val]));
     }
     catch (err) {
-        console.error(err);
         return {};
     }
 }
@@ -155,7 +142,6 @@ function mapValues(obj, callback) {
         return Object.fromEntries(Object.entries(obj).map(([key, val]) => [key, callback(val, key)]));
     }
     catch (err) {
-        console.error(err);
         return {};
     }
 }
@@ -171,7 +157,6 @@ function filterObject(obj, predicate) {
         return Object.fromEntries(Object.entries(obj).filter(([key, val]) => predicate(val, key)));
     }
     catch (err) {
-        console.error(err);
         return {};
     }
 }
@@ -183,10 +168,11 @@ exports.filterObject = filterObject;
  */
 function isValid(value) {
     try {
-        return typeof value === 'object' && value !== null && !Array.isArray(value);
+        if ((value === null) || Array.isArray(value))
+            return false;
+        return typeof value === 'object';
     }
     catch (err) {
-        console.error(err);
         return false;
     }
 }
@@ -201,7 +187,6 @@ function getObjectValues(obj) {
         return Object.keys(obj).map(key => obj[key]);
     }
     catch (err) {
-        console.error(err);
         return [];
     }
 }
@@ -229,7 +214,6 @@ function unflattenObject(obj) {
         return result;
     }
     catch (err) {
-        console.error(err);
         return {};
     }
 }
@@ -250,7 +234,6 @@ function getNestedProperty(obj, path) {
         return path.reduce((acc, key) => (acc && acc[key] !== undefined ? acc[key] : undefined), obj);
     }
     catch (error) {
-        console.error(`Error getting nested property: ${error}`);
         return undefined;
     }
 }
@@ -282,7 +265,6 @@ function setNestedProperty(obj, path, value) {
         return obj;
     }
     catch (error) {
-        console.error(`Error setting nested property: ${error}`);
         return obj;
     }
 }
@@ -307,7 +289,6 @@ function sortByKey(obj, order = "asc") {
         return sortedObj;
     }
     catch (err) {
-        console.error(err);
         return {};
     }
 }
@@ -320,15 +301,13 @@ exports.sortByKey = sortByKey;
 function toObject(jsonString) {
     try {
         // Validate function parameters
-        if (typeof jsonString !== 'string') {
-            throw new Error('Input must be a JSON string.');
-        }
+        if (typeof jsonString !== 'string')
+            return null;
         // Function logic and other codes inside try block
         const obj = JSON.parse(jsonString);
         return obj;
     }
     catch (error) {
-        console.error(error);
         return null;
     }
 }
@@ -341,15 +320,13 @@ exports.toObject = toObject;
 function stringify(obj) {
     try {
         // Validate function parameters
-        if (obj === undefined) {
-            throw new Error('Cannot stringify undefined object.');
-        }
+        if (obj === undefined)
+            return null;
         // Function logic and other codes inside try block
         const jsonString = JSON.stringify(obj);
         return jsonString;
     }
     catch (error) {
-        console.error(error);
         return null;
     }
 }
@@ -370,7 +347,6 @@ function mapObject(obj, fn) {
         return mappedObj;
     }
     catch (err) {
-        console.error(err);
         return {};
     }
 }
@@ -384,15 +360,12 @@ exports.mapObject = mapObject;
 function hasAllKeys(obj, keys) {
     try {
         // Validate function parameters
-        if (typeof obj !== 'object' || Array.isArray(obj) || obj === null) {
-            throw new Error('Invalid object parameter. Must be a non-null object.');
-        }
-        if (!Array.isArray(keys)) {
-            throw new Error('Invalid keys parameter. Must be an array of strings.');
-        }
-        if (keys.length === 0) {
-            throw new Error('Invalid keys parameter. Must specify at least one key.');
-        }
+        if (!isValid(obj))
+            return false;
+        if (!Array.isArray(keys))
+            return false;
+        if (keys.length === 0)
+            return false;
         // Function logic and other codes inside try block
         for (const key of keys) {
             if (!obj.hasOwnProperty(key)) {
@@ -402,7 +375,6 @@ function hasAllKeys(obj, keys) {
         return true;
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -416,17 +388,14 @@ exports.hasAllKeys = hasAllKeys;
 function keyExist(obj, key) {
     try {
         // Validate function parameters
-        if (typeof obj !== 'object' || Array.isArray(obj) || obj === null) {
-            throw new Error('Invalid object parameter. Must be a non-null object.');
-        }
-        if (typeof key !== 'string' || key.trim().length === 0) {
-            throw new Error('Invalid key parameter. Must be a non-empty string.');
-        }
+        if (!isValid(obj))
+            return false;
+        if (typeof key !== 'string' || key.trim().length === 0)
+            return false;
         // Function logic and other codes inside try block
         return obj.hasOwnProperty(key);
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }

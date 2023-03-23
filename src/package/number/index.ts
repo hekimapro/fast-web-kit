@@ -53,7 +53,6 @@ export function formatNumber(num: number, decimalPoints = 2, separator = ','): s
     try {
         return num.toFixed(decimalPoints).replace(/\B(?=(\d{3})+(?!\d))/g, separator);
     } catch (error) {
-        console.error(error);
         return num.toString();
     }
 }
@@ -68,7 +67,6 @@ export function percent(num: number, decimalPoints = 2): string {
     try {
         return (num * 100).toFixed(decimalPoints) + '%';
     } catch (error) {
-        console.error(error);
         return num.toString();
     }
 }
@@ -84,7 +82,6 @@ export function toOrdinal(num: number): string {
         const suffix = num % 100 > 10 && num % 100 < 14 ? suffixes[0] : suffixes[num % 10] || suffixes[0];
         return num + suffix;
     } catch (error) {
-        console.error(error);
         return num.toString();
     }
 }
@@ -111,7 +108,6 @@ export function fibonacci(n: number): number {
         }
         return current;
     } catch (err) {
-        console.error(err);
         return NaN;
     }
 }
@@ -169,7 +165,6 @@ export const clamp = (num: number, min: number, max: number): number => {
     try {
         return Math.min(Math.max(num, min), max);
     } catch (error) {
-        console.error(error);
         return num;
     }
 };
@@ -186,7 +181,6 @@ export const randomInteger = (min: number, max: number): number => {
     try {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     } catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -200,7 +194,6 @@ export function isEven(n: number): boolean {
     try {
         return n % 2 === 0;
     } catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -215,7 +208,6 @@ export function isOdd(n: number): boolean {
     try {
         return n % 2 !== 0;
     } catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -230,7 +222,6 @@ export function isMultipleOf(n: number, multiple: number): boolean {
     try {
         return n % multiple === 0;
     } catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -245,7 +236,6 @@ export function isDivisibleBy(n: number, divisor: number): boolean {
     try {
         return divisor % n === 0;
     } catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -259,7 +249,6 @@ export const add = (...numbers: number[]): number => {
     try {
         return numbers.reduce((acc, val) => acc + val);
     } catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -274,7 +263,6 @@ export const subtract = (a: number, b: number): number => {
     try {
         return a - b;
     } catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -288,7 +276,6 @@ export const multiply = (...numbers: number[]): number => {
     try {
         return numbers.reduce((acc, val) => acc * val);
     } catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -303,7 +290,6 @@ export const divide = (a: number, b: number): number => {
     try {
         return a / b;
     } catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -318,7 +304,6 @@ export const power = (base: number, exponent: number): number => {
     try {
         return Math.pow(base, exponent);
     } catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -332,7 +317,6 @@ export const round = (number: number): number => {
     try {
         return Math.round(number);
     } catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -346,7 +330,6 @@ export const ceil = (number: number): number => {
     try {
         return Math.ceil(number);
     } catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -360,7 +343,6 @@ export const floor = (number: number): number => {
     try {
         return Math.floor(number);
     } catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -373,7 +355,6 @@ export const random = (): number => {
     try {
         return Math.random();
     } catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -402,7 +383,6 @@ export function min(arr: number[]): number {
 
         return Math.min(...arr);
     } catch (err) {
-        console.error(err);
         return 0
     }
 }
@@ -431,7 +411,6 @@ export function max(arr: number[]): number {
 
         return Math.max(...arr);
     } catch (err) {
-        console.error(err);
         return 0
     }
 }
@@ -457,7 +436,6 @@ export function sum(arr: number[]): number {
 
         return total;
     } catch (err) {
-        console.error(err);
         return 0
     }
 }
@@ -483,7 +461,6 @@ export function average(arr: number[]): number {
 
         return total / arr.length;
     } catch (err) {
-        console.error(err);
         return 0
     }
 }
@@ -525,7 +502,6 @@ export function isPrime(n: number): boolean {
 
         return true;
     } catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -547,7 +523,6 @@ export function factorial(n: number): number {
 
         return result;
     } catch (error) {
-        console.error(error);
         return NaN;
     }
 }
@@ -572,7 +547,6 @@ export function isPowerOfTwo(n: number): boolean {
         // If n is now 1, it was a power of two.
         return n === 1;
     } catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -592,7 +566,6 @@ export function isPerfectSquare(n: number): boolean {
         const root = Math.sqrt(n);
         return Number.isInteger(root);
     } catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -615,7 +588,6 @@ export function greatestCommonDivisor(a: number, b: number): number {
 
         return a;
     } catch (error) {
-        console.error(error);
         return NaN;
     }
 }
@@ -638,7 +610,6 @@ export function leastCommonMultiple(num1: number, num2: number): number {
         let gcd = greatestCommonDivisor(greaterNum, lesserNum);
         return (greaterNum * lesserNum) / gcd;
     } catch (error) {
-        console.error(error);
         return 0
     }
 }
@@ -655,7 +626,6 @@ export function generateRandomNumber(min: number, max: number): number {
         // Generate a random number between min and max
         return Math.floor(Math.random() * (max - min + 1) + min);
     } catch (error) {
-        console.error(error);
         return 0
     }
 }
@@ -694,7 +664,6 @@ export const toShortForm = (number: number, upperCaseLetter?: boolean): string =
         return `${abbrevValue}${suffix}`;
 
     } catch (error) {
-        console.error(`Error converting to short form: ${(error as Error).message}`);
         return "";
     }
 };
@@ -762,7 +731,6 @@ export const toWord = (currency: number): string => {
         return words.trim()
 
     } catch (error) {
-        console.error("Error converting number to word:", (error as Error).message);
         return ""
     }
 }
@@ -808,7 +776,6 @@ export const toMilliseconds = (value: number, unit: timeUnit): number => {
         }
         return milliseconds
     } catch (error) {
-        console.error(`Error converting ${value} ${unit} to milliseconds: ${error}`);
         return 0;
     }
 };

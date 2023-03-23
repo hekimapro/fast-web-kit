@@ -3,18 +3,17 @@
  * @param obj The object to check.
  * @returns A boolean indicating whether the object is empty.
  */
-export function isEmpty(obj: Record<string, any>): boolean {
+export function isEmpty(obj: any): boolean {
     try {
-        // Validate function parameters
-        if (typeof obj !== 'object' || Array.isArray(obj) || obj === null) {
-            throw new Error('Invalid object parameter. Must be a non-null object.');
-        }
+
+        if (isValid(obj))
+            return Object.keys(obj).length === 0
 
         // Function logic and other codes inside try block
-        return Object.keys(obj).length === 0;
+        return true
+
     } catch (error) {
-        console.error(error);
-        return false;
+        return true;
     }
 }
 
@@ -23,17 +22,15 @@ export function isEmpty(obj: Record<string, any>): boolean {
 * @param obj The object to check.
 * @returns A boolean indicating whether the object is not empty.
 */
-export function isNotEmpty(obj: Record<string, any>): boolean {
+export function isNotEmpty(obj: any): boolean {
     try {
         // Validate function parameters
-        if (typeof obj !== 'object' || Array.isArray(obj) || obj === null) {
-            throw new Error('Invalid object parameter. Must be a non-null object.');
-        }
+        if (!isValid(obj))
+            return false
 
         // Function logic and other codes inside try block
         return Object.keys(obj).length !== 0;
     } catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -44,20 +41,17 @@ export function isNotEmpty(obj: Record<string, any>): boolean {
  * @param obj2 The second object to compare.
  * @returns A boolean indicating whether the two objects are equal.
  */
-export function areEqual(obj1: Record<string, any>, obj2: Record<string, any>): boolean {
+export function areEqual(obj1: Record<string, any>, obj2: any): boolean {
     try {
         // Validate function parameters
-        if (typeof obj1 !== 'object' || Array.isArray(obj1) || obj1 === null) {
-            throw new Error('Invalid first object parameter. Must be a non-null object.');
-        }
-        if (typeof obj2 !== 'object' || Array.isArray(obj2) || obj2 === null) {
-            throw new Error('Invalid second object parameter. Must be a non-null object.');
-        }
+        if (typeof obj1 !== 'object' || Array.isArray(obj1) || obj1 === null)
+            return false
+        if (typeof obj2 !== 'object' || Array.isArray(obj2) || obj2 === null)
+            return false
 
         // Function logic and other codes inside try block
         return JSON.stringify(obj1) === JSON.stringify(obj2);
     } catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -72,7 +66,6 @@ export function deepClone<T extends object>(obj: T): T {
     try {
         return JSON.parse(JSON.stringify(obj));
     } catch (err) {
-        console.error(err);
         return obj;
     }
 }
@@ -87,7 +80,6 @@ export function deepMerge<T extends object, U extends object>(obj1: T, obj2: U):
     try {
         return { ...obj1, ...obj2 };
     } catch (err) {
-        console.error(err);
         return { ...obj1 } as T & U;
     }
 }
@@ -102,7 +94,6 @@ export function omit<T extends object, K extends keyof T>(obj: T, keys: K[]): Om
     try {
         return Object.fromEntries(Object.entries(obj).filter(([key]) => !keys.includes(key as K))) as Omit<T, K>;
     } catch (err) {
-        console.error(err);
         return { ...obj } as Omit<T, K>;
     }
 }
@@ -117,7 +108,6 @@ export function pick<T extends object, K extends keyof T>(obj: T, keys: K[]): Pi
     try {
         return Object.fromEntries(Object.entries(obj).filter(([key]) => keys.includes(key as K))) as Pick<T, K>;
     } catch (err) {
-        console.error(err);
         return {} as Pick<T, K>;
     }
 }
@@ -132,7 +122,6 @@ export function mapKeys<T extends object, U extends keyof T>(obj: T, keyMap: Rec
     try {
         return Object.fromEntries(Object.entries(obj).map(([key, val]) => [keyMap[key as U] || key, val]));
     } catch (err) {
-        console.error(err);
         return {};
     }
 }
@@ -147,7 +136,6 @@ export function mapValues<T extends object, U>(obj: T, callback: (value: T[keyof
     try {
         return Object.fromEntries(Object.entries(obj).map(([key, val]) => [key, callback(val, key as keyof T)])) as { [key in keyof T]: U };
     } catch (err) {
-        console.error(err);
         return {} as { [key in keyof T]: U };
     }
 }
@@ -162,7 +150,6 @@ export function filterObject<T extends object>(obj: T, predicate: (value: T[keyo
     try {
         return Object.fromEntries(Object.entries(obj).filter(([key, val]) => predicate(val, key as keyof T))) as Partial<T>;
     } catch (err) {
-        console.error(err);
         return {} as Partial<T>;
     }
 }
@@ -174,9 +161,12 @@ export function filterObject<T extends object>(obj: T, predicate: (value: T[keyo
  */
 export function isValid(value: any): boolean {
     try {
-        return typeof value === 'object' && value !== null && !Array.isArray(value);
+
+        if ((value === null) || Array.isArray(value))
+            return false
+        return typeof value === 'object'
+
     } catch (err) {
-        console.error(err);
         return false;
     }
 }
@@ -190,7 +180,6 @@ export function getObjectValues(obj: any): any[] {
     try {
         return Object.keys(obj).map(key => obj[key]);
     } catch (err) {
-        console.error(err);
         return [];
     }
 }
@@ -217,7 +206,6 @@ export function unflattenObject(obj: any): any {
         }
         return result;
     } catch (err) {
-        console.error(err);
         return {};
     }
 }
@@ -237,7 +225,6 @@ export function getNestedProperty(obj: any, path: string[]): any | undefined {
         // Otherwise, return the value of the current key in the current object.
         return path.reduce((acc, key) => (acc && acc[key] !== undefined ? acc[key] : undefined), obj);
     } catch (error) {
-        console.error(`Error getting nested property: ${error}`);
         return undefined;
     }
 }
@@ -267,7 +254,6 @@ export function setNestedProperty(obj: any, path: string[], value: any): any {
         }, obj);
         return obj;
     } catch (error) {
-        console.error(`Error setting nested property: ${error}`);
         return obj;
     }
 }
@@ -291,7 +277,6 @@ export function sortByKey<T>(obj: Record<string, T>, order: "asc" | "desc" = "as
         }
         return sortedObj;
     } catch (err) {
-        console.error(err);
         return {}
     }
 }
@@ -302,18 +287,16 @@ export function sortByKey<T>(obj: Record<string, T>, order: "asc" | "desc" = "as
  * @param jsonString The JSON string to convert to an object.
  * @returns An object representing the JSON string, or null if the string is not valid JSON.
  */
-export function toObject(jsonString: string): Record<string, any> | null {
+export function toObject(jsonString: string): object | any[] | null {
     try {
         // Validate function parameters
-        if (typeof jsonString !== 'string') {
-            throw new Error('Input must be a JSON string.');
-        }
+        if (typeof jsonString !== 'string')
+            return null
 
         // Function logic and other codes inside try block
         const obj = JSON.parse(jsonString);
-        return obj;
+        return obj
     } catch (error) {
-        console.error(error);
         return null;
     }
 }
@@ -324,18 +307,17 @@ export function toObject(jsonString: string): Record<string, any> | null {
  * @param obj The object to convert to a JSON string.
  * @returns A string representing the object in JSON format, or null if the object is undefined.
  */
-export function stringify(obj: Record<string, any>): string | null {
+export function stringify(obj: any): string | null {
     try {
         // Validate function parameters
-        if (obj === undefined) {
-            throw new Error('Cannot stringify undefined object.');
-        }
+        if (obj === undefined)
+            return null
+
 
         // Function logic and other codes inside try block
         const jsonString = JSON.stringify(obj);
         return jsonString;
     } catch (error) {
-        console.error(error);
         return null;
     }
 }
@@ -356,7 +338,6 @@ export function mapObject<T, U>(obj: Record<string, T>, fn: (value: T, key: stri
         }
         return mappedObj;
     } catch (err) {
-        console.error(err);
         return {}
     }
 }
@@ -370,17 +351,14 @@ export function mapObject<T, U>(obj: Record<string, T>, fn: (value: T, key: stri
 export function hasAllKeys(obj: Record<string, any>, keys: string[]): boolean {
     try {
         // Validate function parameters
-        if (typeof obj !== 'object' || Array.isArray(obj) || obj === null) {
-            throw new Error('Invalid object parameter. Must be a non-null object.');
-        }
+        if (!isValid(obj))
+            return false
 
-        if (!Array.isArray(keys)) {
-            throw new Error('Invalid keys parameter. Must be an array of strings.');
-        }
+        if (!Array.isArray(keys))
+            return false
 
-        if (keys.length === 0) {
-            throw new Error('Invalid keys parameter. Must specify at least one key.');
-        }
+        if (keys.length === 0)
+            return false
 
         // Function logic and other codes inside try block
         for (const key of keys) {
@@ -391,7 +369,6 @@ export function hasAllKeys(obj: Record<string, any>, keys: string[]): boolean {
 
         return true;
     } catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -404,18 +381,17 @@ export function hasAllKeys(obj: Record<string, any>, keys: string[]): boolean {
  */
 export function keyExist(obj: Record<string, any>, key: string): boolean {
     try {
+
         // Validate function parameters
-        if (typeof obj !== 'object' || Array.isArray(obj) || obj === null) {
-            throw new Error('Invalid object parameter. Must be a non-null object.');
-        }
-        if (typeof key !== 'string' || key.trim().length === 0) {
-            throw new Error('Invalid key parameter. Must be a non-empty string.');
-        }
+        if (!isValid(obj))
+            return false
+
+        if (typeof key !== 'string' || key.trim().length === 0)
+            return false
 
         // Function logic and other codes inside try block
         return obj.hasOwnProperty(key);
     } catch (error) {
-        console.error(error);
         return false;
     }
 }

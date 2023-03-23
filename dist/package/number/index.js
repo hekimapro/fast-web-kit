@@ -55,7 +55,6 @@ function formatNumber(num, decimalPoints = 2, separator = ',') {
         return num.toFixed(decimalPoints).replace(/\B(?=(\d{3})+(?!\d))/g, separator);
     }
     catch (error) {
-        console.error(error);
         return num.toString();
     }
 }
@@ -71,7 +70,6 @@ function percent(num, decimalPoints = 2) {
         return (num * 100).toFixed(decimalPoints) + '%';
     }
     catch (error) {
-        console.error(error);
         return num.toString();
     }
 }
@@ -88,7 +86,6 @@ function toOrdinal(num) {
         return num + suffix;
     }
     catch (error) {
-        console.error(error);
         return num.toString();
     }
 }
@@ -116,7 +113,6 @@ function fibonacci(n) {
         return current;
     }
     catch (err) {
-        console.error(err);
         return NaN;
     }
 }
@@ -178,7 +174,6 @@ const clamp = (num, min, max) => {
         return Math.min(Math.max(num, min), max);
     }
     catch (error) {
-        console.error(error);
         return num;
     }
 };
@@ -196,7 +191,6 @@ const randomInteger = (min, max) => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
     catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -211,7 +205,6 @@ function isEven(n) {
         return n % 2 === 0;
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -226,7 +219,6 @@ function isOdd(n) {
         return n % 2 !== 0;
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -242,7 +234,6 @@ function isMultipleOf(n, multiple) {
         return n % multiple === 0;
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -258,7 +249,6 @@ function isDivisibleBy(n, divisor) {
         return divisor % n === 0;
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -273,7 +263,6 @@ const add = (...numbers) => {
         return numbers.reduce((acc, val) => acc + val);
     }
     catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -289,7 +278,6 @@ const subtract = (a, b) => {
         return a - b;
     }
     catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -304,7 +292,6 @@ const multiply = (...numbers) => {
         return numbers.reduce((acc, val) => acc * val);
     }
     catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -320,7 +307,6 @@ const divide = (a, b) => {
         return a / b;
     }
     catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -336,7 +322,6 @@ const power = (base, exponent) => {
         return Math.pow(base, exponent);
     }
     catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -351,7 +336,6 @@ const round = (number) => {
         return Math.round(number);
     }
     catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -366,7 +350,6 @@ const ceil = (number) => {
         return Math.ceil(number);
     }
     catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -381,7 +364,6 @@ const floor = (number) => {
         return Math.floor(number);
     }
     catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -395,7 +377,6 @@ const random = () => {
         return Math.random();
     }
     catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -422,7 +403,6 @@ function min(arr) {
         return Math.min(...arr);
     }
     catch (err) {
-        console.error(err);
         return 0;
     }
 }
@@ -449,7 +429,6 @@ function max(arr) {
         return Math.max(...arr);
     }
     catch (err) {
-        console.error(err);
         return 0;
     }
 }
@@ -472,7 +451,6 @@ function sum(arr) {
         return total;
     }
     catch (err) {
-        console.error(err);
         return 0;
     }
 }
@@ -495,7 +473,6 @@ function average(arr) {
         return total / arr.length;
     }
     catch (err) {
-        console.error(err);
         return 0;
     }
 }
@@ -536,7 +513,6 @@ function isPrime(n) {
         return true;
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -556,7 +532,6 @@ function factorial(n) {
         return result;
     }
     catch (error) {
-        console.error(error);
         return NaN;
     }
 }
@@ -579,7 +554,6 @@ function isPowerOfTwo(n) {
         return n === 1;
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -599,7 +573,6 @@ function isPerfectSquare(n) {
         return Number.isInteger(root);
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -621,7 +594,6 @@ function greatestCommonDivisor(a, b) {
         return a;
     }
     catch (error) {
-        console.error(error);
         return NaN;
     }
 }
@@ -643,7 +615,6 @@ function leastCommonMultiple(num1, num2) {
         return (greaterNum * lesserNum) / gcd;
     }
     catch (error) {
-        console.error(error);
         return 0;
     }
 }
@@ -661,7 +632,6 @@ function generateRandomNumber(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
     catch (error) {
-        console.error(error);
         return 0;
     }
 }
@@ -699,7 +669,6 @@ const toShortForm = (number, upperCaseLetter) => {
         return `${abbrevValue}${suffix}`;
     }
     catch (error) {
-        console.error(`Error converting to short form: ${error.message}`);
         return "";
     }
 };
@@ -767,7 +736,6 @@ const toWord = (currency) => {
         return words.trim();
     }
     catch (error) {
-        console.error("Error converting number to word:", error.message);
         return "";
     }
 };
@@ -812,7 +780,6 @@ const toMilliseconds = (value, unit) => {
         return milliseconds;
     }
     catch (error) {
-        console.error(`Error converting ${value} ${unit} to milliseconds: ${error}`);
         return 0;
     }
 };

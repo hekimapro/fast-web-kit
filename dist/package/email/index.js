@@ -43,8 +43,6 @@ const isValid = (email) => {
         return false;
     }
     catch (error) {
-        // Handle error without throw
-        console.error(`Error in isValidEmail function: ${error.message}`);
         // Return false if there was an error
         return false;
     }
@@ -67,9 +65,6 @@ const getDomain = (email) => {
         return "";
     }
     catch (error) {
-        // Handle error without throw
-        console.error(`Error in getEmailDomain function: ${error.message}`);
-        // Return empty string if there was an error
         return '';
     }
 };
@@ -91,8 +86,6 @@ const getUsername = (email) => {
         return '';
     }
     catch (error) {
-        // Handle error without throw
-        console.error(`Error in getEmailUsername function: ${error.message}`);
         // Return empty string if there was an error
         return '';
     }
@@ -114,8 +107,6 @@ const normalize = (email) => {
         return '';
     }
     catch (error) {
-        // Handle error without throw
-        console.error(`Error in normalizeEmail function: ${error.message}`);
         // Return empty string if there was an error
         return '';
     }

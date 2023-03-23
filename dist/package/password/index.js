@@ -22,7 +22,6 @@ function isStrongPassword(password) {
         return hasLength && hasLower && hasUpper && hasDigit && hasSymbol;
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -39,7 +38,6 @@ function isPasswordLessThanMax(password, maxLength) {
         return password.length <= maxLength;
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -55,7 +53,6 @@ function hasLowercase(password) {
         return /[a-z]/.test(password);
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -71,7 +68,6 @@ function hasUppercase(password) {
         return /[A-Z]/.test(password);
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -87,7 +83,6 @@ function hasDigit(password) {
         return /\d/.test(password);
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -103,7 +98,6 @@ function hasSymbol(password) {
         return /[!@#$%^&*]/.test(password);
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -118,7 +112,6 @@ function hasNoWhitespace(password) {
         return !/\s/.test(password);
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -133,7 +126,6 @@ function isAlphanumeric(password) {
         return /^[0-9a-zA-Z]+$/.test(password);
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -148,7 +140,6 @@ function isAlphabeticOnly(password) {
         return /^[a-zA-Z]+$/.test(password);
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -163,7 +154,6 @@ function isLowercaseOnly(password) {
         return /^[a-z]+$/.test(password);
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -178,7 +168,6 @@ function isUppercaseOnly(password) {
         return /^[A-Z]+$/.test(password);
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -194,7 +183,6 @@ function isRepeatedChar(password) {
         return /(.).*\1/.test(password);
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -211,7 +199,6 @@ function isSequencedChar(password) {
         return sequenceRegex.test(password.toLowerCase());
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -239,7 +226,6 @@ function isLeetSpeak(password) {
         return leetRegex.test(password);
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -267,7 +253,6 @@ function hasSimilarCharacter(password) {
         return false;
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -295,7 +280,6 @@ function hasSequentialCharacters(password, sequenceLength) {
         return false;
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -315,7 +299,6 @@ function isComplexPassword(password, minLength = 8) {
             /[!@#$%^&*()\-_=+{};:,<.>/?~\[\]|\\]/.test(password);
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }

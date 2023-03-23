@@ -15,7 +15,6 @@ function isValid(value) {
         return value instanceof Date && !isNaN(value.getTime());
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -82,7 +81,6 @@ function currentMonthName() {
         return currentMonth;
     }
     catch (error) {
-        console.error(error);
         return "";
     }
 }
@@ -97,7 +95,6 @@ function currentHour(date) {
         return now.getHours();
     }
     catch (error) {
-        console.error(error);
         return NaN;
     }
 }
@@ -112,7 +109,6 @@ function currentMinute(date) {
         return now.getMinutes();
     }
     catch (error) {
-        console.error(error);
         return NaN;
     }
 }
@@ -127,7 +123,6 @@ function currentYear(date) {
         return now.getFullYear();
     }
     catch (error) {
-        console.error(error);
         return NaN;
     }
 }
@@ -142,7 +137,6 @@ function currentDay(date) {
         return now.getDay();
     }
     catch (error) {
-        console.error(error);
         return NaN;
     }
 }
@@ -157,7 +151,6 @@ function currentDate(date) {
         return now.getDate();
     }
     catch (error) {
-        console.error(error);
         return NaN;
     }
 }
@@ -172,7 +165,6 @@ function currentSecond(date) {
         return now.getSeconds();
     }
     catch (error) {
-        console.error(error);
         return NaN;
     }
 }
@@ -192,7 +184,6 @@ function currentFullDate(date) {
         return `${year}-${paddedMonth}-${paddedDay}`;
     }
     catch (error) {
-        console.error(error);
         return "";
     }
 }
@@ -237,7 +228,6 @@ function currentTimeInMilliseconds(date) {
         return now.getTime();
     }
     catch (error) {
-        console.error(error);
         return NaN;
     }
 }
@@ -253,7 +243,6 @@ exports.currentTimeInMilliseconds = currentTimeInMilliseconds;
 function addTimeToDate(date, time, unit) {
     try {
         date = convertToDate(date);
-        console.log(new Date().setUTCFullYear);
         switch (unit) {
             case 'seconds':
                 date.setSeconds(date.getSeconds() + time);
@@ -274,12 +263,10 @@ function addTimeToDate(date, time, unit) {
                 date.setMonth(date.getMonth() + time);
                 break;
             default:
-                console.log("invalid unit");
         }
         return date;
     }
     catch (error) {
-        console.error(error);
         return date;
     }
 }
@@ -297,7 +284,6 @@ function getWeekNumber(date) {
         return Math.ceil((daysSinceFirstDayOfYear + firstDayOfYear.getDay() + 1) / 7);
     }
     catch (error) {
-        console.error(error);
         return -1;
     }
 }
@@ -328,7 +314,6 @@ function formatDate(date, format = 'YYYY-MM-DD') {
             .replace('SSS', milliseconds.toString().padStart(3, '0'));
     }
     catch (error) {
-        console.error(error);
         return '';
     }
 }
@@ -355,7 +340,6 @@ function parseDate(dateString, format) {
         return new Date(year, month, day);
     }
     catch (error) {
-        console.error(error);
         return null;
     }
 }
@@ -375,7 +359,6 @@ function getAge(birthdate, referenceDate = new Date()) {
         return Math.floor(ageInYears);
     }
     catch (error) {
-        console.error(error);
         return -1;
     }
 }
@@ -392,7 +375,6 @@ function isWeekend(date) {
         return dayOfWeek === 0 || dayOfWeek === 6;
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -410,7 +392,6 @@ function isBusinessHours(date) {
         return dayOfWeek >= 1 && dayOfWeek <= 5 && hours >= 9 && hours <= 17;
     }
     catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -426,7 +407,6 @@ function convertToDate(dateString) {
         return new Date(dateString);
     }
     catch (error) {
-        console.error(error);
         return new Date(dateString);
         ;
     }
@@ -470,7 +450,6 @@ const relativeTime = (date) => {
         }
     }
     catch (error) {
-        console.error(`Error calculating relative time: ${error.message}`);
         return "";
     }
 };

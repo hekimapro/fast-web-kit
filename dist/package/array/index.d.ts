@@ -157,6 +157,11 @@ export declare const getElementByIndex: (arr: any[], index: number) => any | und
  *
  * @param arr The array to remove duplicates from.
  * @returns A new array with the duplicates removed.
- * @throws TypeError if arr is not an array.
  */
 export declare const removeDuplicates: (arr: any[]) => any[];
+/**
+ * Check if an array is empty.
+ * @param arr The array to check.
+ * @returns True if the array is empty, false otherwise.
+ */
+export declare const isEmpty: (arr: any[]) => boolean;

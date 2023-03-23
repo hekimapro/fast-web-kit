@@ -8,7 +8,6 @@ export declare const isValid: (value: unknown) => boolean;
 /**
  * Checks if a provided string is not empty.
  * @param str The string to check.
- * @throws TypeError if `str` is not a string.
  */
 export declare const isNotEmpty: (str: string) => boolean;
 /**
@@ -95,7 +94,6 @@ export declare const toTitleCase: (str: string) => string;
  * Checks if the given string contains only alphabetic characters.
  * @param str The string to be checked.
  * @returns true if the string contains only alphabetic characters, false otherwise.
- * @throws TypeError if the input is not a string.
  */
 export declare const hasAlphabeticCharsOnly: (str: string) => boolean;
 /**
@@ -117,7 +115,6 @@ export declare const isAlphanumeric: (str: string) => boolean;
  *
  * @param str The string to check.
  * @returns True if the string is all lowercase, false otherwise.
- * @throws TypeError if the parameter is not a string.
  */
 export declare const isLowerCase: (str: string) => boolean;
 /**
@@ -125,7 +122,6 @@ export declare const isLowerCase: (str: string) => boolean;
 *
 * @param str The string to check.
 * @returns True if the string is all uppercase, false otherwise.
-* @throws TypeError if the parameter is not a string.
 */
 export declare const isUpperCase: (str: string) => boolean;
 /**

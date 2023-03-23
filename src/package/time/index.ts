@@ -14,7 +14,6 @@ export function isValid(value: any): boolean {
     try {
         return value instanceof Date && !isNaN(value.getTime());
     } catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -83,7 +82,6 @@ export function currentMonthName(): month | string {
 
         return currentMonth;
     } catch (error) {
-        console.error(error);
         return ""
     }
 }
@@ -97,7 +95,6 @@ export function currentHour(date?: any): number {
         const now = date ? convertToDate(date) : new Date();
         return now.getHours();
     } catch (error) {
-        console.error(error);
         return NaN
     }
 }
@@ -111,7 +108,6 @@ export function currentMinute(date?: any): number {
         const now = date ? convertToDate(date) : new Date();
         return now.getMinutes();
     } catch (error) {
-        console.error(error);
         return NaN;
     }
 }
@@ -125,7 +121,6 @@ export function currentYear(date?: any): number {
         const now = date ? convertToDate(date) : new Date();
         return now.getFullYear();
     } catch (error) {
-        console.error(error);
         return NaN;
     }
 }
@@ -139,7 +134,6 @@ export function currentDay(date?: any): number {
         const now = date ? convertToDate(date) : new Date();
         return now.getDay();
     } catch (error) {
-        console.error(error);
         return NaN;
     }
 }
@@ -153,7 +147,6 @@ export function currentDate(date?: any): number {
         const now = date ? convertToDate(date) : new Date();
         return now.getDate();
     } catch (error) {
-        console.error(error);
         return NaN;
     }
 }
@@ -167,7 +160,6 @@ export function currentSecond(date?: any): number {
         const now = date ? convertToDate(date) : new Date();
         return now.getSeconds();
     } catch (error) {
-        console.error(error);
         return NaN
     }
 }
@@ -186,7 +178,6 @@ export function currentFullDate(date?: any): string {
         const paddedDay: string = day < 10 ? `0${day}` : `${day}`;
         return `${year}-${paddedMonth}-${paddedDay}`;
     } catch (error) {
-        console.error(error);
         return "";
     }
 }
@@ -228,7 +219,6 @@ export function currentTimeInMilliseconds(date?: any): number {
         const now = date ? convertToDate(date) : new Date();
         return now.getTime();
     } catch (error) {
-        console.error(error);
         return NaN
     }
 }
@@ -245,7 +235,6 @@ export function currentTimeInMilliseconds(date?: any): number {
 export function addTimeToDate(date: any, time: number, unit: timeUnit): Date {
     try {
         date = convertToDate(date)
-        console.log(new Date().setUTCFullYear)
         switch (unit) {
 
             case 'seconds':
@@ -267,12 +256,10 @@ export function addTimeToDate(date: any, time: number, unit: timeUnit): Date {
                 date.setMonth(date.getMonth() + time);
                 break;
             default:
-                console.log("invalid unit")
         }
         return date;
 
     } catch (error) {
-        console.error(error);
         return date;
     }
 }
@@ -289,7 +276,6 @@ export function getWeekNumber(date: any): number {
         const daysSinceFirstDayOfYear = (date.getTime() - firstDayOfYear.getTime()) / 86400000; // Number of milliseconds in a day
         return Math.ceil((daysSinceFirstDayOfYear + firstDayOfYear.getDay() + 1) / 7);
     } catch (error) {
-        console.error(error);
         return -1;
     }
 }
@@ -320,7 +306,6 @@ export function formatDate(date: any, format: string = 'YYYY-MM-DD'): string {
             .replace('ss', seconds.toString().padStart(2, '0'))
             .replace('SSS', milliseconds.toString().padStart(3, '0'));
     } catch (error) {
-        console.error(error);
         return '';
     }
 }
@@ -346,7 +331,6 @@ export function parseDate(dateString: string, format: string): Date | null {
         const day = parseInt(parts[formatParts.indexOf('d')]);
         return new Date(year, month, day);
     } catch (error) {
-        console.error(error);
         return null;
     }
 }
@@ -365,7 +349,6 @@ export function getAge(birthdate: any, referenceDate: any = new Date()): number 
         const ageInYears = ageInMillis / 31536000000; // 365 days + leap years
         return Math.floor(ageInYears);
     } catch (error) {
-        console.error(error);
         return -1;
     }
 }
@@ -381,7 +364,6 @@ export function isWeekend(date: any): boolean {
         const dayOfWeek = date.getDay();
         return dayOfWeek === 0 || dayOfWeek === 6;
     } catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -398,7 +380,6 @@ export function isBusinessHours(date: any): boolean {
         const hours = date.getHours();
         return dayOfWeek >= 1 && dayOfWeek <= 5 && hours >= 9 && hours <= 17;
     } catch (error) {
-        console.error(error);
         return false;
     }
 }
@@ -413,7 +394,6 @@ export function convertToDate(dateString: any): Date {
     try {
         return new Date(dateString);
     } catch (error) {
-        console.error(error);
         return new Date(dateString);;
     }
 }
@@ -450,7 +430,6 @@ export const relativeTime = (date: any): string => {
             return `${days} days ago`;
         }
     } catch (error) {
-        console.error(`Error calculating relative time: ${(error as Error).message}`);
         return "";
     }
 };

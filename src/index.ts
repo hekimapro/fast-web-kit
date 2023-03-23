@@ -1,4 +1,3 @@
-
 export * as time from "./package/time"
 export * as array from "./package/array"
 export * as email from "./package/email"

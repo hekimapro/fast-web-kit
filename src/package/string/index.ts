@@ -9,7 +9,6 @@ export const isValid = (value: unknown): boolean => typeof value === 'string'
 /**
  * Checks if a provided string is not empty.
  * @param str The string to check.
- * @throws TypeError if `str` is not a string.
  */
 export const isNotEmpty = (str: string): boolean => isValid(str) ? str.trim() !== "" : false
 
@@ -35,7 +34,6 @@ export const capitalize = (str: string): string => {
         }
         return str
     } catch (error) {
-        console.error((error as Error).message)
         return str // Return original string if there was an error.
     }
 }
@@ -57,7 +55,6 @@ export const reverse = (str: string): string => {
         }
         return str
     } catch (error) {
-        console.error(error)
         return str
     }
 }
@@ -78,7 +75,6 @@ export function removeSpecialCharacters(inputString: string): string {
         }
         return inputString
     } catch (error) {
-        console.error(error)
         return inputString
     }
 }
@@ -96,7 +92,6 @@ export const getLength = (str: string): number => {
             return str.length;
         return 0
     } catch (error) {
-        console.error(error);
         return 0;
     }
 };
@@ -113,7 +108,6 @@ export const truncate = (str: string, maxLength: number): string => {
             return str.length > maxLength ? `${str.slice(0, maxLength)}...` : str;
         return str
     } catch (error) {
-        console.error(error);
         return str;
     }
 }
@@ -131,7 +125,6 @@ export const removeWhitespace = (str: string): string => {
             return str.replace(/\s/g, '')
         return ""
     } catch (error) {
-        console.error(error);
         return '';
     }
 };
@@ -151,7 +144,6 @@ export const split = (str: string, separator: string): string[] => {
         }
         return []
     } catch (error) {
-        console.error("An error occurred while splitting the string:", error);
         return [];
     }
 }
@@ -170,8 +162,7 @@ export const toCamelCase = (str: string): string => {
             }).replace(/\s+/g, '');
         return ''
     } catch (error) {
-        console.error(error);
-        return ''; // Return empty string instead of throwing error
+        return ''; 
     }
 }
 
@@ -188,7 +179,6 @@ export const toKebabCase = (str: string): string => {
         }
         return ''
     } catch (error) {
-        console.error(error);
         return '';
     }
 }
@@ -208,7 +198,6 @@ export const toSnakeCase = (str: string): string => {
         }
         return ''
     } catch (error) {
-        console.error((error as Error).message);
         return '';
     }
 }
@@ -229,7 +218,6 @@ export const toTitleCase = (str: string): string => {
         }
         return ''
     } catch (error) {
-        console.error((error as Error).message);
         return '';
     }
 };
@@ -238,7 +226,6 @@ export const toTitleCase = (str: string): string => {
  * Checks if the given string contains only alphabetic characters.
  * @param str The string to be checked.
  * @returns true if the string contains only alphabetic characters, false otherwise.
- * @throws TypeError if the input is not a string.
  */
 export const hasAlphabeticCharsOnly = (str: string): boolean => {
     try {
@@ -248,7 +235,6 @@ export const hasAlphabeticCharsOnly = (str: string): boolean => {
         }
         return false
     } catch (error) {
-        console.error((error as Error).message);
         return false;
     }
 }
@@ -270,7 +256,6 @@ export const hasNumericCharsOnly = (str: string): boolean => {
         }
         return false
     } catch (error) {
-        console.error(`Error in isNumeric: ${(error as Error).message}`);
         return false;
     }
 }
@@ -286,7 +271,6 @@ export const isAlphanumeric = (str: string): boolean => {
             return /^[a-zA-Z0-9]+$/.test(str)
         return false
     } catch (err) {
-        console.error(err);
         return false;
     }
 }
@@ -296,7 +280,6 @@ export const isAlphanumeric = (str: string): boolean => {
  *
  * @param str The string to check.
  * @returns True if the string is all lowercase, false otherwise.
- * @throws TypeError if the parameter is not a string.
  */
 export const isLowerCase = (str: string): boolean => {
     try {
@@ -304,7 +287,6 @@ export const isLowerCase = (str: string): boolean => {
             return str === str.toLowerCase()
         return false
     } catch (error) {
-        console.error(error);
         return false;
     }
 };
@@ -314,7 +296,6 @@ export const isLowerCase = (str: string): boolean => {
 *
 * @param str The string to check.
 * @returns True if the string is all uppercase, false otherwise.
-* @throws TypeError if the parameter is not a string.
 */
 export const isUpperCase = (str: string): boolean => {
     try {
@@ -322,7 +303,6 @@ export const isUpperCase = (str: string): boolean => {
             return str === str.toUpperCase()
         return false
     } catch (error) {
-        console.error(error);
         return false;
     }
 };
@@ -359,7 +339,6 @@ export const isIPAddress = (ipAddress: string): boolean => {
         }
         return false
     } catch (error) {
-        console.log('An error occurred while validating IP address:', error);
         return false;
     }
 };
@@ -384,7 +363,6 @@ export const isValidHexColor = (value: string): boolean => {
         }
         return false
     } catch (error) {
-        console.error('An error occurred while validating the hexadecimal color:', error);
         return false;
     }
 };
@@ -425,7 +403,6 @@ export const isValidCreditCard = (value: string): boolean => {
         }
         return false
     } catch (error) {
-        console.error('An error occurred while validating the credit card number:', error);
         return false;
     }
 };
@@ -439,14 +416,13 @@ export const isValidJSON = (jsonString: string): boolean => {
     try {
         if (isNotEmpty(jsonString)) {
             const json = JSON.parse(jsonString);
-            if (typeof json !== 'object' || Array.isArray(json)) {
+            if (typeof json !== 'object') {
                 return false;
             }
             return true;
         }
         return false
     } catch (error) {
-        console.log(`Error occurred while validating JSON: ${(error as Error).message}`);
         return false;
     }
 }
@@ -469,7 +445,6 @@ export const isValidBase64 = (base64String: string): boolean => {
         }
         return false
     } catch (error) {
-        console.log(`Error occurred while validating Base64: ${(error as Error).message}`);
         return false;
     }
 };
@@ -501,7 +476,6 @@ export function removeCase(str: string, caseType: 'kebab-case' | 'snake_case'): 
         }
         return convertedStr
     } catch (error) {
-        console.error((error as Error).message);
         return "";
     }
 }
@@ -514,14 +488,12 @@ export function removeCase(str: string, caseType: 'kebab-case' | 'snake_case'): 
 export function isEmpty(str: string): boolean {
     try {
         // Validate function parameters
-        if (typeof str !== 'string') {
-            throw new Error('Input must be a string.');
-        }
+        if (typeof str !== 'string')
+            return false
 
         // Function logic and other codes inside try block
         return str.trim().length === 0;
     } catch (error) {
-        console.error(error);
         return false;
     }
 }
