@@ -7,13 +7,13 @@ exports.isEmpty = exports.removeCase = exports.isValidBase64 = exports.isValidJS
  * @param value - The value to check.
  * @returns Whether the value is a string.
  */
-const isValid = (value) => typeof value === 'string';
+const isValid = (value) => (typeof value === 'string');
 exports.isValid = isValid;
 /**
  * Checks if a provided string is not empty.
  * @param str The string to check.
  */
-const isNotEmpty = (str) => (0, exports.isValid)(str) ? str.trim() !== "" : false;
+const isNotEmpty = (str) => (0, exports.isValid)(str) ? (str.trim() !== "") : false;
 exports.isNotEmpty = isNotEmpty;
 /**
  * Converts the provided value to a string.
@@ -500,12 +500,12 @@ function isEmpty(str) {
     try {
         // Validate function parameters
         if (typeof str !== 'string')
-            return false;
+            return true;
         // Function logic and other codes inside try block
         return str.trim().length === 0;
     }
     catch (error) {
-        return false;
+        return true;
     }
 }
 exports.isEmpty = isEmpty;

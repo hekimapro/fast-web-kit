@@ -1,5 +1,3 @@
-import { dataType } from "../../types"
-
 /**
  * Check if a given value is an array
  * @param value The value to check
@@ -34,7 +32,7 @@ export const hasDuplicates = (arr: any[]): boolean => hasElements(arr) ? arr.len
  * @param type The data type to compare against
  * @returns true if the array has elements with the same data type, false otherwise
  */
-export const hasSameDataType = <T>(arr: T[], type: dataType): boolean => hasElements(arr) && type ? arr.every(item => type === "array" ? isValid(item) : typeof item === type) : false
+export const hasSameDataType = <T>(arr: T[], type: "string" | "object" | "number" | "null" | "undefined" | "array" | "boolean" | "bigint" | "function" | "symbol"): boolean => hasElements(arr) && type ? arr.every(item => type === "array" ? isValid(item) : typeof item === type) : false
 
 /**
  * Check if a given array has falsy values
@@ -94,7 +92,7 @@ export const removeFalsyElements = (arr: any[]): any[] => hasElements(arr) ? arr
  * @param dataType The data type to search for.
  * @returns An array containing all elements in arr that have the same data type as dataType.
  */
-export const elementsWithSameType = <T>(arr: T[], dataType: dataType): T[] => hasElements(arr) && dataType ? arr.filter((element: any) => dataType === "array" ? isValid(element) : dataType === "null" ? element === null : ((typeof element === dataType) && (element !== null))) : []
+export const elementsWithSameType = <T>(arr: T[], dataType: "string" | "object" | "number" | "null" | "undefined" | "array" | "boolean" | "bigint" | "function" | "symbol"): T[] => hasElements(arr) && dataType ? arr.filter((element: any) => dataType === "array" ? isValid(element) : dataType === "null" ? element === null : ((typeof element === dataType) && (element !== null))) : []
 
 /**
  * Returns an object with the count of all elements in the given array

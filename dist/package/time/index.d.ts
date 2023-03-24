@@ -1,4 +1,4 @@
-import { month, timeUnit } from "../../types";
+type month = "January" | "February" | "March" | "April" | "May" | "June" | "July" | "August" | "September" | "October" | "November" | "December";
 /**
  * Checks whether a given value is a valid date object.
  * @param value The value to check
@@ -86,7 +86,7 @@ export declare function currentTimeInMilliseconds(date?: any): number;
  * @param unit The unit of time (seconds, minutes, hours, or days)
  * @returns The updated date object
  */
-export declare function addTimeToDate(date: any, time: number, unit: timeUnit): Date;
+export declare function addTimeToDate(date: any, time: number, unit: 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks' | 'months' | 'years'): Date;
 /**
  * Returns the week number of a given date.
  * @param date The date
@@ -141,3 +141,4 @@ export declare function convertToDate(dateString: any): Date;
  * @returns {string} A string representing the relative time
  */
 export declare const relativeTime: (date: any) => string;
+export {};

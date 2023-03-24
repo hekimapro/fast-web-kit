@@ -4,7 +4,7 @@
  * @param value - The value to check.
  * @returns Whether the value is a string.
  */
-export declare const isValid: (value: unknown) => boolean;
+export declare const isValid: (value: string) => boolean;
 /**
  * Checks if a provided string is not empty.
  * @param str The string to check.

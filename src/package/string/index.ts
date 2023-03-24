@@ -4,13 +4,13 @@
  * @param value - The value to check.
  * @returns Whether the value is a string.
  */
-export const isValid = (value: unknown): boolean => typeof value === 'string'
+export const isValid = (value: string): boolean => (typeof value === 'string')
 
 /**
  * Checks if a provided string is not empty.
  * @param str The string to check.
  */
-export const isNotEmpty = (str: string): boolean => isValid(str) ? str.trim() !== "" : false
+export const isNotEmpty = (str: string): boolean => isValid(str) ? (str.trim() !== "") : false
 
 /**
  * Converts the provided value to a string.
@@ -162,7 +162,7 @@ export const toCamelCase = (str: string): string => {
             }).replace(/\s+/g, '');
         return ''
     } catch (error) {
-        return ''; 
+        return '';
     }
 }
 
@@ -489,11 +489,11 @@ export function isEmpty(str: string): boolean {
     try {
         // Validate function parameters
         if (typeof str !== 'string')
-            return false
+            return true
 
         // Function logic and other codes inside try block
         return str.trim().length === 0;
     } catch (error) {
-        return false;
+        return true;
     }
 }

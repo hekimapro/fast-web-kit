@@ -1,4 +1,3 @@
-import { timeUnit } from "../../types";
 /**
  * Checks if a given value is a valid number
  * @param number
@@ -283,4 +282,4 @@ export declare const toWord: (currency: number) => string;
  * @param unit The time unit to convert, one of: seconds, minutes, hours, days, weeks, months, years
  * @returns The value converted to milliseconds
  */
-export declare const toMilliseconds: (value: number, unit: timeUnit) => number;
+export declare const toMilliseconds: (value: number, unit: 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks' | 'months' | 'years') => number;

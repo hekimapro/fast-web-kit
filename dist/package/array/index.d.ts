@@ -1,4 +1,3 @@
-import { dataType } from "../../types";
 /**
  * Check if a given value is an array
  * @param value The value to check
@@ -29,7 +28,7 @@ export declare const hasDuplicates: (arr: any[]) => boolean;
  * @param type The data type to compare against
  * @returns true if the array has elements with the same data type, false otherwise
  */
-export declare const hasSameDataType: <T>(arr: T[], type: dataType) => boolean;
+export declare const hasSameDataType: <T>(arr: T[], type: "string" | "object" | "number" | "null" | "undefined" | "array" | "boolean" | "bigint" | "function" | "symbol") => boolean;
 /**
  * Check if a given array has falsy values
  * @param arr The array to check
@@ -70,7 +69,7 @@ export declare const removeFalsyElements: (arr: any[]) => any[];
  * @param dataType The data type to search for.
  * @returns An array containing all elements in arr that have the same data type as dataType.
  */
-export declare const elementsWithSameType: <T>(arr: T[], dataType: dataType) => T[];
+export declare const elementsWithSameType: <T>(arr: T[], dataType: "string" | "object" | "number" | "null" | "undefined" | "array" | "boolean" | "bigint" | "function" | "symbol") => T[];
 /**
  * Returns an object with the count of all elements in the given array
  *

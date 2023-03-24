@@ -1,4 +1,4 @@
-import { month, timeUnit } from "../../types";
+type month = "January" | "February" | "March" | "April" | "May" | "June" | "July" | "August" | "September" | "October" | "November" | "December"
 
 const months: month[] = [
     'January', 'February', 'March', 'April', 'May', 'June',
@@ -232,7 +232,7 @@ export function currentTimeInMilliseconds(date?: any): number {
  * @param unit The unit of time (seconds, minutes, hours, or days)
  * @returns The updated date object
  */
-export function addTimeToDate(date: any, time: number, unit: timeUnit): Date {
+export function addTimeToDate(date: any, time: number, unit: 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks' | 'months' | 'years'): Date {
     try {
         date = convertToDate(date)
         switch (unit) {
