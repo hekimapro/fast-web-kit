@@ -17,7 +17,7 @@
     "skipLibCheck": true,
     "module": "commonjs",
     "lib": [
-      "ES6",
+      "ES2017",
       "dom"
     ],
     "jsx": "react",
