@@ -101,6 +101,19 @@ export declare function getWeekNumber(date: any): number;
  */
 export declare function formatDate(date: any, format?: string): string;
 /**
+ * Returns the datetime in ISO string format localized with some options.
+ * @param option Object that specifies the date and timezoneOffset if provided
+ * @param option.date The date to be converted by default uses the current date
+ * @param option.timezoneOffset Can be true for timezone offset by default it is false
+ * @param option.exactTimezoneOffset Can be true if timezone offset is true and by default it is false. It returns exactly the timezone offset value
+ * @returns ISo format date with based on the local timezone
+ */
+export declare function toISOStringFormat(options?: {
+    date: Date;
+    timezoneOffset: boolean;
+    exactTimezoneOffset: boolean;
+}): string | null;
+/**
  * Parses a string representation of a date into a date object, using a specified format string.
  * @param dateString The string representation of the date to parse
  * @param format The format string to use for parsing the date
