@@ -184,7 +184,7 @@ exports.toCamelCase = toCamelCase;
 const toKebabCase = (str) => {
     try {
         if ((0, exports.isNotEmpty)(str)) {
-            const kebabCase = str.replace(/[^\w\s]/g, '').trim().replace(/\s+/g, '-').toLowerCase();
+            const kebabCase = str.trim().replace(/\s+/g, '-').toLowerCase();
             return kebabCase;
         }
         return '';
@@ -202,9 +202,7 @@ exports.toKebabCase = toKebabCase;
 const toSnakeCase = (str) => {
     try {
         if ((0, exports.isNotEmpty)(str)) {
-            const snakeCase = str.replace(/[^\w\s]/gi, '')
-                .replace(/\s+/g, '_')
-                .toLowerCase();
+            const snakeCase = str.replace(/\s+/g, '_').toLowerCase();
             return snakeCase;
         }
         return '';
