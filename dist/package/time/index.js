@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.relativeTime = exports.convertToDate = exports.isBusinessHours = exports.isWeekend = exports.getAge = exports.parseDate = exports.formatDate = exports.getWeekNumber = exports.addTimeToDate = exports.currentTimeInMilliseconds = exports.currentTime = exports.currentMonth = exports.currentFullDate = exports.currentSecond = exports.currentDate = exports.currentDay = exports.currentYear = exports.currentMinute = exports.currentHour = exports.currentMonthName = exports.daysInMonth = exports.isLeapYear = exports.isToday = exports.isValid = void 0;
+exports.relativeTime = exports.convertToDate = exports.isBusinessHours = exports.isWeekend = exports.getAge = exports.parseDate = exports.toISOStringFormat = exports.formatDate = exports.getWeekNumber = exports.addTimeToDate = exports.currentTimeInMilliseconds = exports.currentTime = exports.currentMonth = exports.currentFullDate = exports.currentSecond = exports.currentDate = exports.currentDay = exports.currentYear = exports.currentMinute = exports.currentHour = exports.currentMonthName = exports.daysInMonth = exports.isLeapYear = exports.isToday = exports.isValid = void 0;
 const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
@@ -318,6 +318,49 @@ function formatDate(date, format = 'YYYY-MM-DD') {
     }
 }
 exports.formatDate = formatDate;
+/**
+ * Returns the datetime in ISO string format localized with some options.
+ * @param option Object that specifies the date and timezoneOffset if provided
+ * @param option.date The date to be converted by default uses the current date
+ * @param option.timezoneOffset Can be true for timezone offset by default it is false
+ * @param option.exactTimezoneOffset Can be true if timezone offset is true and by default it is false. It returns exactly the timezone offset value
+ * @returns ISo format date with based on the local timezone
+ */
+function toISOStringFormat(options = { date: new Date(), timezoneOffset: false, exactTimezoneOffset: false }) {
+    try {
+        var tzo = options.date.getTimezoneOffset(), dif = tzo >= 0 ? '+' : '-', pad = function (num) {
+            return (num < 10 ? '0' : '') + num;
+        };
+        const dateTimeWithOffset = (options === null || options === void 0 ? void 0 : options.date.getFullYear()) +
+            '-' + pad((options === null || options === void 0 ? void 0 : options.date.getMonth()) + 1) +
+            '-' + pad(options === null || options === void 0 ? void 0 : options.date.getDate()) +
+            'T' + pad(options === null || options === void 0 ? void 0 : options.date.getHours()) +
+            ':' + pad(options === null || options === void 0 ? void 0 : options.date.getMinutes()) +
+            ':' + pad(options === null || options === void 0 ? void 0 : options.date.getSeconds()) +
+            dif + pad(Math.floor(Math.abs(tzo) / 60)) +
+            ':' + pad(Math.abs(tzo) % 60);
+        const dateTimeWithExactly = (options === null || options === void 0 ? void 0 : options.date.getFullYear()) +
+            '-' + pad((options === null || options === void 0 ? void 0 : options.date.getMonth()) + 1) +
+            '-' + pad(options === null || options === void 0 ? void 0 : options.date.getDate()) +
+            'T' + pad(options === null || options === void 0 ? void 0 : options.date.getHours()) +
+            ':' + pad(options === null || options === void 0 ? void 0 : options.date.getMinutes()) +
+            ':' + pad(options === null || options === void 0 ? void 0 : options.date.getSeconds()) +
+            tzo;
+        const dateTimeByDefault = (options === null || options === void 0 ? void 0 : options.date.getFullYear()) +
+            '-' + pad((options === null || options === void 0 ? void 0 : options.date.getMonth()) + 1) +
+            '-' + pad(options === null || options === void 0 ? void 0 : options.date.getDate()) +
+            'T' + pad(options === null || options === void 0 ? void 0 : options.date.getHours()) +
+            ':' + pad(options === null || options === void 0 ? void 0 : options.date.getMinutes()) +
+            ':' + pad(options === null || options === void 0 ? void 0 : options.date.getSeconds()) +
+            '.000Z';
+        return (options === null || options === void 0 ? void 0 : options.timezoneOffset) && !options.exactTimezoneOffset ? dateTimeWithOffset :
+            (options === null || options === void 0 ? void 0 : options.timezoneOffset) && options.exactTimezoneOffset ? dateTimeWithExactly : dateTimeByDefault;
+    }
+    catch (_a) {
+        throw new Error("Inputs options must be an object with date of type date, timezoneoffset boolean value and exact timezoneOffset boolean value");
+    }
+}
+exports.toISOStringFormat = toISOStringFormat;
 /**
  * Parses a string representation of a date into a date object, using a specified format string.
  * @param dateString The string representation of the date to parse

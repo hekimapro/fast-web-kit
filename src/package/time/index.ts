@@ -311,6 +311,54 @@ export function formatDate(date: any, format: string = 'YYYY-MM-DD'): string {
 }
 
 /**
+ * Returns the datetime in ISO string format localized with some options.
+ * @param option Object that specifies the date and timezoneOffset if provided
+ * @param option.date The date to be converted by default uses the current date
+ * @param option.timezoneOffset Can be true for timezone offset by default it is false
+ * @param option.exactTimezoneOffset Can be true if timezone offset is true and by default it is false. It returns exactly the timezone offset value
+ * @returns ISo format date with based on the local timezone
+ */
+export function toISOStringFormat(options: { date: Date, timezoneOffset: boolean, exactTimezoneOffset: boolean } = { date: new Date(), timezoneOffset: false, exactTimezoneOffset: false }): string | null {
+    try {
+        var tzo = options.date.getTimezoneOffset(),
+            dif = tzo >= 0 ? '+' : '-',
+            pad = function (num: number) {
+                return (num < 10 ? '0' : '') + num;
+            };
+
+        const dateTimeWithOffset = options?.date.getFullYear() +
+            '-' + pad(options?.date.getMonth() + 1) +
+            '-' + pad(options?.date.getDate()) +
+            'T' + pad(options?.date.getHours()) +
+            ':' + pad(options?.date.getMinutes()) +
+            ':' + pad(options?.date.getSeconds()) +
+            dif + pad(Math.floor(Math.abs(tzo) / 60)) +
+            ':' + pad(Math.abs(tzo) % 60)
+
+        const dateTimeWithExactly = options?.date.getFullYear() +
+            '-' + pad(options?.date.getMonth() + 1) +
+            '-' + pad(options?.date.getDate()) +
+            'T' + pad(options?.date.getHours()) +
+            ':' + pad(options?.date.getMinutes()) +
+            ':' + pad(options?.date.getSeconds()) +
+            tzo
+
+        const dateTimeByDefault = options?.date.getFullYear() +
+            '-' + pad(options?.date.getMonth() + 1) +
+            '-' + pad(options?.date.getDate()) +
+            'T' + pad(options?.date.getHours()) +
+            ':' + pad(options?.date.getMinutes()) +
+            ':' + pad(options?.date.getSeconds()) +
+            '.000Z'
+        return options?.timezoneOffset && !options.exactTimezoneOffset ? dateTimeWithOffset :
+            options?.timezoneOffset && options.exactTimezoneOffset ? dateTimeWithExactly : dateTimeByDefault;
+    } catch {
+        throw new Error("Inputs options must be an object with date of type date, timezoneoffset boolean value and exact timezoneOffset boolean value")
+    }
+
+}
+
+/**
  * Parses a string representation of a date into a date object, using a specified format string.
  * @param dateString The string representation of the date to parse
  * @param format The format string to use for parsing the date
