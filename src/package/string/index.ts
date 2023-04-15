@@ -495,3 +495,32 @@ export function isEmpty(str: string): boolean {
         return true;
     }
 }
+
+/**
+ * This function takes a string of space-separated words and returns an abbreviation
+ * consisting of the first letter of each word.
+ *
+ * @param inputString - The input string containing space-separated words.
+ * @returns The abbreviation consisting of the first letter of each word.
+ * @throws Throws an error if the input string is empty or undefined.
+ */
+export const getAbbreviation = (inputString: string): string => {
+    try {
+
+        // Validate function parameters
+        if (!inputString || inputString.trim() === '')
+            return inputString
+
+        // Split the input string into words
+        const words = inputString.split(' ');
+
+        // Extract the first letter of each word
+        const abbreviation = words.map(word => word.charAt(0)).join('');
+
+        return abbreviation.toUpperCase();
+    } catch (error) {
+        // Handle any errors that occur within the try block
+        return inputString
+    }
+};
+

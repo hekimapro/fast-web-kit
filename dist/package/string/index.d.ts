@@ -172,3 +172,12 @@ export declare function removeCase(str: string, caseType: 'kebab-case' | 'snake_
  * @returns True if the string is empty, false otherwise.
  */
 export declare function isEmpty(str: string): boolean;
+/**
+ * This function takes a string of space-separated words and returns an abbreviation
+ * consisting of the first letter of each word.
+ *
+ * @param inputString - The input string containing space-separated words.
+ * @returns The abbreviation consisting of the first letter of each word.
+ * @throws Throws an error if the input string is empty or undefined.
+ */
+export declare const getAbbreviation: (inputString: string) => string;

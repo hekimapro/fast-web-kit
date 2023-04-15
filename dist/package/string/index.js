@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isEmpty = exports.removeCase = exports.isValidBase64 = exports.isValidJSON = exports.isValidCreditCard = exports.isValidHexColor = exports.isIPAddress = exports.isUpperCase = exports.isLowerCase = exports.isAlphanumeric = exports.hasNumericCharsOnly = exports.hasAlphabeticCharsOnly = exports.toTitleCase = exports.toSnakeCase = exports.toKebabCase = exports.toCamelCase = exports.split = exports.removeWhitespace = exports.truncate = exports.getLength = exports.removeSpecialCharacters = exports.reverse = exports.capitalize = exports.convert = exports.isNotEmpty = exports.isValid = void 0;
+exports.getAbbreviation = exports.isEmpty = exports.removeCase = exports.isValidBase64 = exports.isValidJSON = exports.isValidCreditCard = exports.isValidHexColor = exports.isIPAddress = exports.isUpperCase = exports.isLowerCase = exports.isAlphanumeric = exports.hasNumericCharsOnly = exports.hasAlphabeticCharsOnly = exports.toTitleCase = exports.toSnakeCase = exports.toKebabCase = exports.toCamelCase = exports.split = exports.removeWhitespace = exports.truncate = exports.getLength = exports.removeSpecialCharacters = exports.reverse = exports.capitalize = exports.convert = exports.isNotEmpty = exports.isValid = void 0;
 /**
  * Determines whether a given value is a string.
  *
@@ -507,3 +507,28 @@ function isEmpty(str) {
     }
 }
 exports.isEmpty = isEmpty;
+/**
+ * This function takes a string of space-separated words and returns an abbreviation
+ * consisting of the first letter of each word.
+ *
+ * @param inputString - The input string containing space-separated words.
+ * @returns The abbreviation consisting of the first letter of each word.
+ * @throws Throws an error if the input string is empty or undefined.
+ */
+const getAbbreviation = (inputString) => {
+    try {
+        // Validate function parameters
+        if (!inputString || inputString.trim() === '')
+            return inputString;
+        // Split the input string into words
+        const words = inputString.split(' ');
+        // Extract the first letter of each word
+        const abbreviation = words.map(word => word.charAt(0)).join('');
+        return abbreviation.toUpperCase();
+    }
+    catch (error) {
+        // Handle any errors that occur within the try block
+        return inputString;
+    }
+};
+exports.getAbbreviation = getAbbreviation;
