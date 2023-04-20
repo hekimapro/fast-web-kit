@@ -164,3 +164,10 @@ export declare const removeDuplicates: (arr: any[]) => any[];
  * @returns True if the array is empty, false otherwise.
  */
 export declare const isEmpty: (arr: any[]) => boolean;
+/**
+ * This function takes in two arrays and checks if all elements in the first array are present in the second array.
+ * @param {Array} arr1 - The array to be checked.
+ * @param {Array} arr2 - The array to be checked against.
+ * @returns {boolean} - Returns true if all elements in arr1 are present in arr2, false otherwise.
+ */
+export declare const elementsExist: (arr1: any[], arr2: any[]) => boolean;

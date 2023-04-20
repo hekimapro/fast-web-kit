@@ -383,3 +383,28 @@ export const isEmpty = (arr: any[]): boolean => {
     }
 }
 
+/**
+ * This function takes in two arrays and checks if all elements in the first array are present in the second array.
+ * @param {Array} arr1 - The array to be checked.
+ * @param {Array} arr2 - The array to be checked against.
+ * @returns {boolean} - Returns true if all elements in arr1 are present in arr2, false otherwise.
+ */
+export const elementsExist = (arr1: any[], arr2: any[]): boolean => {
+  try {
+    // Validate function parameters
+    if (!Array.isArray(arr1) || !Array.isArray(arr2)) {
+      return false
+    }
+
+    // Check if all elements in arr1 are present in arr2
+    for (let i = 0; i < arr2.length; i++) {
+      if (!arr1.includes(arr2[i])) {
+        return false;
+      }
+    }
+
+    return true;
+  } catch (error) {
+    return false;
+  }
+};

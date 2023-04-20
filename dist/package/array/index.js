@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isEmpty = exports.removeDuplicates = exports.getElementByIndex = exports.getMiddleElement = exports.getFirstElement = exports.getLastElement = exports.getLength = exports.addElement = exports.copy = exports.sort = exports.computeMathOperation = exports.countOccurrences = exports.countElements = exports.elementsWithSameType = exports.removeFalsyElements = exports.removeElement = exports.getElementIndex = exports.elementExist = exports.hasFalsyValues = exports.hasSameDataType = exports.hasDuplicates = exports.isUnique = exports.hasElements = exports.isValid = void 0;
+exports.elementsExist = exports.isEmpty = exports.removeDuplicates = exports.getElementByIndex = exports.getMiddleElement = exports.getFirstElement = exports.getLastElement = exports.getLength = exports.addElement = exports.copy = exports.sort = exports.computeMathOperation = exports.countOccurrences = exports.countElements = exports.elementsWithSameType = exports.removeFalsyElements = exports.removeElement = exports.getElementIndex = exports.elementExist = exports.hasFalsyValues = exports.hasSameDataType = exports.hasDuplicates = exports.isUnique = exports.hasElements = exports.isValid = void 0;
 /**
  * Check if a given value is an array
  * @param value The value to check
@@ -388,3 +388,28 @@ const isEmpty = (arr) => {
     }
 };
 exports.isEmpty = isEmpty;
+/**
+ * This function takes in two arrays and checks if all elements in the first array are present in the second array.
+ * @param {Array} arr1 - The array to be checked.
+ * @param {Array} arr2 - The array to be checked against.
+ * @returns {boolean} - Returns true if all elements in arr1 are present in arr2, false otherwise.
+ */
+const elementsExist = (arr1, arr2) => {
+    try {
+        // Validate function parameters
+        if (!Array.isArray(arr1) || !Array.isArray(arr2)) {
+            return false;
+        }
+        // Check if all elements in arr1 are present in arr2
+        for (let i = 0; i < arr2.length; i++) {
+            if (!arr1.includes(arr2[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+    catch (error) {
+        return false;
+    }
+};
+exports.elementsExist = elementsExist;
