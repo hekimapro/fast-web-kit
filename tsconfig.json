@@ -17,16 +17,25 @@
     "skipLibCheck": true,
     "module": "commonjs",
     "lib": [
-      "ES2017",
+      "ESNext",
       "dom"
     ],
     "jsx": "react",
-    "sourceMap": false
+    "sourceMap": true
   },
   "include": [
+    "src",
     "src/**/*"
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "target": "esnext",
+  "module": "commonjs",
+  "lib": [
+    "esnext",
+    "dom"
+  ],
+  "allowSyntheticDefaultImports": true,
+  "resolveJsonModule": true
 }
