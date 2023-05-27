@@ -1,25 +1,28 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
     "rootDir": "./src",
-    "moduleResolution": "node",
-    "declaration": true,
     "outDir": "./dist",
-    "removeComments": false,
+    "target": "ES6",
+    "module": "commonjs",
+    "lib": [
+      "ES6"
+    ],
+    "jsx": "react-native",
+    "declaration": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitAny": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "allowUnreachableCode": false,
-    "skipLibCheck": true,
-    "lib": ["ESNext", "dom"],
-    "jsx": "react"
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"],
-  "resolveJsonModule": true,
-  "allowSyntheticDefaultImports": true
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

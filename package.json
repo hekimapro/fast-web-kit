@@ -1,6 +1,6 @@
 {
   "name": "fast-web-kit",
-  "version": "0.6.2",
+  "version": "0.6.7",
   "description": "Fast-web-Kit is a collection of utilities and functions that simplify common development tasks, allowing developers to write applications more quickly and efficiently. Lightweight, easy to use, and flexible, Fast-web-Kit helps save time and reduce development costs for beginners and experienced developers alike.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
