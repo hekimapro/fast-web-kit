@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.relativeTime = exports.convertToDate = exports.isBusinessHours = exports.isWeekend = exports.getAge = exports.parseDate = exports.toISOStringFormat = exports.formatDate = exports.getWeekNumber = exports.addTimeToDate = exports.currentTimeInMilliseconds = exports.currentTime = exports.currentMonth = exports.currentFullDate = exports.currentSecond = exports.currentDate = exports.currentDay = exports.currentYear = exports.currentMinute = exports.currentHour = exports.currentMonthName = exports.daysInMonth = exports.isLeapYear = exports.isToday = exports.isValid = void 0;
 const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
@@ -10,7 +7,7 @@ const months = [
  * @param value The value to check
  * @returns True if the value is a valid date object, false otherwise
  */
-function isValid(value) {
+export function isValid(value) {
     try {
         return value instanceof Date && !isNaN(value.getTime());
     }
@@ -18,45 +15,42 @@ function isValid(value) {
         return false;
     }
 }
-exports.isValid = isValid;
 /**
  * Checks if the given date is today.
  * @param date - The date to check.
  * @returns Returns `true` if the given date is today, else `false`.
  */
-function isToday(date) {
+export function isToday(date) {
     try {
         const today = new Date();
         return date.getDate() === today.getDate()
             && date.getMonth() === today.getMonth()
             && date.getFullYear() === today.getFullYear();
     }
-    catch (_a) {
+    catch {
         return false;
     }
 }
-exports.isToday = isToday;
 /**
 * Checks if the given year is a leap year.
 * @param year - The year to check.
 * @returns Returns `true` if the given year is a leap year, else `false`.
 */
-function isLeapYear(year) {
+export function isLeapYear(year) {
     try {
         return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
     }
-    catch (_a) {
+    catch {
         return false;
     }
 }
-exports.isLeapYear = isLeapYear;
 /**
  * Returns the number of days in the given month and year.
  * @param month - The month number (0-11) or name ("January", "February", etc.).
  * @param year - The year in the Gregorian calendar.
  * @returns The number of days in the given month and year.
  */
-function daysInMonth(month, year) {
+export function daysInMonth(month, year) {
     try {
         let date = new Date();
         if (month && year)
@@ -65,16 +59,15 @@ function daysInMonth(month, year) {
         date.setDate(date.getDate() - 1);
         return date.getDate();
     }
-    catch (_a) {
+    catch {
         return -1;
     }
 }
-exports.daysInMonth = daysInMonth;
 /**
  * Returns the name of the current month.
  * @returns {string} The name of the current month.
  */
-function currentMonthName() {
+export function currentMonthName() {
     try {
         const currentDate = new Date();
         const currentMonth = months[currentDate.getMonth()];
@@ -84,12 +77,11 @@ function currentMonthName() {
         return "";
     }
 }
-exports.currentMonthName = currentMonthName;
 /**
  * Returns the current hour as a number (0-23)
  * @returns {number} The current hour as a number
  */
-function currentHour(date) {
+export function currentHour(date) {
     try {
         const now = date ? convertToDate(date) : new Date();
         return now.getHours();
@@ -98,12 +90,11 @@ function currentHour(date) {
         return NaN;
     }
 }
-exports.currentHour = currentHour;
 /**
  * Returns the current minute as a number (0-59)
  * @returns {number} The current minute as a number
  */
-function currentMinute(date) {
+export function currentMinute(date) {
     try {
         const now = date ? convertToDate(date) : new Date();
         return now.getMinutes();
@@ -112,12 +103,11 @@ function currentMinute(date) {
         return NaN;
     }
 }
-exports.currentMinute = currentMinute;
 /**
  * Returns the current year as a number
  * @returns {number} The current minute as a number
  */
-function currentYear(date) {
+export function currentYear(date) {
     try {
         const now = date ? convertToDate(date) : new Date();
         return now.getFullYear();
@@ -126,12 +116,11 @@ function currentYear(date) {
         return NaN;
     }
 }
-exports.currentYear = currentYear;
 /**
  * Returns the current day as a number
  * @returns {number} The current minute as a number
  */
-function currentDay(date) {
+export function currentDay(date) {
     try {
         const now = date ? convertToDate(date) : new Date();
         return now.getDay();
@@ -140,12 +129,11 @@ function currentDay(date) {
         return NaN;
     }
 }
-exports.currentDay = currentDay;
 /**
  * Returns the current date as a number (1-31)
  * @returns {number} The current minute as a number
  */
-function currentDate(date) {
+export function currentDate(date) {
     try {
         const now = date ? convertToDate(date) : new Date();
         return now.getDate();
@@ -154,12 +142,11 @@ function currentDate(date) {
         return NaN;
     }
 }
-exports.currentDate = currentDate;
 /**
  * Returns the current second as a number (0-59)
  * @returns {number} The current second as a number
  */
-function currentSecond(date) {
+export function currentSecond(date) {
     try {
         const now = date ? convertToDate(date) : new Date();
         return now.getSeconds();
@@ -168,12 +155,11 @@ function currentSecond(date) {
         return NaN;
     }
 }
-exports.currentSecond = currentSecond;
 /**
  * Returns the current date in "YYYY-MM-DD" format.
  * @returns {string} The current date in "YYYY-MM-DD" format.
  */
-function currentFullDate(date) {
+export function currentFullDate(date) {
     try {
         const now = date ? convertToDate(date) : new Date();
         const year = now.getFullYear();
@@ -187,12 +173,11 @@ function currentFullDate(date) {
         return "";
     }
 }
-exports.currentFullDate = currentFullDate;
 /**
  * Returns the current month as a number (1-12).
  *
  */
-function currentMonth(date) {
+export function currentMonth(date) {
     try {
         const now = date ? convertToDate(date) : new Date();
         return now.getMonth() + 1;
@@ -201,12 +186,11 @@ function currentMonth(date) {
         return NaN;
     }
 }
-exports.currentMonth = currentMonth;
 /**
  * Returns the current time in the format `HH:MM:SS`.
  *
  */
-function currentTime(date) {
+export function currentTime(date) {
     try {
         const now = date ? convertToDate(date) : new Date();
         const hours = now.getHours().toString().padStart(2, '0');
@@ -218,11 +202,10 @@ function currentTime(date) {
         return "";
     }
 }
-exports.currentTime = currentTime;
 /**
  * Returns the current time in milliseconds.
  */
-function currentTimeInMilliseconds(date) {
+export function currentTimeInMilliseconds(date) {
     try {
         const now = date ? convertToDate(date) : new Date();
         return now.getTime();
@@ -231,7 +214,6 @@ function currentTimeInMilliseconds(date) {
         return NaN;
     }
 }
-exports.currentTimeInMilliseconds = currentTimeInMilliseconds;
 /**
  * Adds a specified amount of time to a given date object
  * based on a specified time unit.
@@ -240,7 +222,7 @@ exports.currentTimeInMilliseconds = currentTimeInMilliseconds;
  * @param unit The unit of time (seconds, minutes, hours, or days)
  * @returns The updated date object
  */
-function addTimeToDate(date, time, unit) {
+export function addTimeToDate(date, time, unit) {
     try {
         date = convertToDate(date);
         switch (unit) {
@@ -270,13 +252,12 @@ function addTimeToDate(date, time, unit) {
         return date;
     }
 }
-exports.addTimeToDate = addTimeToDate;
 /**
  * Returns the week number of a given date.
  * @param date The date
  * @returns The week number
  */
-function getWeekNumber(date) {
+export function getWeekNumber(date) {
     try {
         date = convertToDate(date);
         const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
@@ -287,14 +268,13 @@ function getWeekNumber(date) {
         return -1;
     }
 }
-exports.getWeekNumber = getWeekNumber;
 /**
  * Formats a given date object into a string representation, using a specified format string.
  * @param date The date object
  * @param format The format string (default is 'YYYY-MM-DD')
  * @returns The formatted date string
  */
-function formatDate(date, format = 'YYYY-MM-DD') {
+export function formatDate(date, format = 'YYYY-MM-DD') {
     try {
         date = convertToDate(date);
         const year = date.getFullYear();
@@ -317,7 +297,6 @@ function formatDate(date, format = 'YYYY-MM-DD') {
         return '';
     }
 }
-exports.formatDate = formatDate;
 /**
  * Returns the datetime in ISO string format localized with some options.
  * @param option Object that specifies the date and timezoneOffset if provided
@@ -326,48 +305,47 @@ exports.formatDate = formatDate;
  * @param option.exactTimezoneOffset Can be true if timezone offset is true and by default it is false. It returns exactly the timezone offset value
  * @returns ISo format date with based on the local timezone
  */
-function toISOStringFormat(options = { date: new Date(), timezoneOffset: false, exactTimezoneOffset: false }) {
+export function toISOStringFormat(options = { date: new Date(), timezoneOffset: false, exactTimezoneOffset: false }) {
     try {
         var tzo = options.date.getTimezoneOffset(), dif = tzo >= 0 ? '+' : '-', pad = function (num) {
             return (num < 10 ? '0' : '') + num;
         };
-        const dateTimeWithOffset = (options === null || options === void 0 ? void 0 : options.date.getFullYear()) +
-            '-' + pad((options === null || options === void 0 ? void 0 : options.date.getMonth()) + 1) +
-            '-' + pad(options === null || options === void 0 ? void 0 : options.date.getDate()) +
-            'T' + pad(options === null || options === void 0 ? void 0 : options.date.getHours()) +
-            ':' + pad(options === null || options === void 0 ? void 0 : options.date.getMinutes()) +
-            ':' + pad(options === null || options === void 0 ? void 0 : options.date.getSeconds()) +
+        const dateTimeWithOffset = options?.date.getFullYear() +
+            '-' + pad(options?.date.getMonth() + 1) +
+            '-' + pad(options?.date.getDate()) +
+            'T' + pad(options?.date.getHours()) +
+            ':' + pad(options?.date.getMinutes()) +
+            ':' + pad(options?.date.getSeconds()) +
             dif + pad(Math.floor(Math.abs(tzo) / 60)) +
             ':' + pad(Math.abs(tzo) % 60);
-        const dateTimeWithExactly = (options === null || options === void 0 ? void 0 : options.date.getFullYear()) +
-            '-' + pad((options === null || options === void 0 ? void 0 : options.date.getMonth()) + 1) +
-            '-' + pad(options === null || options === void 0 ? void 0 : options.date.getDate()) +
-            'T' + pad(options === null || options === void 0 ? void 0 : options.date.getHours()) +
-            ':' + pad(options === null || options === void 0 ? void 0 : options.date.getMinutes()) +
-            ':' + pad(options === null || options === void 0 ? void 0 : options.date.getSeconds()) +
+        const dateTimeWithExactly = options?.date.getFullYear() +
+            '-' + pad(options?.date.getMonth() + 1) +
+            '-' + pad(options?.date.getDate()) +
+            'T' + pad(options?.date.getHours()) +
+            ':' + pad(options?.date.getMinutes()) +
+            ':' + pad(options?.date.getSeconds()) +
             tzo;
-        const dateTimeByDefault = (options === null || options === void 0 ? void 0 : options.date.getFullYear()) +
-            '-' + pad((options === null || options === void 0 ? void 0 : options.date.getMonth()) + 1) +
-            '-' + pad(options === null || options === void 0 ? void 0 : options.date.getDate()) +
-            'T' + pad(options === null || options === void 0 ? void 0 : options.date.getHours()) +
-            ':' + pad(options === null || options === void 0 ? void 0 : options.date.getMinutes()) +
-            ':' + pad(options === null || options === void 0 ? void 0 : options.date.getSeconds()) +
+        const dateTimeByDefault = options?.date.getFullYear() +
+            '-' + pad(options?.date.getMonth() + 1) +
+            '-' + pad(options?.date.getDate()) +
+            'T' + pad(options?.date.getHours()) +
+            ':' + pad(options?.date.getMinutes()) +
+            ':' + pad(options?.date.getSeconds()) +
             '.000Z';
-        return (options === null || options === void 0 ? void 0 : options.timezoneOffset) && !options.exactTimezoneOffset ? dateTimeWithOffset :
-            (options === null || options === void 0 ? void 0 : options.timezoneOffset) && options.exactTimezoneOffset ? dateTimeWithExactly : dateTimeByDefault;
+        return options?.timezoneOffset && !options.exactTimezoneOffset ? dateTimeWithOffset :
+            options?.timezoneOffset && options.exactTimezoneOffset ? dateTimeWithExactly : dateTimeByDefault;
     }
-    catch (_a) {
+    catch {
         throw new Error("Inputs options must be an object with date of type date, timezoneoffset boolean value and exact timezoneOffset boolean value");
     }
 }
-exports.toISOStringFormat = toISOStringFormat;
 /**
  * Parses a string representation of a date into a date object, using a specified format string.
  * @param dateString The string representation of the date to parse
  * @param format The format string to use for parsing the date
  * @returns A date object representing the parsed date, or null if the parsing fails
  */
-function parseDate(dateString, format) {
+export function parseDate(dateString, format) {
     try {
         const parts = dateString.match(/(\d+)/g);
         if (!parts || parts.length < 3) {
@@ -386,14 +364,13 @@ function parseDate(dateString, format) {
         return null;
     }
 }
-exports.parseDate = parseDate;
 /**
  * Calculates the age of a person based on their birthdate and a reference date.
  * @param birthdate The birthdate of the person
  * @param referenceDate The reference date to calculate the age from (defaults to the current date)
  * @returns The age of the person in years, or -1 if the calculation fails
  */
-function getAge(birthdate, referenceDate = new Date()) {
+export function getAge(birthdate, referenceDate = new Date()) {
     try {
         birthdate = convertToDate(birthdate);
         referenceDate = convertToDate(referenceDate);
@@ -405,13 +382,12 @@ function getAge(birthdate, referenceDate = new Date()) {
         return -1;
     }
 }
-exports.getAge = getAge;
 /**
  * Checks whether a given date falls on a weekend (i.e. a Saturday or Sunday).
  * @param date The date to check
  * @returns True if the date falls on a weekend, false otherwise
  */
-function isWeekend(date) {
+export function isWeekend(date) {
     try {
         date = convertToDate(date);
         const dayOfWeek = date.getDay();
@@ -421,13 +397,12 @@ function isWeekend(date) {
         return false;
     }
 }
-exports.isWeekend = isWeekend;
 /**
 * Checks whether a given time falls within business hours (9am-5pm, Monday-Friday).
 * @param date The date and time to check
 * @returns True if the time falls within business hours, false otherwise
 */
-function isBusinessHours(date) {
+export function isBusinessHours(date) {
     try {
         date = convertToDate(date);
         const dayOfWeek = date.getDay();
@@ -438,14 +413,13 @@ function isBusinessHours(date) {
         return false;
     }
 }
-exports.isBusinessHours = isBusinessHours;
 /**
  * Converts a string representation of a date and time into a Date object.
  * @param dateString The string representation of the date and time to convert
  * @param format The format string to use for parsing the date (defaults to 'YYYY-MM-DDTHH:mm:ssZ')
  * @returns A Date object representing the parsed date and time, or null if the parsing fails
  */
-function convertToDate(dateString) {
+export function convertToDate(dateString) {
     try {
         return new Date(dateString);
     }
@@ -454,7 +428,6 @@ function convertToDate(dateString) {
         ;
     }
 }
-exports.convertToDate = convertToDate;
 /**
  * Returns a relative time according to a provided date
  *
@@ -462,7 +435,7 @@ exports.convertToDate = convertToDate;
  *
  * @returns {string} A string representing the relative time
  */
-const relativeTime = (date) => {
+export const relativeTime = (date) => {
     try {
         date = convertToDate(date);
         const currentDate = new Date();
@@ -496,5 +469,3 @@ const relativeTime = (date) => {
         return "";
     }
 };
-exports.relativeTime = relativeTime;
-//# sourceMappingURL=index.js.map

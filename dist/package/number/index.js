@@ -1,48 +1,38 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.toMilliseconds = exports.toWord = exports.toShortForm = exports.generateRandomNumber = exports.leastCommonMultiple = exports.greatestCommonDivisor = exports.isPerfectSquare = exports.isPowerOfTwo = exports.factorial = exports.isPrime = exports.standardDeviation = exports.average = exports.sum = exports.max = exports.min = exports.random = exports.floor = exports.ceil = exports.round = exports.power = exports.divide = exports.multiply = exports.subtract = exports.add = exports.isDivisibleBy = exports.isMultipleOf = exports.isOdd = exports.isEven = exports.randomInteger = exports.clamp = exports.degreeToRadian = exports.radianToDegree = exports.randomFloat = exports.fibonacci = exports.toOrdinal = exports.percent = exports.formatNumber = exports.isNegativeInteger = exports.isPositiveInteger = exports.isZero = exports.isNegative = exports.isPositive = exports.isInteger = exports.isValid = void 0;
 /**
  * Checks if a given value is a valid number
  * @param number
  */
-const isValid = (number) => typeof number === "number" && !isNaN(number);
-exports.isValid = isValid;
+export const isValid = (number) => typeof number === "number" && !isNaN(number);
 /**
  * Checks if a given value is a valid integer
  * @param integer
  */
-const isInteger = (integer) => (0, exports.isValid)(integer) ? Number.isInteger(integer) : false;
-exports.isInteger = isInteger;
+export const isInteger = (integer) => isValid(integer) ? Number.isInteger(integer) : false;
 /**
  * Checks if a given number is positive
  * @param number
  */
-const isPositive = (number) => (0, exports.isValid)(number) ? number > 0 : false;
-exports.isPositive = isPositive;
+export const isPositive = (number) => isValid(number) ? number > 0 : false;
 /**
  * Checks if a given number is negative
  * @param number
  */
-const isNegative = (number) => (0, exports.isValid)(number) ? number < 0 : false;
-exports.isNegative = isNegative;
+export const isNegative = (number) => isValid(number) ? number < 0 : false;
 /**
  * Check if a given number is zero
  * @param number
  */
-const isZero = (number) => (0, exports.isValid)(number) ? number === 0 : false;
-exports.isZero = isZero;
+export const isZero = (number) => isValid(number) ? number === 0 : false;
 /**
  * Checks if a given  value is a positive integer
  * @param number
  */
-const isPositiveInteger = (number) => (0, exports.isInteger)(number) ? number > 0 : false;
-exports.isPositiveInteger = isPositiveInteger;
+export const isPositiveInteger = (number) => isInteger(number) ? number > 0 : false;
 /**
  * Checks if a given value is a negative integer
  * @param number
  */
-const isNegativeInteger = (number) => (0, exports.isInteger)(number) ? number < 0 : false;
-exports.isNegativeInteger = isNegativeInteger;
+export const isNegativeInteger = (number) => isInteger(number) ? number < 0 : false;
 /**
  * Formats a number with specified decimal points and separator.
  * @param num The number to format.
@@ -50,7 +40,7 @@ exports.isNegativeInteger = isNegativeInteger;
  * @param separator The separator to use between thousands. Defaults to ",".
  * @returns The formatted number as a string.
  */
-function formatNumber(num, decimalPoints = 2, separator = ',') {
+export function formatNumber(num, decimalPoints = 2, separator = ',') {
     try {
         return num.toFixed(decimalPoints).replace(/\B(?=(\d{3})+(?!\d))/g, separator);
     }
@@ -58,14 +48,13 @@ function formatNumber(num, decimalPoints = 2, separator = ',') {
         return num.toString();
     }
 }
-exports.formatNumber = formatNumber;
 /**
  * Converts a decimal number to a percentage value with specified decimal points.
  * @param num The number to convert to percentage.
  * @param decimalPoints The number of decimal points to include. Defaults to 2.
  * @returns The percentage value as a string with percent sign.
  */
-function percent(num, decimalPoints = 2) {
+export function percent(num, decimalPoints = 2) {
     try {
         return (num * 100).toFixed(decimalPoints) + '%';
     }
@@ -73,13 +62,12 @@ function percent(num, decimalPoints = 2) {
         return num.toString();
     }
 }
-exports.percent = percent;
 /**
  * Converts a number to its ordinal representation.
  * @param num The number to convert to ordinal representation.
  * @returns The ordinal representation of the number.
  */
-function toOrdinal(num) {
+export function toOrdinal(num) {
     try {
         const suffixes = ['th', 'st', 'nd', 'rd'];
         const suffix = num % 100 > 10 && num % 100 < 14 ? suffixes[0] : suffixes[num % 10] || suffixes[0];
@@ -89,13 +77,12 @@ function toOrdinal(num) {
         return num.toString();
     }
 }
-exports.toOrdinal = toOrdinal;
 /**
  * Generates the nth number in the Fibonacci sequence.
  * @param n - The index of the number to generate (starting from 0).
  * @returns The nth number in the Fibonacci sequence.
  */
-function fibonacci(n) {
+export function fibonacci(n) {
     try {
         if (n < 0) {
             return NaN;
@@ -116,14 +103,13 @@ function fibonacci(n) {
         return NaN;
     }
 }
-exports.fibonacci = fibonacci;
 /**
  * Generates a random float number between the given minimum and maximum values (inclusive of both).
  * @param min The minimum value.
  * @param max The maximum value.
  * @returns A random float number between the given minimum and maximum values.
  */
-const randomFloat = (min, max) => {
+export const randomFloat = (min, max) => {
     try {
         return Math.random() * (max - min) + min;
     }
@@ -131,13 +117,12 @@ const randomFloat = (min, max) => {
         return NaN;
     }
 };
-exports.randomFloat = randomFloat;
 /**
  * Converts the given angle in radians to degrees.
  * @param radians The angle in radians.
  * @returns The angle in degrees.
  */
-const radianToDegree = (radians) => {
+export const radianToDegree = (radians) => {
     try {
         return radians * (180 / Math.PI);
     }
@@ -145,13 +130,12 @@ const radianToDegree = (radians) => {
         return NaN;
     }
 };
-exports.radianToDegree = radianToDegree;
 /**
  * Converts the given angle in degrees to radians.
  * @param degrees The angle in degrees.
  * @returns The angle in radians.
  */
-const degreeToRadian = (degrees) => {
+export const degreeToRadian = (degrees) => {
     try {
         return degrees * (Math.PI / 180);
     }
@@ -159,7 +143,6 @@ const degreeToRadian = (degrees) => {
         return NaN;
     }
 };
-exports.degreeToRadian = degreeToRadian;
 /**
  * Clamps a number within the given range.
  *
@@ -169,7 +152,7 @@ exports.degreeToRadian = degreeToRadian;
  *
  * @returns The clamped number.
  */
-const clamp = (num, min, max) => {
+export const clamp = (num, min, max) => {
     try {
         return Math.min(Math.max(num, min), max);
     }
@@ -177,7 +160,6 @@ const clamp = (num, min, max) => {
         return num;
     }
 };
-exports.clamp = clamp;
 /**
  * Generates a random integer between the given minimum and maximum values (inclusive).
  *
@@ -186,7 +168,7 @@ exports.clamp = clamp;
  *
  * @returns The randomly generated integer.
  */
-const randomInteger = (min, max) => {
+export const randomInteger = (min, max) => {
     try {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -194,13 +176,12 @@ const randomInteger = (min, max) => {
         return 0;
     }
 };
-exports.randomInteger = randomInteger;
 /**
  * Checks if a number is even.
  * @param n - The number to check.
  * @returns `true` if the number is even, `false` otherwise.
  */
-function isEven(n) {
+export function isEven(n) {
     try {
         return n % 2 === 0;
     }
@@ -208,13 +189,12 @@ function isEven(n) {
         return false;
     }
 }
-exports.isEven = isEven;
 /**
 * Checks if a number is odd.
 * @param n - The number to check.
 * @returns `true` if the number is odd, `false` otherwise.
 */
-function isOdd(n) {
+export function isOdd(n) {
     try {
         return n % 2 !== 0;
     }
@@ -222,14 +202,13 @@ function isOdd(n) {
         return false;
     }
 }
-exports.isOdd = isOdd;
 /**
 * Checks if a number is a multiple of another number.
 * @param n - The number to check.
 * @param multiple - The number to check if `n` is a multiple of.
 * @returns `true` if `n` is a multiple of `multiple`, `false` otherwise.
 */
-function isMultipleOf(n, multiple) {
+export function isMultipleOf(n, multiple) {
     try {
         return n % multiple === 0;
     }
@@ -237,14 +216,13 @@ function isMultipleOf(n, multiple) {
         return false;
     }
 }
-exports.isMultipleOf = isMultipleOf;
 /**
 * Checks if a number is divisible by another number.
 * @param n - The number to check.
 * @param divisor - The number to check if `n` is divisible by.
 * @returns `true` if `n` is divisible by `divisor`, `false` otherwise.
 */
-function isDivisibleBy(n, divisor) {
+export function isDivisibleBy(n, divisor) {
     try {
         return divisor % n === 0;
     }
@@ -252,13 +230,12 @@ function isDivisibleBy(n, divisor) {
         return false;
     }
 }
-exports.isDivisibleBy = isDivisibleBy;
 /**
  * Adds two or more numbers together.
  * @param numbers The numbers to be added.
  * @returns The sum of the numbers.
  */
-const add = (...numbers) => {
+export const add = (...numbers) => {
     try {
         return numbers.reduce((acc, val) => acc + val);
     }
@@ -266,14 +243,13 @@ const add = (...numbers) => {
         return 0;
     }
 };
-exports.add = add;
 /**
  * Subtracts one number from another.
  * @param a The number to subtract from.
  * @param b The number to subtract.
  * @returns The difference between the two numbers.
  */
-const subtract = (a, b) => {
+export const subtract = (a, b) => {
     try {
         return a - b;
     }
@@ -281,13 +257,12 @@ const subtract = (a, b) => {
         return 0;
     }
 };
-exports.subtract = subtract;
 /**
  * Multiplies two or more numbers together.
  * @param numbers The numbers to be multiplied.
  * @returns The product of the numbers.
  */
-const multiply = (...numbers) => {
+export const multiply = (...numbers) => {
     try {
         return numbers.reduce((acc, val) => acc * val);
     }
@@ -295,14 +270,13 @@ const multiply = (...numbers) => {
         return 0;
     }
 };
-exports.multiply = multiply;
 /**
  * Divides one number by another.
  * @param a The number to divide.
  * @param b The number to divide by.
  * @returns The quotient of the two numbers.
  */
-const divide = (a, b) => {
+export const divide = (a, b) => {
     try {
         return a / b;
     }
@@ -310,14 +284,13 @@ const divide = (a, b) => {
         return 0;
     }
 };
-exports.divide = divide;
 /**
  * Raises a number to the power of another.
  * @param base The base number.
  * @param exponent The exponent.
  * @returns The base number raised to the power of the exponent.
  */
-const power = (base, exponent) => {
+export const power = (base, exponent) => {
     try {
         return Math.pow(base, exponent);
     }
@@ -325,13 +298,12 @@ const power = (base, exponent) => {
         return 0;
     }
 };
-exports.power = power;
 /**
  * Rounds a number to the nearest integer.
  * @param number The number to round.
  * @returns The nearest integer to the input number.
  */
-const round = (number) => {
+export const round = (number) => {
     try {
         return Math.round(number);
     }
@@ -339,13 +311,12 @@ const round = (number) => {
         return 0;
     }
 };
-exports.round = round;
 /**
  * Returns the smallest integer greater than or equal to a number.
  * @param number The number to round up.
  * @returns The smallest integer greater than or equal to the input number.
  */
-const ceil = (number) => {
+export const ceil = (number) => {
     try {
         return Math.ceil(number);
     }
@@ -353,13 +324,12 @@ const ceil = (number) => {
         return 0;
     }
 };
-exports.ceil = ceil;
 /**
  * Returns the largest integer less than or equal to a number.
  * @param number The number to round down.
  * @returns The largest integer less than or equal to the input number.
  */
-const floor = (number) => {
+export const floor = (number) => {
     try {
         return Math.floor(number);
     }
@@ -367,12 +337,11 @@ const floor = (number) => {
         return 0;
     }
 };
-exports.floor = floor;
 /**
  * Generates a random number between 0 and 1.
  * @returns A random number between 0 and 1.
  */
-const random = () => {
+export const random = () => {
     try {
         return Math.random();
     }
@@ -380,14 +349,13 @@ const random = () => {
         return 0;
     }
 };
-exports.random = random;
 /**
  * Returns the smallest number in an array of numbers
  *
  * @param arr An array of numbers
  * @returns The smallest number in the array
  */
-function min(arr) {
+export function min(arr) {
     try {
         if (!Array.isArray(arr)) {
             return 0;
@@ -406,14 +374,13 @@ function min(arr) {
         return 0;
     }
 }
-exports.min = min;
 /**
 * Returns the largest number in an array of numbers
 *
 * @param arr An array of numbers
 * @returns The largest number in the array
 */
-function max(arr) {
+export function max(arr) {
     try {
         if (!Array.isArray(arr)) {
             return 0;
@@ -432,14 +399,13 @@ function max(arr) {
         return 0;
     }
 }
-exports.max = max;
 /**
 * Returns the sum of an array of numbers
 *
 * @param arr An array of numbers
 * @returns The sum of the numbers in the array
 */
-function sum(arr) {
+export function sum(arr) {
     try {
         let total = 0;
         for (let i = 0; i < arr.length; i++) {
@@ -454,14 +420,13 @@ function sum(arr) {
         return 0;
     }
 }
-exports.sum = sum;
 /**
 * Returns the average of an array of numbers
 *
 * @param arr An array of numbers
 * @returns The average of the numbers in the array
 */
-function average(arr) {
+export function average(arr) {
     try {
         let total = 0;
         for (let i = 0; i < arr.length; i++) {
@@ -476,29 +441,27 @@ function average(arr) {
         return 0;
     }
 }
-exports.average = average;
 /**
  * Returns the standard deviation of an array of numbers.
  * @param arr Array of numbers
  * @returns The standard deviation of the array
  */
-const standardDeviation = (arr) => {
+export const standardDeviation = (arr) => {
     try {
         const mean = average(arr);
-        const variance = arr.reduce((acc, curr) => acc + Math.pow((curr - mean), 2), 0) / arr.length;
+        const variance = arr.reduce((acc, curr) => acc + (curr - mean) ** 2, 0) / arr.length;
         return Math.sqrt(variance);
     }
     catch (error) {
         return 0;
     }
 };
-exports.standardDeviation = standardDeviation;
 /**
  * Checks if a given number is prime or not.
  * @param n The number to be checked.
  * @returns True if the number is prime, false otherwise.
  */
-function isPrime(n) {
+export function isPrime(n) {
     try {
         if (n <= 1) {
             return false;
@@ -516,13 +479,12 @@ function isPrime(n) {
         return false;
     }
 }
-exports.isPrime = isPrime;
 /**
 * Returns the factorial of a given number.
 * @param n The number to find the factorial of.
 * @returns The factorial of the given number.
 */
-function factorial(n) {
+export function factorial(n) {
     try {
         let result = 1;
         // Multiply all numbers from 1 to n.
@@ -535,13 +497,12 @@ function factorial(n) {
         return NaN;
     }
 }
-exports.factorial = factorial;
 /**
 * Checks if a given number is a power of two or not.
 * @param n The number to be checked.
 * @returns True if the number is a power of two, false otherwise.
 */
-function isPowerOfTwo(n) {
+export function isPowerOfTwo(n) {
     try {
         if (n <= 0) {
             return false;
@@ -557,13 +518,12 @@ function isPowerOfTwo(n) {
         return false;
     }
 }
-exports.isPowerOfTwo = isPowerOfTwo;
 /**
 * Checks if a given number is a perfect square or not.
 * @param n The number to be checked.
 * @returns True if the number is a perfect square, false otherwise.
 */
-function isPerfectSquare(n) {
+export function isPerfectSquare(n) {
     try {
         if (n < 0) {
             return false;
@@ -576,14 +536,13 @@ function isPerfectSquare(n) {
         return false;
     }
 }
-exports.isPerfectSquare = isPerfectSquare;
 /**
 * Returns the greatest common divisor of two given numbers.
 * @param a The first number.
 * @param b The second number.
 * @returns The greatest common divisor of the two numbers.
 */
-function greatestCommonDivisor(a, b) {
+export function greatestCommonDivisor(a, b) {
     try {
         // Use Euclid's algorithm to find the GCD.
         while (b !== 0) {
@@ -597,7 +556,6 @@ function greatestCommonDivisor(a, b) {
         return NaN;
     }
 }
-exports.greatestCommonDivisor = greatestCommonDivisor;
 /**
 * Returns the least common multiple (LCM) of two numbers.
 *
@@ -605,7 +563,7 @@ exports.greatestCommonDivisor = greatestCommonDivisor;
 * @param num2 The second number.
 * @returns The LCM of num1 and num2.
 */
-function leastCommonMultiple(num1, num2) {
+export function leastCommonMultiple(num1, num2) {
     try {
         // Find the greater and lesser numbers
         let greaterNum = Math.max(num1, num2);
@@ -618,7 +576,6 @@ function leastCommonMultiple(num1, num2) {
         return 0;
     }
 }
-exports.leastCommonMultiple = leastCommonMultiple;
 /**
  * Generates a random number between the specified minimum and maximum values (inclusive).
  *
@@ -626,7 +583,7 @@ exports.leastCommonMultiple = leastCommonMultiple;
  * @param max The maximum value for the random number.
  * @returns A random number between min and max.
  */
-function generateRandomNumber(min, max) {
+export function generateRandomNumber(min, max) {
     try {
         // Generate a random number between min and max
         return Math.floor(Math.random() * (max - min + 1) + min);
@@ -635,7 +592,6 @@ function generateRandomNumber(min, max) {
         return 0;
     }
 }
-exports.generateRandomNumber = generateRandomNumber;
 /**
  * Returns a number in short form with a suffix (k, m, b, t)
  *
@@ -643,7 +599,7 @@ exports.generateRandomNumber = generateRandomNumber;
  *
  * @returns {string} A string representing the number in short form with suffix
  */
-const toShortForm = (number, upperCaseLetter) => {
+export const toShortForm = (number, upperCaseLetter) => {
     try {
         let abbrevValue = number;
         let suffix = "";
@@ -672,14 +628,13 @@ const toShortForm = (number, upperCaseLetter) => {
         return "";
     }
 };
-exports.toShortForm = toShortForm;
 /**
  * Converts a number to its equivalent word representation.
  *
  * @param currency - The number to be converted to word representation. Must be a finite number within the range of (-10^33 to 10^33).
  * @returns The word representation of the input number.
  */
-const toWord = (currency) => {
+export const toWord = (currency) => {
     try {
         let words = "";
         const ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
@@ -739,14 +694,13 @@ const toWord = (currency) => {
         return "";
     }
 };
-exports.toWord = toWord;
 /**
  * Converts a number and time unit to milliseconds
  * @param value The numerical value to convert
  * @param unit The time unit to convert, one of: seconds, minutes, hours, days, weeks, months, years
  * @returns The value converted to milliseconds
  */
-const toMilliseconds = (value, unit) => {
+export const toMilliseconds = (value, unit) => {
     try {
         // Perform conversion
         let milliseconds = 0;
@@ -783,5 +737,3 @@ const toMilliseconds = (value, unit) => {
         return 0;
     }
 };
-exports.toMilliseconds = toMilliseconds;
-//# sourceMappingURL=index.js.map

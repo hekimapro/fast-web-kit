@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "ESNext",
     "rootDir": "./src",
     "moduleResolution": "node",
     "declaration": true,
@@ -15,27 +15,11 @@
     "noImplicitReturns": true,
     "allowUnreachableCode": false,
     "skipLibCheck": true,
-    "module": "commonjs",
-    "lib": [
-      "ESNext",
-      "dom"
-    ],
-    "jsx": "react",
-    "sourceMap": true
+    "lib": ["ESNext", "dom"],
+    "jsx": "react"
   },
-  "include": [
-    "src",
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules"
-  ],
-  "target": "esnext",
-  "module": "commonjs",
-  "lib": [
-    "esnext",
-    "dom"
-  ],
-  "allowSyntheticDefaultImports": true,
-  "resolveJsonModule": true
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"],
+  "resolveJsonModule": true,
+  "allowSyntheticDefaultImports": true
 }
