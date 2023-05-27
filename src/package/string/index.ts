@@ -149,78 +149,6 @@ export const split = (str: string, separator: string): string[] => {
 }
 
 /**
- * Converts a string to camel case.
- * @param str The string to convert.
- * @returns The camel case version of the string.
- */
-export const toCamelCase = (str: string): string => {
-    try {
-        if (isNotEmpty(str))
-            // Main logic for converting string to camel case goes here
-            return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
-                return index === 0 ? word.toLowerCase() : word.toUpperCase();
-            }).replace(/\s+/g, '');
-        return ''
-    } catch (error) {
-        return '';
-    }
-}
-
-/**
- * Converts a given string to kebab case
- * @param str The input string to convert
- * @returns The kebab case version of the input string
- */
-export const toKebabCase = (str: string): string => {
-    try {
-        if (isNotEmpty(str)) {
-            const kebabCase = str.trim().replace(/\s+/g, '-').toLowerCase();
-            return kebabCase;
-        }
-        return ''
-    } catch (error) {
-        return '';
-    }
-}
-
-/**
- * Converts a given string to snake case.
- * @param str The input string to convert.
- * @returns The converted snake case string.
- */
-export const toSnakeCase = (str: string): string => {
-    try {
-        if (isNotEmpty(str)) {
-            const snakeCase = str.replace(/\s+/g, '_').toLowerCase()
-            return snakeCase;
-        }
-        return ''
-    } catch (error) {
-        return '';
-    }
-}
-
-/**
- * This function takes a string and returns a title case version of it.
- * @param {string} str - The input string to be converted to title case.
- * @returns {string} - The title case version of the input string.
- */
-export const toTitleCase = (str: string): string => {
-    try {
-        if (isNotEmpty(str)) {
-            const words = str.toLowerCase().split(' ');
-            for (let i = 0; i < words.length; i++) {
-                words[i] = words[i][0].toUpperCase() + words[i].substr(1);
-            }
-            return words.join(' ')
-        }
-        return ''
-    } catch (error) {
-        return '';
-    }
-};
-
-/**
  * Checks if the given string contains only alphabetic characters.
  * @param str The string to be checked.
  * @returns true if the string contains only alphabetic characters, false otherwise.
@@ -455,8 +383,8 @@ export const isValidBase64 = (base64String: string): boolean => {
  * @returns {string} The converted string
  */
 export function removeCase(str: string, caseType: 'kebab-case' | 'snake_case'): string {
-
     try {
+        str = str.trim()
         let convertedStr: string = '';
 
         if (isNotEmpty(str) && isNotEmpty(caseType)) {
@@ -502,7 +430,6 @@ export function isEmpty(str: string): boolean {
  *
  * @param inputString - The input string containing space-separated words.
  * @returns The abbreviation consisting of the first letter of each word.
- * @throws Throws an error if the input string is empty or undefined.
  */
 export const getAbbreviation = (inputString: string): string => {
     try {
@@ -524,3 +451,100 @@ export const getAbbreviation = (inputString: string): string => {
     }
 };
 
+/**
+ * This function takes a string with extra whitespace and returns a string with extra whitespace removed
+ * consisting of the first letter of each word.
+ *
+ * @param inputString - The input string containing extra whitespace words.
+ * @returns a string with whitespace removed
+ */
+export const removeExtraWhitespace = (inputString: string): string => {
+    try {
+
+        if (isEmpty(inputString))
+            return inputString
+
+        return inputString.replace(/\s+/g, ' ').trim()
+
+    } catch (error) {
+        return inputString
+    }
+}
+
+/**
+ * This function takes a string and returns a title case version of it.
+ * @param {string} str - The input string to be converted to title case.
+ * @returns {string} - The title case version of the input string.
+ */
+export const toTitleCase = (str: string): string => {
+    try {
+        str = removeExtraWhitespace(str)
+        if (isNotEmpty(str)) {
+            str = removeExtraWhitespace(str)
+            const words = str.toLowerCase().split(' ');
+            for (let i = 0; i < words.length; i++) {
+                words[i] = words[i][0].toUpperCase() + words[i].substring(1);
+            }
+            return words.join(' ')
+        }
+        return str
+    } catch (error) {
+        return str;
+    }
+};
+
+
+/**
+ * Converts a string to camel case.
+ * @param str The string to convert.
+ * @returns The camel case version of the string.
+ */
+export const toCamelCase = (str: string): string => {
+    try {
+        str = removeExtraWhitespace(str)
+        if (isNotEmpty(str))
+            // Main logic for converting string to camel case goes here
+            return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+                return index === 0 ? word.toLowerCase() : word.toUpperCase();
+            }).replace(/\s+/g, '');
+        return str
+    } catch (error) {
+        return str;
+    }
+}
+
+/**
+ * Converts a given string to kebab case
+ * @param str The input string to convert
+ * @returns The kebab case version of the input string
+ */
+export const toKebabCase = (str: string): string => {
+    try {
+        str = removeExtraWhitespace(str)
+        if (isNotEmpty(str)) {
+            const kebabCase = str.replace(/\s+/g, '-').toLowerCase();
+            return kebabCase;
+        }
+        return str
+    } catch (error) {
+        return str;
+    }
+}
+
+/**
+ * Converts a given string to snake case.
+ * @param str The input string to convert.
+ * @returns The converted snake case string.
+ */
+export const toSnakeCase = (str: string): string => {
+    try {
+        str = removeExtraWhitespace(str)
+        if (isNotEmpty(str)) {
+            const snakeCase = str.replace(/\s+/g, '_').toLowerCase()
+            return snakeCase;
+        }
+        return str
+    } catch (error) {
+        return str;
+    }
+}

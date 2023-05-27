@@ -67,30 +67,6 @@ export declare const removeWhitespace: (str: string) => string;
  */
 export declare const split: (str: string, separator: string) => string[];
 /**
- * Converts a string to camel case.
- * @param str The string to convert.
- * @returns The camel case version of the string.
- */
-export declare const toCamelCase: (str: string) => string;
-/**
- * Converts a given string to kebab case
- * @param str The input string to convert
- * @returns The kebab case version of the input string
- */
-export declare const toKebabCase: (str: string) => string;
-/**
- * Converts a given string to snake case.
- * @param str The input string to convert.
- * @returns The converted snake case string.
- */
-export declare const toSnakeCase: (str: string) => string;
-/**
- * This function takes a string and returns a title case version of it.
- * @param {string} str - The input string to be converted to title case.
- * @returns {string} - The title case version of the input string.
- */
-export declare const toTitleCase: (str: string) => string;
-/**
  * Checks if the given string contains only alphabetic characters.
  * @param str The string to be checked.
  * @returns true if the string contains only alphabetic characters, false otherwise.
@@ -178,6 +154,37 @@ export declare function isEmpty(str: string): boolean;
  *
  * @param inputString - The input string containing space-separated words.
  * @returns The abbreviation consisting of the first letter of each word.
- * @throws Throws an error if the input string is empty or undefined.
  */
 export declare const getAbbreviation: (inputString: string) => string;
+/**
+ * This function takes a string with extra whitespace and returns a string with extra whitespace removed
+ * consisting of the first letter of each word.
+ *
+ * @param inputString - The input string containing extra whitespace words.
+ * @returns a string with whitespace removed
+ */
+export declare const removeExtraWhitespace: (inputString: string) => string;
+/**
+ * This function takes a string and returns a title case version of it.
+ * @param {string} str - The input string to be converted to title case.
+ * @returns {string} - The title case version of the input string.
+ */
+export declare const toTitleCase: (str: string) => string;
+/**
+ * Converts a string to camel case.
+ * @param str The string to convert.
+ * @returns The camel case version of the string.
+ */
+export declare const toCamelCase: (str: string) => string;
+/**
+ * Converts a given string to kebab case
+ * @param str The input string to convert
+ * @returns The kebab case version of the input string
+ */
+export declare const toKebabCase: (str: string) => string;
+/**
+ * Converts a given string to snake case.
+ * @param str The input string to convert.
+ * @returns The converted snake case string.
+ */
+export declare const toSnakeCase: (str: string) => string;
