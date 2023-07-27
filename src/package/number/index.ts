@@ -47,11 +47,35 @@ export const isNegativeInteger = (number: number): boolean => isInteger(number) 
  * @param separator The separator to use between thousands. Defaults to ",".
  * @returns The formatted number as a string.
  */
-export function formatNumber(num: number, decimalPoints = 2, separator = ','): string {
+export function format(num: number, decimalPoints = 2, separator = ','): string {
     try {
         return num.toFixed(decimalPoints).replace(/\B(?=(\d{3})+(?!\d))/g, separator);
     } catch (error) {
         return num.toString();
+    }
+}
+
+/**
+ * Reverses the formatting of a number with specified decimal points and separator.
+ * @param formattedNum The formatted number string to reformat.
+ * @param separator The separator used between thousands. Defaults to ",".
+ * @returns The re-formatted number as a string.
+ */
+export function reFormat(formattedNum: string, separator = ','): number {
+    try {
+        // Remove the thousands separator from the input number string
+        const regex = new RegExp(`\\${separator}`, 'g');
+        const numWithoutSeparator = formattedNum.replace(regex, '');
+
+
+        // Parse the resulting number string back to a numeric value
+        const parsedNum = parseFloat(numWithoutSeparator);
+
+        return parsedNum
+
+    } catch (error) {
+        // If any error occurs during parsing, return the original formatted number
+        return 0;
     }
 }
 
@@ -739,7 +763,7 @@ export const toWord = (currency: number): string => {
  * @param unit The time unit to convert, one of: seconds, minutes, hours, days, weeks, months, years
  * @returns The value converted to milliseconds
  */
-export const toMilliseconds = (value: number, unit: 'seconds'| 'minutes'| 'hours'| 'days'| 'weeks'| 'months'| 'years'): number => {
+export const toMilliseconds = (value: number, unit: 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks' | 'months' | 'years'): number => {
     try {
 
         // Perform conversion
@@ -777,4 +801,3 @@ export const toMilliseconds = (value: number, unit: 'seconds'| 'minutes'| 'hours
         return 0;
     }
 };
-
