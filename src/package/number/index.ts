@@ -47,9 +47,11 @@ export const isNegativeInteger = (number: number): boolean => isInteger(number) 
  * @param separator The separator to use between thousands. Defaults to ",".
  * @returns The formatted number as a string.
  */
-export function format(num: number, decimalPoints = 2, separator = ','): string {
+export function format(num: number | string, decimalPoints = 2, separator = ','): string {
     try {
-        return num.toFixed(decimalPoints).replace(/\B(?=(\d{3})+(?!\d))/g, separator);
+        num = Number(num)
+        const newNum = num % 1 !== 0 ? num.toFixed(decimalPoints) : num.toFixed()
+        return newNum.replace(/\B(?=(\d{3})+(?!\d))/g, separator);
     } catch (error) {
         return num.toString();
     }
