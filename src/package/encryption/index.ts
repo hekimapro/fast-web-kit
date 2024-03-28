@@ -1,4 +1,4 @@
-import crypto from "crypto-es"
+import crypto from "crypto-js"
 
 /**
  * Defines the return type of the encryption function.
@@ -94,7 +94,7 @@ export function decrypt(encryptedData: EncryptReturnType, key: string, iv: strin
         const initializationVector = crypto.enc.Utf8.parse(iv);
 
         // Convert encrypted payload to CryptoJS format
-        let encryptedDataBytes: any;
+        let encryptedDataBytes: crypto.lib.WordArray;
         if (encryptionType === "base64") {
             encryptedDataBytes = crypto.enc.Base64.parse(encryptedData.payload);
         } else {
@@ -103,7 +103,7 @@ export function decrypt(encryptedData: EncryptReturnType, key: string, iv: strin
 
         // Decrypt the data
         const decryptedData = crypto.AES.decrypt(
-            { ciphertext: encryptedDataBytes },
+            crypto.enc.Base64.stringify(encryptedDataBytes),
             encryptionKey,
             { iv: initializationVector }
         ).toString(crypto.enc.Utf8);
