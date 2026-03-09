@@ -548,3 +548,30 @@ export const toSnakeCase = (str: string): string => {
         return str;
     }
 }
+
+export const getParameters = (oldParameters: string, key: string, value: string): string => {
+    try {
+        const params: Record<string, string> = {}
+
+        if (isNotEmpty(oldParameters)) {
+            const pairs = oldParameters.split("&")
+
+            for (const pair of pairs) {
+                const [key, value] = pair.split("=")
+                if (key) params[key] = value ?? ""
+            }
+        }
+
+        params[key] = value
+
+        const result: string[] = []
+
+        for (const k in params) {
+            result.push(`${k}=${params[k]}`)
+        }
+
+        return result.join("&")
+    } catch (error) {
+        return oldParameters
+    }
+}
