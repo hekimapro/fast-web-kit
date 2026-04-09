@@ -2,11 +2,11 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist",
-    "target": "ES6",
-    "module": "commonjs",
+    "target": "ES2019",
     "lib": [
-      "ES6"
+      "ES2019"
     ],
+    "module": "commonjs",
     "skipLibCheck": true,
     "jsx": "react-native",
     "declaration": true,

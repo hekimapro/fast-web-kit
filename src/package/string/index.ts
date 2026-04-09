@@ -358,22 +358,22 @@ export const isValidJSON = (jsonString: string): boolean => {
  * @param base64String The string to be validated as a Base64.
  * @returns A boolean indicating whether the string is a valid Base64 or not.
  */
-export const isValidBase64 = (base64String: string): boolean => {
-    try {
-        if (isNotEmpty(base64String)) {
-            const regex = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/;
-            if (!isValid(base64String) || !regex.test(base64String)) {
-                return false;
-            }
-            const decodedString = atob(base64String);
-            const encodedString = btoa(decodedString);
-            return encodedString === base64String;
-        }
-        return false
-    } catch (error) {
-        return false;
-    }
-};
+// export const isValidBase64 = (base64String: string): boolean => {
+//     try {
+//         if (isNotEmpty(base64String)) {
+//             const regex = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/;
+//             if (!isValid(base64String) || !regex.test(base64String)) {
+//                 return false;
+//             }
+//             const decodedString = atob(base64String);
+//             const encodedString = btoa(decodedString);
+//             return encodedString === base64String;
+//         }
+//         return false
+//     } catch (error) {
+//         return false;
+//     }
+// };
 
 /**
  * Convert a specified case to string
